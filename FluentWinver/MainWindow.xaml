@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--// Fluent Winver
+// A WinUI3 version of winver.
+// Version: 2.5.0
+// Made with Visual Studio 2022
+// Used Projects: WinverUWP.Interop
+//
+// Current: MainWindow.UI-->
+
+<Window
+    x:Class="FluentWinver.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FluentWinver"
+    xmlns:SettingsControls="using:CommunityToolkit.Labs.WinUI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:isShapesCompatible="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsTypePresent(Windows.UI.Composition.CompositionShape)"
+    xmlns:isShapesIncompatible="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsTypeNotPresent(Windows.UI.Composition.CompositionShape)"
+    mc:Ignorable="d">
+
+    <Window.SystemBackdrop>
+        <MicaBackdrop/>
+    </Window.SystemBackdrop>
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel HorizontalAlignment="Center">
+            <StackPanel.Resources>
+                <Style TargetType="Expander">
+                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </StackPanel.Resources>
+
+            <!--Windows Brand-->
+            <Viewbox
+            MaxWidth="300"
+            Margin="100,20">
+                <Grid>
+                    <isShapesIncompatible:Path x:Name="NonCompatiblePath" Fill="{ThemeResource ApplicationForegroundThemeBrush}" />
+                    <isShapesCompatible:Border>
+                        <Border x:Name="CompatibleCanvas">
+                            <!--  This is only for Designer, not actually loaded in the real UI tree  -->
+                            <d:Path Data="{StaticResource Windows11Path}" Fill="{ThemeResource ApplicationForegroundThemeBrush}" />
+                        </Border>
+                    </isShapesCompatible:Border>
+                </Grid>
+            </Viewbox>
+
+            <!--Main Views-->
+            <StackPanel Margin="0,15,0,0">
+                <!--Windows Specifications Card-->
+                <SettingsControls:SettingsCard>
+                    <SettingsControls:SettingsCard.Header>
+                        <StackPanel>
+                            <StackPanel Margin="0,0,0,5">
+                                <TextBlock x:Uid="WindowsSpecificationsTitle" FontSize="15"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                                <StackPanel Margin="0,0,20,0">
+                                    <TextBlock x:Uid="OSEditionHeader" x:Name="OSCaptionHeader" FontSize="15"/>
+                                    <TextBlock x:Uid="OSVersionHeader" x:Name="OSVersionHeader" FontSize="15"/>
+                                    <TextBlock x:Uid="OSBuildVersionHeader" x:Name="OSBuildVersionHeader" FontSize="15"/>
+                                    <TextBlock x:Uid="OSArchHeader" x:Name="OSArchHeader" FontSize="15"/>
+                                    <TextBlock x:Uid="ExpirationHeader" x:Name="ExpirationHeader" FontSize="15"/>
+                                </StackPanel>
+                                <StackPanel>
+                                    <TextBlock x:Name="OSEditionBlock" FontSize="15" IsTextSelectionEnabled="True"/>
+                                    <TextBlock x:Name="OSVersionBlock" FontSize="15" IsTextSelectionEnabled="True"/>
+                                    <TextBlock x:Name="OSBuildVersionBlock" FontSize="15" IsTextSelectionEnabled="True"/>
+                                    <TextBlock x:Name="OSArchBlock" FontSize="15" IsTextSelectionEnabled="True"/>
+                                    <TextBlock x:Name="OSExpirationTimeBlock" FontSize="15" IsTextSelectionEnabled="True"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </SettingsControls:SettingsCard.Header>
+                    <SettingsControls:SettingsCard.Content>
+                        <Button x:Uid="CopyButton" Click="Copy_WS"/>
+                    </SettingsControls:SettingsCard.Content>
+                </SettingsControls:SettingsCard>
+
+                <!--OS Developer Card-->
+                <SettingsControls:SettingsCard>
+                    <SettingsControls:SettingsCard.Header>
+                        <TextBlock x:Name="OSDevBlock" FontSize="15"/>
+                    </SettingsControls:SettingsCard.Header>
+                    <SettingsControls:SettingsCard.Content>
+                        <TextBlock x:Uid="RightsReserved" FontSize="15"/>
+                    </SettingsControls:SettingsCard.Content>
+                </SettingsControls:SettingsCard>
+
+                <!--More Info Card-->
+                <Expander x:Uid="MoreInfo" Margin="0,10,0,0">
+                    <Expander.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Margin="0,0,20,0">
+                                <TextBlock x:Uid="InstalledDateHeader" FontSize="15"/>
+                                <TextBlock x:Uid="RegisteredUserHeader" FontSize="15"/>
+                                <TextBlock x:Uid="SystemDirectoryHeader" FontSize="15"/>
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock x:Name="InstalledDateBlock" FontSize="15" IsTextSelectionEnabled="True"/>
+                                <TextBlock x:Name="RegisterBlock" FontSize="15" IsTextSelectionEnabled="True"/>
+                                <TextBlock x:Name="SysdirecBlock" FontSize="15" IsTextSelectionEnabled="True"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Expander.Content>
+                </Expander>
+
+                <!--Legal Card-->
+                <Expander x:Uid="Legalandlicense" Margin="0,10,0,0">
+                    <Expander.Content>
+                        <StackPanel>
+                            <TextBlock TextWrapping="WrapWholeWords" x:Uid="LicensingText"/>
+                            <HyperlinkButton x:Uid="LicenseLinkButton" x:Name="LicenseLinkButton" Margin="0,5,0,0"/>
+                        </StackPanel>
+                    </Expander.Content>
+                </Expander>
+            </StackPanel>
+        </StackPanel>
+
+        <!--OK Button-->
+        <Button
+            x:Uid="OKButton"
+            Width="60"
+            Grid.Row="3"
+            HorizontalAlignment="Right"
+            Click="OK_Click"
+            Style="{StaticResource AccentButtonStyle}" />
+    </Grid>
+</Window>
