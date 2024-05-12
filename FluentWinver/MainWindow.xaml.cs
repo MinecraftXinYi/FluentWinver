@@ -87,10 +87,10 @@ namespace FluentWinver
             OSBuildVersionBlock.Text = OSVersion.FullVersion;
 
             //加载系统架构
-            OSArchBlock.Text = OSEnvironmentInfo.OSArchitecture;
+            OSArchBlock.Text = OSEdition.OSArchitecture;
 
             //加载系统开发商（版权方）名称
-            OSDevBlock.Text = "(c) " + OSEnvironmentInfo.OSManufacturer;
+            OSDevBlock.Text = "(c) " + OSLegalInfo.OSManufacturer;
 
             //加载系统测试副本过期时间或隐藏
             if (TestBuildCheck.IsTestBuild)
@@ -109,7 +109,7 @@ namespace FluentWinver
             InstalledDateBlock.Text = OSEnvironmentInfo.OSInstallationDate.ToString("d", userCulture);
 
             //加载系统注册用户名
-            RegisterBlock.Text = OSEnvironmentInfo.OSRegisteredUser;
+            RegisterBlock.Text = OSLegalInfo.OSRegisteredUser;
 
             //加载系统目录
             SysdirecBlock.Text = OSEnvironmentInfo.OSDirectory;

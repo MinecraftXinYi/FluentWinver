@@ -1,5 +1,6 @@
 ﻿using System;
 using Windows.System.Profile;
+using System.Runtime.InteropServices;
 
 namespace RTWinver
 {
@@ -12,7 +13,9 @@ namespace RTWinver
         {
             get
             {
-                return RegistryHelper.GetInfoString("ProductName") ?? "";
+                string regOSProductName;
+                RegistryHelper.TryGetInfoString(RegistryHelper.NTInfoKeyPath, "ProductName", out regOSProductName);
+                return regOSProductName;
             }
         }
 
@@ -21,7 +24,8 @@ namespace RTWinver
             get
             {
                 string osDescription = System.Runtime.InteropServices.RuntimeInformation.OSDescription;
-                string osEditionID = RegistryHelper.GetInfoString("EditionID") ?? "";
+                string osEditionID;
+                RegistryHelper.TryGetInfoString(RegistryHelper.NTInfoKeyPath, "EditionID", out osEditionID);
                 string fullDescription = osDescription + " " + osEditionID;
                 return fullDescription;
             }
@@ -51,12 +55,21 @@ namespace RTWinver
             }
         }
 
-        //获取系统类型
+        //获取系统平台类型
         public static string OSFamily
         {
             get
             {
                 return AnalyticsInfo.VersionInfo.DeviceFamily;
+            }
+        }
+
+        //获取系统架构
+        public static string OSArchitecture
+        {
+            get
+            {
+                return RuntimeInformation.OSArchitecture.ToString();
             }
         }
     }
