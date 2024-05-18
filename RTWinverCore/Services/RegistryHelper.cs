@@ -3,16 +3,16 @@ using Microsoft.Win32;
 
 namespace RTWinver.Services;
 
-public static class RegistryHelper
+internal static class RegistryKeyPaths
 {
     public static string NTInfoKeyPath
     {
-        get
-        {
-            return @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion";
-        }
+        get => @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion";
     }
+}
 
+internal static class RegistryHelper
+{
     public static bool TryGetInfoString(string keyName, string? valueName, out string infoString)
     {
         infoString = string.Empty;

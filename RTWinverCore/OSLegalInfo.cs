@@ -39,7 +39,7 @@ namespace RTWinver
             get
             {
                 string registeredUser;
-                RegistryHelper.TryGetInfoString(RegistryHelper.NTInfoKeyPath, "RegisteredOwner", out registeredUser);
+                RegistryHelper.TryGetInfoString(RegistryKeyPaths.NTInfoKeyPath, "RegisteredOwner", out registeredUser);
                 if (string.IsNullOrEmpty(registeredUser)) registeredUser = "[Registered Owner]";
                 return registeredUser;
             }

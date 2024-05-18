@@ -93,7 +93,7 @@ namespace FluentWinver
             OSDevBlock.Text = "(c) " + OSLegalInfo.OSManufacturer;
 
             //加载系统测试副本过期时间或隐藏
-            if (TestBuildCheck.IsTestBuild)
+            if (TestBuildCheck.HasExpirationTime)
                 OSExpirationTimeBlock.Text = TestBuildCheck.OSExpirationTime.Value.ToString("g", userCulture);
             else
             {
@@ -201,7 +201,7 @@ namespace FluentWinver
         private void Copy_WS(object sender, RoutedEventArgs e)
         {
             var package = new DataPackage();
-            if(TestBuildCheck.IsTestBuild)
+            if(TestBuildCheck.HasExpirationTime)
             {
                 package.SetText(OSEditionBlock.Text + "\r\n" + OSVersionHeader.Text + "  " + OSVersionBlock.Text + "\r\n" + OSBuildVersionHeader.Text + "  " + OSBuildVersionBlock.Text + "\r\n" + OSArchHeader.Text + "  " + OSArchBlock.Text + "\r\n" + ExpirationHeader.Text + "  " + OSExpirationTimeBlock.Text);
             }

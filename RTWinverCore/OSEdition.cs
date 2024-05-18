@@ -1,5 +1,4 @@
 ﻿using System;
-using Windows.System.Profile;
 using System.Runtime.InteropServices;
 
 namespace RTWinver
@@ -8,47 +7,25 @@ namespace RTWinver
 
     public static partial class OSEdition
     {
-        //获取系统名称
-        static string RegOSProductName
-        {
-            get
-            {
-                string regOSProductName;
-                RegistryHelper.TryGetInfoString(RegistryHelper.NTInfoKeyPath, "ProductName", out regOSProductName);
-                return regOSProductName;
-            }
-        }
-
-        static string NetOSDescription
-        {
-            get
-            {
-                string osDescription = System.Runtime.InteropServices.RuntimeInformation.OSDescription;
-                string osEditionID;
-                RegistryHelper.TryGetInfoString(RegistryHelper.NTInfoKeyPath, "EditionID", out osEditionID);
-                string fullDescription = osDescription + " " + osEditionID;
-                return fullDescription;
-            }
-        }
-
+        //获取系统类型名称
         public static string OSEditionName
         {
             get
             {
-                string osEdition = "Microsoft Windows";
+                string osEdition = "Windows";
                 try
                 {
                     osEdition = WinbrandService.GetWinbrand();
                 }
                 catch (Exception)
                 {
-                    try
+                    if (OSTypeInfoService.IsDesktopPlatform)
                     {
-                        osEdition = RegOSProductName;
+                        osEdition = SpareOSEditionMethods.CreateDesktopEditionName;
                     }
-                    catch (Exception)
+                    else
                     {
-                        osEdition = NetOSDescription;
+                        osEdition = SpareOSEditionMethods.GetOSProductName;
                     }
                 }
                 return osEdition;
@@ -60,7 +37,16 @@ namespace RTWinver
         {
             get
             {
-                return AnalyticsInfo.VersionInfo.DeviceFamily;
+                return OSTypeInfoService.OSPlatformType;
+            }
+        }
+
+        //检测系统是否为桌面端 Windows
+        public static bool IsDesktopEdition
+        {
+            get
+            {
+                return OSTypeInfoService.IsDesktopPlatform;
             }
         }
 

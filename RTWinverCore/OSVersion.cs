@@ -10,9 +10,9 @@
             get
             {
                 string osDisplayVersion;
-                RegistryHelper.TryGetInfoString(RegistryHelper.NTInfoKeyPath, "DisplayVersion", out osDisplayVersion);
+                RegistryHelper.TryGetInfoString(RegistryKeyPaths.NTInfoKeyPath, "DisplayVersion", out osDisplayVersion);
                 if (string.IsNullOrEmpty(osDisplayVersion))
-                    RegistryHelper.TryGetInfoString(RegistryHelper.NTInfoKeyPath, "ReleaseId", out osDisplayVersion);
+                    RegistryHelper.TryGetInfoString(RegistryKeyPaths.NTInfoKeyPath, "ReleaseId", out osDisplayVersion);
                 if (string.IsNullOrEmpty(osDisplayVersion))
                     osDisplayVersion = "[Unknown]";
                 return osDisplayVersion;

@@ -12,7 +12,7 @@ namespace RTWinver
             get
             {
                 uint seconds;
-                RegistryHelper.TryGetInfoDword(RegistryHelper.NTInfoKeyPath, "InstallDate", out seconds);
+                RegistryHelper.TryGetInfoDword(RegistryKeyPaths.NTInfoKeyPath, "InstallDate", out seconds);
                 DateTime installDate = DateTimeOffset.FromUnixTimeSeconds(seconds).LocalDateTime;
                 return installDate;
             }
