@@ -15,7 +15,7 @@ namespace RTWinver
                 string osEdition = "Windows";
                 try
                 {
-                    osEdition = WinbrandService.GetWinbrand();
+                    osEdition = WinbrandService.WindowsLong;
                 }
                 catch (Exception)
                 {

@@ -28,13 +28,13 @@ internal static class SpareOSEditionMethods
             RegistryHelper.TryGetInfoString(RegistryKeyPaths.NTInfoKeyPath, "EditionID", out osEditionID);
             if (string.IsNullOrEmpty(GuessOSNumber) || string.IsNullOrEmpty(osEditionID))
                 baseName = "Microsoft Windows";
-            string string1 = string.Empty;
             string string2 = string.Empty;
+            string string3 = string.Empty;
             if (!string.IsNullOrEmpty(GuessOSNumber))
-                string1 = $" {GuessOSNumber}";
+                string2 = $" {GuessOSNumber}";
             if (!string.IsNullOrEmpty(osEditionID))
-                string2 = $" {osEditionID}";
-            return baseName + string1 + string2;
+                string3 = $" {osEditionID}";
+            return baseName + string2 + string3;
         }
     }
 

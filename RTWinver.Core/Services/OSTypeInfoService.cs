@@ -6,10 +6,7 @@ internal static class OSTypeInfoService
 {
     public static string OSPlatformType
     {
-        get
-        {
-            return AnalyticsInfo.VersionInfo.DeviceFamily;
-        }
+        get => AnalyticsInfo.VersionInfo.DeviceFamily;
     }
 
     public static bool IsDesktopPlatform

@@ -6,10 +6,7 @@ internal static class OSFamilyVersionService
 {
     static string OSFamilyVersionRaw
     {
-        get
-        {
-            return AnalyticsInfo.VersionInfo.DeviceFamilyVersion;
-        }
+        get => AnalyticsInfo.VersionInfo.DeviceFamilyVersion;
     }
 
     static ulong OSFamilyVersionRawUlong
