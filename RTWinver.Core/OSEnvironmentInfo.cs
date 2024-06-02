@@ -2,6 +2,7 @@
 
 namespace RTWinver
 {
+    using Helpers;
     using Services;
 
     public static partial class OSEnvironmentInfo

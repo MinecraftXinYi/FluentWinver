@@ -1,0 +1,10 @@
+﻿{
+	"profiles": {
+		"FluentWinver (Packaged)": {
+			"commandName": "MsixPackage"
+		},
+		"FluentWinver (Unpackaged)": {
+			"commandName": "Project"
+		}
+	}
+}

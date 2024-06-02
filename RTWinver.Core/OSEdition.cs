@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace RTWinver
 {
+    using L2Services;
     using Services;
 
     public static partial class OSEdition
@@ -12,12 +13,12 @@ namespace RTWinver
         {
             get
             {
-                string osEdition = "Windows";
-                try
+                string osEdition;
+                if (WinbrandService.CanInvoke)
                 {
-                    osEdition = WinbrandService.WindowsLong;
+                    osEdition = WinbrandService.GetWinBrandInfo.WindowsLong;
                 }
-                catch (Exception)
+                else
                 {
                     if (OSTypeInfoService.IsDesktopPlatform)
                     {

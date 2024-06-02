@@ -1,4 +1,7 @@
-﻿namespace RTWinver.Services;
+﻿using RTWinver.Helpers;
+using RTWinver.Services;
+
+namespace RTWinver.L2Services;
 
 internal static class SpareOSEditionMethods
 {
@@ -23,18 +26,17 @@ internal static class SpareOSEditionMethods
     {
         get
         {
-            string baseName = "Windows";
             string osEditionID;
             RegistryHelper.TryGetInfoString(RegistryKeyPaths.NTInfoKeyPath, "EditionID", out osEditionID);
-            if (string.IsNullOrEmpty(GuessOSNumber) || string.IsNullOrEmpty(osEditionID))
-                baseName = "Microsoft Windows";
             string string2 = string.Empty;
             string string3 = string.Empty;
             if (!string.IsNullOrEmpty(GuessOSNumber))
                 string2 = $" {GuessOSNumber}";
             if (!string.IsNullOrEmpty(osEditionID))
                 string3 = $" {osEditionID}";
-            return baseName + string2 + string3;
+            if (string2 != string.Empty || string3 != string.Empty)
+                return "Windows" + string2 + string3;
+            else return "Windows Desktop";
         }
     }
 
@@ -44,6 +46,8 @@ internal static class SpareOSEditionMethods
         {
             string getOSProductName;
             RegistryHelper.TryGetInfoString(RegistryKeyPaths.NTInfoKeyPath, "ProductName", out getOSProductName);
+            if (getOSProductName == string.Empty)
+                getOSProductName = OSTypeInfoService.OSPlatformType;
             return getOSProductName;
         }
     }
