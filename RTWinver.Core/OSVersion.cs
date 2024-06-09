@@ -4,7 +4,7 @@
 
     public static partial class OSVersion
     {
-        //获取系统外部版本代号
+        //获取系统版本代号
         public static string DisplayVersion
         {
             get
@@ -16,7 +16,7 @@
             }
         }
 
-        //获取系统内部版本号各部分
+        //获取OS内部版本数字
         static readonly ulong major = OSVersionRaw.OSVersionMajor;
         static readonly ulong minor = OSVersionRaw.OSVersionMinor;
         static readonly ulong revision = OSVersionRaw.OSVersionRevision;

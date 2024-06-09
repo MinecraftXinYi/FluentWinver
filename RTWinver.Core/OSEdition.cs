@@ -1,7 +1,7 @@
 ﻿namespace RTWinver
 {
-    using L3Services;
     using Services;
+    using L3Services;
 
     public static partial class OSEdition
     {
