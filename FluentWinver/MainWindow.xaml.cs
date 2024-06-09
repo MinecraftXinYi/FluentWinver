@@ -1,7 +1,7 @@
 // <summary>
 // Fluent Winver
 // A WinUI3 version of winver.
-// Version: 2.5.0
+// Version: 1.0.0
 // Made with Visual Studio 2022
 // Used Projects: WinverUWP.Interop
 //

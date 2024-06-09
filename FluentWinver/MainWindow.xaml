@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--// Fluent Winver
 // A WinUI3 version of winver.
-// Version: 2.5.0
+// Version: 1.0.0
 // Made with Visual Studio 2022
 // Used Projects: WinverUWP.Interop
 //
@@ -26,36 +26,36 @@
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <StackPanel HorizontalAlignment="Center">
-            <StackPanel.Resources>
-                <Style TargetType="Expander">
-                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                </Style>
-            </StackPanel.Resources>
-
-            <!--Windows Brand-->
-            <Viewbox
+        <!--Windows Brand-->
+        <Viewbox Grid.Row="0"
             MaxWidth="300"
             Margin="100,20">
-                <Grid>
-                    <isShapesIncompatible:Path x:Name="NonCompatiblePath" Fill="{ThemeResource ApplicationForegroundThemeBrush}" />
-                    <isShapesCompatible:Border>
-                        <Border x:Name="CompatibleCanvas">
-                            <!--  This is only for Designer, not actually loaded in the real UI tree  -->
-                            <d:Path Data="{StaticResource Windows11Path}" Fill="{ThemeResource ApplicationForegroundThemeBrush}" />
-                        </Border>
-                    </isShapesCompatible:Border>
-                </Grid>
-            </Viewbox>
+            <Grid>
+                <isShapesIncompatible:Path x:Name="NonCompatiblePath" Fill="{ThemeResource ApplicationForegroundThemeBrush}" />
+                <isShapesCompatible:Border>
+                    <Border x:Name="CompatibleCanvas">
+                        <!--  This is only for Designer, not actually loaded in the real UI tree  -->
+                        <d:Path Data="{StaticResource Windows11Path}" Fill="{ThemeResource ApplicationForegroundThemeBrush}" />
+                    </Border>
+                </isShapesCompatible:Border>
+            </Grid>
+        </Viewbox>
 
+        <ScrollViewer Grid.Row="1"
+                      VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
             <!--Main Views-->
             <StackPanel Margin="0,15,0,0">
+                <StackPanel.Resources>
+                    <Style TargetType="Expander">
+                        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </StackPanel.Resources>
+
                 <!--Windows Specifications Card-->
                 <SettingsControls:SettingsCard>
                     <SettingsControls:SettingsCard.Header>
@@ -121,15 +121,16 @@
                     </Expander.Content>
                 </Expander>
             </StackPanel>
-        </StackPanel>
+        </ScrollViewer>
 
-        <!--OK Button-->
-        <Button
+        <StackPanel Grid.Row="2" Margin="0,10,0,0">
+            <!--OK Button-->
+            <Button
             x:Uid="OKButton"
             Width="60"
-            Grid.Row="3"
             HorizontalAlignment="Right"
             Click="OK_Click"
             Style="{StaticResource AccentButtonStyle}" />
+        </StackPanel>
     </Grid>
 </Window>
