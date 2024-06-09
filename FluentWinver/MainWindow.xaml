@@ -89,11 +89,8 @@
                 <!--OS Developer Card-->
                 <SettingsControls:SettingsCard>
                     <SettingsControls:SettingsCard.Header>
-                        <TextBlock x:Name="OSDevBlock" FontSize="15"/>
+                        <TextBlock x:Name="OSCopyRightBlock" FontSize="15"/>
                     </SettingsControls:SettingsCard.Header>
-                    <SettingsControls:SettingsCard.Content>
-                        <TextBlock x:Uid="RightsReserved" FontSize="15"/>
-                    </SettingsControls:SettingsCard.Content>
                 </SettingsControls:SettingsCard>
 
                 <!--More Info Card-->

@@ -165,9 +165,6 @@
   <data name="RegisteredUserHeader.Text" xml:space="preserve">
     <value>注册用户</value>
   </data>
-  <data name="RightsReserved.Text" xml:space="preserve">
-    <value>保留所有权利。</value>
-  </data>
   <data name="SystemDirectoryHeader.Text" xml:space="preserve">
     <value>系统目录</value>
   </data>

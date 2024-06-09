@@ -90,7 +90,7 @@ namespace FluentWinver
             OSArchBlock.Text = OSEdition.OSArchitecture;
 
             //加载系统开发商（版权方）名称
-            OSDevBlock.Text = "(c) " + OSLegalInfo.OSManufacturer;
+            OSCopyRightBlock.Text = OSLegalInfo.OSCopyRightString;
 
             //加载系统测试副本过期时间或隐藏
             if (TestBuildCheck.HasExpirationTime)
@@ -106,7 +106,7 @@ namespace FluentWinver
         void LoadMoreInfo()
         {
             //加载系统安装时间
-            InstalledDateBlock.Text = OSEnvironmentInfo.OSInstallationDate.ToString("d", userCulture);
+            InstalledDateBlock.Text = OSEnvironmentInfo.OSInstallationDateTime.ToString("d", userCulture);
 
             //加载系统注册用户名
             RegisterBlock.Text = OSLegalInfo.OSRegisteredUser;

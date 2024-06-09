@@ -1,7 +1,6 @@
 ﻿namespace RTWinver
 {
-    using Helpers;
-    using Services;
+    using L2Services;
 
     public static partial class OSVersion
     {
@@ -10,21 +9,18 @@
         {
             get
             {
-                string osDisplayVersion;
-                RegistryHelper.TryGetInfoString(RegistryKeyPaths.NTInfoKeyPath, "DisplayVersion", out osDisplayVersion);
-                if (string.IsNullOrEmpty(osDisplayVersion))
-                    RegistryHelper.TryGetInfoString(RegistryKeyPaths.NTInfoKeyPath, "ReleaseId", out osDisplayVersion);
-                if (string.IsNullOrEmpty(osDisplayVersion))
-                    osDisplayVersion = "[Unknown]";
+                string osDisplayVersion = OSVersionRaw.OSDisplayVersion;
+                if (osDisplayVersion == string.Empty) osDisplayVersion = OSVersionRaw.OSReleaseId;
+                if (osDisplayVersion == string.Empty) osDisplayVersion = "(Unknown)";
                 return osDisplayVersion;
             }
         }
 
         //获取系统内部版本号各部分
-        static ulong major = OSFamilyVersionService.OSFamilyVersionMajor;
-        static ulong minor = OSFamilyVersionService.OSFamilyVersionMinor;
-        static ulong revision = OSFamilyVersionService.OSFamilyVersionRevision;
-        static ulong build = OSFamilyVersionService.OSFamilyVersionBuild;
+        static readonly ulong major = OSVersionRaw.OSVersionMajor;
+        static readonly ulong minor = OSVersionRaw.OSVersionMinor;
+        static readonly ulong revision = OSVersionRaw.OSVersionRevision;
+        static readonly ulong build = OSVersionRaw.OSVersionBuild;
 
         public static string FullVersion
         {

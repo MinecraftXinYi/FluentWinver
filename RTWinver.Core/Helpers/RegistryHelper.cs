@@ -5,10 +5,7 @@ namespace RTWinver.Helpers;
 
 internal static class RegistryKeyPaths
 {
-    public static string NTInfoKeyPath
-    {
-        get => @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion";
-    }
+    public static readonly string NTInfoKeyPath = @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion";
 }
 
 internal static class RegistryHelper

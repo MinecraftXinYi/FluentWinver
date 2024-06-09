@@ -165,9 +165,6 @@
   <data name="RegisteredUserHeader.Text" xml:space="preserve">
     <value>Registered User</value>
   </data>
-  <data name="RightsReserved.Text" xml:space="preserve">
-    <value>All rights reserved.</value>
-  </data>
   <data name="SystemDirectoryHeader.Text" xml:space="preserve">
     <value>System Directory</value>
   </data>

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Runtime.InteropServices;
-
-namespace RTWinver
+﻿namespace RTWinver
 {
-    using L2Services;
+    using L3Services;
     using Services;
 
     public static partial class OSEdition
@@ -14,19 +11,20 @@ namespace RTWinver
             get
             {
                 string osEdition;
-                if (WinbrandService.CanInvoke)
+                if (WinbrandAPI.CanInvoke)
                 {
-                    osEdition = WinbrandService.GetWinBrandInfo.WindowsLong;
+                    osEdition = WinbrandAPI.GetWinBrandInfo.WindowsLong;
                 }
                 else
                 {
-                    if (OSTypeInfoService.IsDesktopPlatform)
+                    if (OSTypeInfo.IsDesktopPlatform)
                     {
                         osEdition = SpareOSEditionMethods.CreateDesktopEditionName;
                     }
                     else
                     {
                         osEdition = SpareOSEditionMethods.GetOSProductName;
+                        if (osEdition == string.Empty) osEdition = "(Unknown)";
                     }
                 }
                 return osEdition;
@@ -38,7 +36,9 @@ namespace RTWinver
         {
             get
             {
-                return OSTypeInfoService.OSPlatformType;
+                string osTypeInfo = OSTypeInfo.OSPlatformType;
+                if (osTypeInfo == string.Empty) osTypeInfo = "(Unknown)";
+                return osTypeInfo;
             }
         }
 
@@ -47,7 +47,7 @@ namespace RTWinver
         {
             get
             {
-                return OSTypeInfoService.IsDesktopPlatform;
+                return OSTypeInfo.IsDesktopPlatform;
             }
         }
 
@@ -56,7 +56,7 @@ namespace RTWinver
         {
             get
             {
-                return RuntimeInformation.OSArchitecture.ToString();
+                return OSTypeInfo.OSPlatformArchitecture;
             }
         }
     }

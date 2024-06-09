@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace RTWinver.Services;
 
-internal static class WinbrandService
+internal static class WinbrandAPI
 {
     [DllImport("winbrand.dll", CharSet = CharSet.Unicode)]
     [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]

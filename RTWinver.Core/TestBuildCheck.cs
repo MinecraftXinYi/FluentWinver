@@ -9,7 +9,7 @@ namespace RTWinver
         //检测系统是否有过期时间
         public static bool HasExpirationTime
         {
-            get => ExpirationInfoService.GetSystemExpiration().HasValue;
+            get => ExpirationInfo.GetSystemExpiration().HasValue;
         }
 
         //获取测试副本过期时间
@@ -17,7 +17,7 @@ namespace RTWinver
         {
             get
             {
-                return ExpirationInfoService.GetSystemExpiration();
+                return ExpirationInfo.GetSystemExpiration();
             }
         }
 
