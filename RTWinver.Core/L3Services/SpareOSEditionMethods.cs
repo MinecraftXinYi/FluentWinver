@@ -31,7 +31,8 @@ internal static class SpareOSEditionMethods
             string string3 = " Desktop";
             if (GuessOSNumber != string.Empty) string2 = $" {GuessOSNumber}";
             if (osEditionID != string.Empty) string3 = $" {osEditionID}";
-            return "Windows" + string2 + string3;
+            string winDesktopEdition = "Windows" + string2 + string3;
+            return winDesktopEdition;
         }
     }
 

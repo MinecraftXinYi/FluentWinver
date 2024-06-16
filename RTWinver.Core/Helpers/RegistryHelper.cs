@@ -55,7 +55,7 @@ internal static class RegistryHelper
         return tryGet;
     }
 
-    public static bool TryGetSubKeys(RegistryPath registryPath, out string[] subKeyNames)
+    public static bool TryGetSubKeyList(RegistryPath registryPath, out string[] subKeyNames)
     {
         subKeyNames = new string[1];
         bool tryGet = false;

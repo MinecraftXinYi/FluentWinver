@@ -86,6 +86,9 @@ namespace FluentWinver
             //加载系统内部版本号
             OSBuildVersionBlock.Text = OSVersion.FullVersion;
 
+            //Experience
+            ExperienceBlock.Text = $"Windows Feature Experience Pack {OSExperienceInfo.CBSVersion}";
+
             //加载系统架构
             OSArchBlock.Text = OSEdition.OSArchitecture;
 

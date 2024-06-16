@@ -77,6 +77,7 @@
                                     <TextBlock x:Name="OSBuildVersionBlock" FontSize="15" IsTextSelectionEnabled="True"/>
                                     <TextBlock x:Name="OSArchBlock" FontSize="15" IsTextSelectionEnabled="True"/>
                                     <TextBlock x:Name="OSExpirationTimeBlock" FontSize="15" IsTextSelectionEnabled="True"/>
+                                    <TextBlock x:Name="ExperienceBlock" FontSize="15" IsTextSelectionEnabled="True"/>
                                 </StackPanel>
                             </StackPanel>
                         </StackPanel>
