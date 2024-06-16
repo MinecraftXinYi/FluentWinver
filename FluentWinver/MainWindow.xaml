@@ -63,22 +63,45 @@
                             <StackPanel Margin="0,0,0,5">
                                 <TextBlock x:Uid="WindowsSpecificationsTitle" FontSize="15"/>
                             </StackPanel>
-                            <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                                <StackPanel Margin="0,0,20,0">
-                                    <TextBlock x:Uid="OSEditionHeader" x:Name="OSCaptionHeader" FontSize="15"/>
-                                    <TextBlock x:Uid="OSVersionHeader" x:Name="OSVersionHeader" FontSize="15"/>
-                                    <TextBlock x:Uid="OSBuildVersionHeader" x:Name="OSBuildVersionHeader" FontSize="15"/>
-                                    <TextBlock x:Uid="OSArchHeader" x:Name="OSArchHeader" FontSize="15"/>
-                                    <TextBlock x:Uid="ExpirationHeader" x:Name="ExpirationHeader" FontSize="15"/>
-                                </StackPanel>
-                                <StackPanel>
-                                    <TextBlock x:Name="OSEditionBlock" FontSize="15" IsTextSelectionEnabled="True"/>
-                                    <TextBlock x:Name="OSVersionBlock" FontSize="15" IsTextSelectionEnabled="True"/>
-                                    <TextBlock x:Name="OSBuildVersionBlock" FontSize="15" IsTextSelectionEnabled="True"/>
-                                    <TextBlock x:Name="OSArchBlock" FontSize="15" IsTextSelectionEnabled="True"/>
-                                    <TextBlock x:Name="OSExpirationTimeBlock" FontSize="15" IsTextSelectionEnabled="True"/>
-                                    <TextBlock x:Name="ExperienceBlock" FontSize="15" IsTextSelectionEnabled="True"/>
-                                </StackPanel>
+                            <StackPanel>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="4*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.Resources>
+                                        <Style TargetType="TextBlock" x:Key="InfoHeaderBlockStyle">
+                                            <Setter Property="FontSize" Value="15"/>
+                                            <Setter Property="Margin" Value="0,0,40,0"/>
+                                        </Style>
+                                        <Style TargetType="TextBlock" x:Key="InfoContentBlockStyle">
+                                            <Setter Property="FontSize" Value="14"/>
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="IsTextSelectionEnabled" Value="True"/>
+                                            <Setter Property="TextWrapping" Value="WrapWholeWords"/>
+                                        </Style>
+                                    </Grid.Resources>
+                                    <TextBlock Grid.Row="0" Grid.Column="0" x:Uid="OSEditionHeader" x:Name="OSCaptionHeader" Style="{StaticResource InfoHeaderBlockStyle}"/>
+                                    <TextBlock Grid.Row="1" Grid.Column="0" x:Uid="OSVersionHeader" x:Name="OSVersionHeader" Style="{StaticResource InfoHeaderBlockStyle}"/>
+                                    <TextBlock Grid.Row="2" Grid.Column="0" x:Uid="OSBuildVersionHeader" x:Name="OSBuildVersionHeader" Style="{StaticResource InfoHeaderBlockStyle}"/>
+                                    <TextBlock Grid.Row="3" Grid.Column="0" x:Uid="OSArchHeader" x:Name="OSArchHeader" Style="{StaticResource InfoHeaderBlockStyle}"/>
+                                    <TextBlock Grid.Row="4" Grid.Column="0" x:Uid="OSExperienceHeader" x:Name="ExperienceHeader" Style="{StaticResource InfoHeaderBlockStyle}"/>
+                                    <TextBlock Grid.Row="5" Grid.Column="0" x:Uid="OSExpirationTimeHeader" x:Name="ExpirationHeader" Style="{StaticResource InfoHeaderBlockStyle}"/>
+                                    <TextBlock Grid.Row="0" Grid.Column="1" x:Name="OSEditionBlock" Style="{StaticResource InfoContentBlockStyle}"/>
+                                    <TextBlock Grid.Row="1" Grid.Column="1" x:Name="OSVersionBlock" Style="{StaticResource InfoContentBlockStyle}"/>
+                                    <TextBlock Grid.Row="2" Grid.Column="1" x:Name="OSBuildVersionBlock" Style="{StaticResource InfoContentBlockStyle}"/>
+                                    <TextBlock Grid.Row="3" Grid.Column="1" x:Name="OSArchBlock" Style="{StaticResource InfoContentBlockStyle}"/>
+                                    <TextBlock Grid.Row="4" Grid.Column="1" x:Name="OSExperienceBlock" Style="{StaticResource InfoContentBlockStyle}"/>
+                                    <TextBlock Grid.Row="5" Grid.Column="1" x:Name="OSExpirationTimeBlock" Style="{StaticResource InfoContentBlockStyle}"/>
+                                </Grid>
                             </StackPanel>
                         </StackPanel>
                     </SettingsControls:SettingsCard.Header>

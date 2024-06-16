@@ -126,9 +126,6 @@
   <data name="CopyButton.Content" xml:space="preserve">
     <value>Copy</value>
   </data>
-  <data name="ExpirationHeader.Text" xml:space="preserve">
-    <value>Expiration Time</value>
-  </data>
   <data name="InstalledDateHeader.Text" xml:space="preserve">
     <value>Installed on</value>
   </data>
@@ -158,6 +155,12 @@
   </data>
   <data name="OSEditionHeader.Text" xml:space="preserve">
     <value>Edition</value>
+  </data>
+  <data name="OSExperienceHeader.Text" xml:space="preserve">
+    <value>Experience</value>
+  </data>
+  <data name="OSExpirationTimeHeader.Text" xml:space="preserve">
+    <value>Expiration Time</value>
   </data>
   <data name="OSVersionHeader.Text" xml:space="preserve">
     <value>Version</value>

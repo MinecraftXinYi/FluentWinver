@@ -126,9 +126,6 @@
   <data name="CopyButton.Content" xml:space="preserve">
     <value>复制</value>
   </data>
-  <data name="ExpirationHeader.Text" xml:space="preserve">
-    <value>过期时间</value>
-  </data>
   <data name="InstalledDateHeader.Text" xml:space="preserve">
     <value>安装日期</value>
   </data>
@@ -154,10 +151,16 @@
     <value>系统架构</value>
   </data>
   <data name="OSBuildVersionHeader.Text" xml:space="preserve">
-    <value>内部版本</value>
+    <value>OS 内部版本</value>
   </data>
   <data name="OSEditionHeader.Text" xml:space="preserve">
-    <value>Edition</value>
+    <value>类型</value>
+  </data>
+  <data name="OSExperienceHeader.Text" xml:space="preserve">
+    <value>体验</value>
+  </data>
+  <data name="OSExpirationTimeHeader.Text" xml:space="preserve">
+    <value>过期时间</value>
   </data>
   <data name="OSVersionHeader.Text" xml:space="preserve">
     <value>版本</value>
