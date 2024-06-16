@@ -8,7 +8,7 @@ internal static class InstallationInfo
     {
         get
         {
-            RegistryHelper.TryGetInfoDword(RegistryKeyPaths.NTInfoKeyPath, "InstallDate", out uint installDateTimeSeconds);
+            RegistryHelper.TryGetRegDword(RegistryPaths.WinNTCurrent, "InstallDate", out uint installDateTimeSeconds);
             return installDateTimeSeconds;
         }
     }
@@ -17,7 +17,7 @@ internal static class InstallationInfo
     {
         get
         {
-            RegistryHelper.TryGetInfoString(RegistryKeyPaths.NTInfoKeyPath, "RegisteredOwner", out string registeredUserString);
+            RegistryHelper.TryGetRegString(RegistryPaths.WinNTCurrent, "RegisteredOwner", out string registeredUserString);
             return registeredUserString;
         }
     }

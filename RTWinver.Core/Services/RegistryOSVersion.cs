@@ -8,7 +8,7 @@ internal static class RegistryOSVersion
     {
         get
         {
-            RegistryHelper.TryGetInfoDword(RegistryKeyPaths.NTInfoKeyPath, "CurrentMajorVersionNumber", out uint majorNumber);
+            RegistryHelper.TryGetRegDword(RegistryPaths.WinNTCurrent, "CurrentMajorVersionNumber", out uint majorNumber);
             return majorNumber;
         }
     }
@@ -17,7 +17,7 @@ internal static class RegistryOSVersion
     {
         get
         {
-            RegistryHelper.TryGetInfoDword(RegistryKeyPaths.NTInfoKeyPath, "CurrentMinorVersionNumber", out uint minorNumber);
+            RegistryHelper.TryGetRegDword(RegistryPaths.WinNTCurrent, "CurrentMinorVersionNumber", out uint minorNumber);
             return minorNumber;
         }
     }
@@ -26,7 +26,7 @@ internal static class RegistryOSVersion
     {
         get
         {
-            RegistryHelper.TryGetInfoString(RegistryKeyPaths.NTInfoKeyPath, "CurrentBuildNumber", out string rawData);
+            RegistryHelper.TryGetRegString(RegistryPaths.WinNTCurrent, "CurrentBuildNumber", out string rawData);
             if (ulong.TryParse(rawData, out ulong revisionNumber)) return revisionNumber;
             else return 0;
         }
@@ -36,7 +36,7 @@ internal static class RegistryOSVersion
     {
         get
         {
-            RegistryHelper.TryGetInfoDword(RegistryKeyPaths.NTInfoKeyPath, "UBR", out uint ubuildNumber);
+            RegistryHelper.TryGetRegDword(RegistryPaths.WinNTCurrent, "UBR", out uint ubuildNumber);
             return ubuildNumber;
         }
     }

@@ -10,7 +10,7 @@ namespace RTWinver.L2Services
         {
             get
             {
-                RegistryHelper.TryGetInfoString(RegistryKeyPaths.NTInfoKeyPath, "DisplayVersion", out string osDisplayVersion);
+                RegistryHelper.TryGetRegString(RegistryPaths.WinNTCurrent, "DisplayVersion", out string osDisplayVersion);
                 return osDisplayVersion;
             }
         }
@@ -19,7 +19,7 @@ namespace RTWinver.L2Services
         {
             get
             {
-                RegistryHelper.TryGetInfoString(RegistryKeyPaths.NTInfoKeyPath, "ReleaseId", out string osReleaseId);
+                RegistryHelper.TryGetRegString(RegistryPaths.WinNTCurrent, "ReleaseId", out string osReleaseId);
                 return osReleaseId;
             }
         }

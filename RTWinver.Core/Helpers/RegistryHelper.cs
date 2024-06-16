@@ -3,40 +3,69 @@ using Microsoft.Win32;
 
 namespace RTWinver.Helpers;
 
-internal static class RegistryKeyPaths
+internal class RegistryPath
 {
-    public static readonly string NTInfoKeyPath = @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion";
+    public RegistryHive RootHive { get; set; }
+    public string SubPath { get; set; } = string.Empty;
 }
 
 internal static class RegistryHelper
 {
-    public static bool TryGetInfoString(string keyName, string? valueName, out string infoString)
+    public static bool TryGetRegString(RegistryPath registryPath, string? valueName, out string infoString)
     {
         infoString = string.Empty;
         bool tryGet = false;
         try
         {
-            object? getValue = Registry.GetValue(keyName, valueName, null);
-            if (getValue != null)
+            RegistryKey rootKey = RegistryKey.OpenBaseKey(registryPath.RootHive, RegistryView.Default);
+            RegistryKey? mainKey = rootKey.OpenSubKey(registryPath.SubPath, false);
+            if (mainKey != null)
             {
-                infoString = (string)getValue;
-                tryGet = true;
+                object? getValue = mainKey.GetValue(valueName, null);
+                if (getValue != null)
+                {
+                    infoString = (string)getValue;
+                    tryGet = true;
+                }
             }
         }
         catch (Exception) { }
         return tryGet;
     }
 
-    public static bool TryGetInfoDword(string keyName, string? valueName, out uint infoUInt)
+    public static bool TryGetRegDword(RegistryPath registryPath, string? valueName, out uint infoUInt)
     {
         infoUInt = 0;
         bool tryGet = false;
         try
         {
-            object? getValue = Registry.GetValue(keyName, valueName, null);
-            if (getValue != null)
+            RegistryKey rootKey = RegistryKey.OpenBaseKey(registryPath.RootHive, RegistryView.Default);
+            RegistryKey? mainKey = rootKey.OpenSubKey(registryPath.SubPath, false);
+            if (mainKey != null)
             {
-                infoUInt = Convert.ToUInt32(getValue);
+                object? getValue = mainKey.GetValue(valueName, null);
+                if (getValue != null)
+                {
+                    infoUInt = Convert.ToUInt32(getValue);
+                    tryGet = true;
+                }
+            }
+        }
+        catch (Exception) { }
+        return tryGet;
+    }
+
+    public static bool TryGetSubKeys(RegistryPath registryPath, out string[] subKeyNames)
+    {
+        subKeyNames = new string[1];
+        bool tryGet = false;
+        try
+        {
+            RegistryKey rootKey = RegistryKey.OpenBaseKey(registryPath.RootHive, RegistryView.Default);
+            RegistryKey? mainKey = rootKey.OpenSubKey(registryPath.SubPath, false);
+            if (mainKey != null)
+            {
+                subKeyNames = mainKey.GetSubKeyNames();
                 tryGet = true;
             }
         }

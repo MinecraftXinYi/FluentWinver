@@ -26,7 +26,7 @@ internal static class SpareOSEditionMethods
     {
         get
         {
-            RegistryHelper.TryGetInfoString(RegistryKeyPaths.NTInfoKeyPath, "EditionID", out string osEditionID);
+            RegistryHelper.TryGetRegString(RegistryPaths.WinNTCurrent, "EditionID", out string osEditionID);
             string string2 = string.Empty;
             string string3 = " Desktop";
             if (GuessOSNumber != string.Empty) string2 = $" {GuessOSNumber}";
@@ -39,7 +39,7 @@ internal static class SpareOSEditionMethods
     {
         get
         {
-            RegistryHelper.TryGetInfoString(RegistryKeyPaths.NTInfoKeyPath, "ProductName", out string getOSProductName);
+            RegistryHelper.TryGetRegString(RegistryPaths.WinNTCurrent, "ProductName", out string getOSProductName);
             return getOSProductName;
         }
     }

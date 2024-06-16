@@ -30,7 +30,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!--Windows Brand-->
+        <!--Windows brand logo-->
         <Viewbox Grid.Row="0"
             MaxWidth="300"
             Margin="100,20">
@@ -47,7 +47,7 @@
 
         <ScrollViewer Grid.Row="1"
                       VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-            <!--Main Views-->
+            <!--Main display controls-->
             <StackPanel Margin="0,15,0,0">
                 <StackPanel.Resources>
                     <Style TargetType="Expander">
@@ -86,7 +86,7 @@
                     </SettingsControls:SettingsCard.Content>
                 </SettingsControls:SettingsCard>
 
-                <!--OS Developer Card-->
+                <!--OS CopyRight Card-->
                 <SettingsControls:SettingsCard>
                     <SettingsControls:SettingsCard.Header>
                         <TextBlock x:Name="OSCopyRightBlock" FontSize="15"/>

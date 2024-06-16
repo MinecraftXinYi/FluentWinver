@@ -2,7 +2,7 @@
 
 namespace RTWinver
 {
-    using L2Services;
+    using Services;
 
     public static partial class TestBuildCheck
     {
@@ -11,7 +11,7 @@ namespace RTWinver
         {
             get
             {
-                return OSExpirationRaw.HasExpiration;
+                return ExpirationInfo.GetSystemExpiration().HasValue;
             }
         }
 
@@ -20,7 +20,7 @@ namespace RTWinver
         {
             get
             {
-                DateTime? expirationTime = OSExpirationRaw.ExpirationTime;
+                DateTime? expirationTime = ExpirationInfo.GetSystemExpiration();
                 if (expirationTime.HasValue) return expirationTime.Value;
                 else return DateTimeOffset.FromUnixTimeSeconds(0).LocalDateTime;
             }
