@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RTWinver
+namespace SharpWinver
 {
     using Services;
 

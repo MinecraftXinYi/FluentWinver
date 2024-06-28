@@ -1,7 +1,7 @@
-﻿using RTWinver.Helpers;
-using RTWinver.L2Services;
+﻿using SharpWinver.Helpers;
+using SharpWinver.L2Services;
 
-namespace RTWinver.L3Services;
+namespace SharpWinver.L3Services;
 
 internal static class SpareOSEditionMethods
 {

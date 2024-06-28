@@ -1,4 +1,4 @@
-﻿namespace RTWinver
+﻿namespace SharpWinver
 {
     using L3Services;
 

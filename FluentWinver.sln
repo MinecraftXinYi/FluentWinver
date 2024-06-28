@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinverUWP.Interop", "Winver
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentWinver", "FluentWinver\FluentWinver.csproj", "{D3CF65FD-EFD2-40A1-96FB-8F5C50563F8F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RTWinver.Core", "RTWinver.Core\RTWinver.Core.csproj", "{260829DF-C6EB-4084-A056-C7CD342A69E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpWinver.Core", "SharpWinver.Core\SharpWinver.Core.csproj", "{260829DF-C6EB-4084-A056-C7CD342A69E9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

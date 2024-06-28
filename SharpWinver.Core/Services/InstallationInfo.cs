@@ -1,6 +1,6 @@
-﻿using RTWinver.Helpers;
+﻿using SharpWinver.Helpers;
 
-namespace RTWinver.Services;
+namespace SharpWinver.Services;
 
 internal static class InstallationInfo
 {

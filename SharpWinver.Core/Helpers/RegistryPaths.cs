@@ -1,6 +1,6 @@
 ﻿using Microsoft.Win32;
 
-namespace RTWinver.Helpers;
+namespace SharpWinver.Helpers;
 
 internal static class RegistryPaths
 {

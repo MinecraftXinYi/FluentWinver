@@ -1,8 +1,8 @@
-﻿using RTWinver.Helpers;
-using RTWinver.Services;
+﻿using SharpWinver.Helpers;
+using SharpWinver.Services;
 using System;
 
-namespace RTWinver.L2Services
+namespace SharpWinver.L2Services
 {
     internal static class OSVersionRaw
     {

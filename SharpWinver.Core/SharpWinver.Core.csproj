@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	<Product>RTWinver Core</Product>
+	<Product>SharpWinver Core</Product>
     <TargetFrameworks>net6.0-windows10.0.17763.0;netstandard2.0</TargetFrameworks>
-	<RootNamespace>RTWinver</RootNamespace>
+	<RootNamespace>SharpWinver</RootNamespace>
     <LangVersion>11.0</LangVersion>
 	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Nullable>enable</Nullable>

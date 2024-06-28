@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace RTWinver.Services;
+namespace SharpWinver.Services;
 
 internal static class WinbrandAPI
 {

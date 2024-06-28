@@ -1,6 +1,6 @@
 ﻿using Windows.System.Profile;
 
-namespace RTWinver.Services;
+namespace SharpWinver.Services;
 
 internal static class OSFamilyVersion
 {

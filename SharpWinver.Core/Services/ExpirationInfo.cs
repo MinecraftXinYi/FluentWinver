@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RTWinver.Services;
+namespace SharpWinver.Services;
 
 internal static class ExpirationInfo
 {

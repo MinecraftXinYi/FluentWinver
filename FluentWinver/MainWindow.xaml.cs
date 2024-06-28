@@ -26,7 +26,7 @@ using Microsoft.UI.Xaml.Markup;
 using Windows.UI.ViewManagement;
 using Microsoft.UI.Composition;
 using System.Runtime.InteropServices;
-using RTWinver;
+using SharpWinver;
 using System.Globalization;
 
 // To learn more about WinUI, the WinUI project structure,
