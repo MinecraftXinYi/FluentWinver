@@ -6,7 +6,7 @@ namespace SharpWinver
 
     public static partial class OSLegalInfo
     {
-        static readonly string MicrosoftCompString = "(c) Microsoft Corporation";
+        static readonly string CopyrightMicrosoftString = "(c) Microsoft Corporation";
 
         //获取系统CopyRight信息
         public static string OSCopyRightString
@@ -19,7 +19,7 @@ namespace SharpWinver
                 }
                 else
                 {
-                    return MicrosoftCompString;
+                    return CopyrightMicrosoftString;
                 }
             }
         }

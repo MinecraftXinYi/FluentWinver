@@ -12,6 +12,8 @@
             }
         }
 
+        public static readonly string CBSPackName = "Windows Feature Experience Pack";
+
         public static string CBSVersion
         {
             get
