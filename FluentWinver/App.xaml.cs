@@ -46,23 +46,15 @@ namespace FluentWinver
             this.InitializeComponent();
         }
 
-        //MainWindow Classes
-        private Window m_window;
-        private ResourceLoader m_resourceLoader;
-
         /// <summary>
         /// Invoked when the application is launched.
         /// </summary>
         /// <param name="args">Details about the launch request and process.</param>
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
-            //MainWindow Resource API Preloading
-            m_resourceLoader = new ResourceLoader();
-
             //Start
-            m_window = new MainWindow(m_resourceLoader);
+            Window m_window = new MainWindow();
             m_window.Activate();
         }
-
     }
 }

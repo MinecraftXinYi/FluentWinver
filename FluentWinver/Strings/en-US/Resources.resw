@@ -126,9 +126,6 @@
   <data name="CopyButton.Content" xml:space="preserve">
     <value>Copy</value>
   </data>
-  <data name="InstalledDateHeader.Text" xml:space="preserve">
-    <value>Installed on</value>
-  </data>
   <data name="Legalandlicense.Header" xml:space="preserve">
     <value>Legal and license</value>
   </data>
@@ -138,8 +135,11 @@
   <data name="LicenseLinkButton.Content" xml:space="preserve">
     <value>Microsoft Software License Terms</value>
   </data>
-  <data name="LicensingText.Text" xml:space="preserve">
-    <value>The Microsoft Windows operating system and its user interface are protected by trademark and other pending or existing intellectual property rights in the United States and other countries/regions.</value>
+  <data name="LicenseToHeader.Text" xml:space="preserve">
+    <value>This product is licensed under the Microsoft Software License Terms to:</value>
+  </data>
+  <data name="LicensingText" xml:space="preserve">
+    <value>The [Microsoft Windows] operating system and its user interface are protected by trademark and other pending or existing intellectual property rights in the United States and other countries/regions.</value>
   </data>
   <data name="MoreInfo.Header" xml:space="preserve">
     <value>More info...</value>
@@ -162,14 +162,11 @@
   <data name="OSExpirationTimeHeader.Text" xml:space="preserve">
     <value>Expiration Time</value>
   </data>
+  <data name="OSInstalledDateHeader.Text" xml:space="preserve">
+    <value>Installed on</value>
+  </data>
   <data name="OSVersionHeader.Text" xml:space="preserve">
     <value>Version</value>
-  </data>
-  <data name="RegisteredUserHeader.Text" xml:space="preserve">
-    <value>Registered User</value>
-  </data>
-  <data name="SystemDirectoryHeader.Text" xml:space="preserve">
-    <value>System Directory</value>
   </data>
   <data name="WindowsSpecificationsTitle.Text" xml:space="preserve">
     <value>Windows Specifications</value>

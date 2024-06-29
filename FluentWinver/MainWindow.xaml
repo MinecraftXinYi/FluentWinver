@@ -72,6 +72,7 @@
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="2*"/>
@@ -89,18 +90,20 @@
                                             <Setter Property="TextWrapping" Value="WrapWholeWords"/>
                                         </Style>
                                     </Grid.Resources>
-                                    <TextBlock Grid.Row="0" Grid.Column="0" x:Uid="OSEditionHeader" x:Name="OSCaptionHeader" Style="{StaticResource InfoHeaderBlockStyle}"/>
+                                    <TextBlock Grid.Row="0" Grid.Column="0" x:Uid="OSEditionHeader" x:Name="OSEditionHeader" Style="{StaticResource InfoHeaderBlockStyle}"/>
                                     <TextBlock Grid.Row="1" Grid.Column="0" x:Uid="OSVersionHeader" x:Name="OSVersionHeader" Style="{StaticResource InfoHeaderBlockStyle}"/>
                                     <TextBlock Grid.Row="2" Grid.Column="0" x:Uid="OSBuildVersionHeader" x:Name="OSBuildVersionHeader" Style="{StaticResource InfoHeaderBlockStyle}"/>
                                     <TextBlock Grid.Row="3" Grid.Column="0" x:Uid="OSArchHeader" x:Name="OSArchHeader" Style="{StaticResource InfoHeaderBlockStyle}"/>
-                                    <TextBlock Grid.Row="4" Grid.Column="0" x:Uid="OSExperienceHeader" x:Name="ExperienceHeader" Style="{StaticResource InfoHeaderBlockStyle}"/>
-                                    <TextBlock Grid.Row="5" Grid.Column="0" x:Uid="OSExpirationTimeHeader" x:Name="ExpirationHeader" Style="{StaticResource InfoHeaderBlockStyle}"/>
+                                    <TextBlock Grid.Row="4" Grid.Column="0" x:Uid="OSInstalledDateHeader" x:Name="OSInstalledDateHeader" Style="{StaticResource InfoHeaderBlockStyle}"/>
+                                    <TextBlock Grid.Row="5" Grid.Column="0" x:Uid="OSExperienceHeader" x:Name="OSExperienceHeader" Style="{StaticResource InfoHeaderBlockStyle}"/>
+                                    <TextBlock Grid.Row="6" Grid.Column="0" x:Uid="OSExpirationTimeHeader" x:Name="OSExpirationTimeHeader" Style="{StaticResource InfoHeaderBlockStyle}"/>
                                     <TextBlock Grid.Row="0" Grid.Column="1" x:Name="OSEditionBlock" Style="{StaticResource InfoContentBlockStyle}"/>
                                     <TextBlock Grid.Row="1" Grid.Column="1" x:Name="OSVersionBlock" Style="{StaticResource InfoContentBlockStyle}"/>
                                     <TextBlock Grid.Row="2" Grid.Column="1" x:Name="OSBuildVersionBlock" Style="{StaticResource InfoContentBlockStyle}"/>
                                     <TextBlock Grid.Row="3" Grid.Column="1" x:Name="OSArchBlock" Style="{StaticResource InfoContentBlockStyle}"/>
-                                    <TextBlock Grid.Row="4" Grid.Column="1" x:Name="OSExperienceBlock" Style="{StaticResource InfoContentBlockStyle}"/>
-                                    <TextBlock Grid.Row="5" Grid.Column="1" x:Name="OSExpirationTimeBlock" Style="{StaticResource InfoContentBlockStyle}"/>
+                                    <TextBlock Grid.Row="4" Grid.Column="1" x:Name="OSInstalledDateBlock" FontSize="15" IsTextSelectionEnabled="True"/>
+                                    <TextBlock Grid.Row="5" Grid.Column="1" x:Name="OSExperienceBlock" Style="{StaticResource InfoContentBlockStyle}"/>
+                                    <TextBlock Grid.Row="6" Grid.Column="1" x:Name="OSExpirationTimeBlock" Style="{StaticResource InfoContentBlockStyle}"/>
                                 </Grid>
                             </StackPanel>
                         </StackPanel>
@@ -117,29 +120,14 @@
                     </SettingsControls:SettingsCard.Header>
                 </SettingsControls:SettingsCard>
 
-                <!--More Info Card-->
-                <Expander x:Uid="MoreInfo" Margin="0,10,0,0">
-                    <Expander.Content>
-                        <StackPanel Orientation="Horizontal">
-                            <StackPanel Margin="0,0,20,0">
-                                <TextBlock x:Uid="InstalledDateHeader" FontSize="15"/>
-                                <TextBlock x:Uid="RegisteredUserHeader" FontSize="15"/>
-                                <TextBlock x:Uid="SystemDirectoryHeader" FontSize="15"/>
-                            </StackPanel>
-                            <StackPanel>
-                                <TextBlock x:Name="InstalledDateBlock" FontSize="15" IsTextSelectionEnabled="True"/>
-                                <TextBlock x:Name="RegisterBlock" FontSize="15" IsTextSelectionEnabled="True"/>
-                                <TextBlock x:Name="SysdirecBlock" FontSize="15" IsTextSelectionEnabled="True"/>
-                            </StackPanel>
-                        </StackPanel>
-                    </Expander.Content>
-                </Expander>
-
                 <!--Legal Card-->
                 <Expander x:Uid="Legalandlicense" Margin="0,10,0,0">
                     <Expander.Content>
                         <StackPanel>
-                            <TextBlock TextWrapping="WrapWholeWords" x:Uid="LicensingText"/>
+                            <TextBlock x:Name="LicensingTextBlock" TextWrapping="WrapWholeWords"/>
+                            <TextBlock Text="        "/>
+                            <TextBlock x:Uid="LicenseToHeader" TextWrapping="WrapWholeWords"/>
+                            <TextBlock x:Name="RegisterBlock" IsTextSelectionEnabled="True"/>
                             <HyperlinkButton x:Uid="LicenseLinkButton" x:Name="LicenseLinkButton" Margin="0,5,0,0"/>
                         </StackPanel>
                     </Expander.Content>

@@ -126,9 +126,6 @@
   <data name="CopyButton.Content" xml:space="preserve">
     <value>复制</value>
   </data>
-  <data name="InstalledDateHeader.Text" xml:space="preserve">
-    <value>安装日期</value>
-  </data>
   <data name="Legalandlicense.Header" xml:space="preserve">
     <value>许可协议</value>
   </data>
@@ -138,8 +135,11 @@
   <data name="LicenseLinkButton.Content" xml:space="preserve">
     <value>Microsoft 软件许可条款</value>
   </data>
-  <data name="LicensingText.Text" xml:space="preserve">
-    <value>Microsoft Windows 操作系统及其用户界面受美国和其他国家/地区的商标法和其他待颁布或已颁布的知识产权法保护。</value>
+  <data name="LicenseToHeader.Text" xml:space="preserve">
+    <value>根据 Microsoft 软件许可条款，许可如下用户使用本产品:</value>
+  </data>
+  <data name="LicensingText" xml:space="preserve">
+    <value>[Microsoft Windows] 操作系统及其用户界面受美国和其他国家/地区的商标法和其他待颁布或已颁布的知识产权法保护。</value>
   </data>
   <data name="MoreInfo.Header" xml:space="preserve">
     <value>更多信息</value>
@@ -162,14 +162,11 @@
   <data name="OSExpirationTimeHeader.Text" xml:space="preserve">
     <value>过期时间</value>
   </data>
+  <data name="OSInstalledDateHeader.Text" xml:space="preserve">
+    <value>安装日期</value>
+  </data>
   <data name="OSVersionHeader.Text" xml:space="preserve">
     <value>版本</value>
-  </data>
-  <data name="RegisteredUserHeader.Text" xml:space="preserve">
-    <value>注册用户</value>
-  </data>
-  <data name="SystemDirectoryHeader.Text" xml:space="preserve">
-    <value>系统目录</value>
   </data>
   <data name="WindowsSpecificationsTitle.Text" xml:space="preserve">
     <value>Windows 规格</value>

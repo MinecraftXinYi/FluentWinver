@@ -8,6 +8,10 @@
 // Current: MainWindow.Code
 // </summary>
 
+using System;
+using SharpWinver;
+using FluentWindowsBrandLogoHelper;
+using Win32WindowHelper;
 using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
@@ -17,8 +21,6 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
-using System;
-using WinverUWP.Helpers;
 using Windows.ApplicationModel.DataTransfer;
 using Microsoft.Windows.ApplicationModel.Resources;
 using Microsoft.Graphics.Canvas.Geometry;
@@ -26,7 +28,6 @@ using Microsoft.UI.Xaml.Markup;
 using Windows.UI.ViewManagement;
 using Microsoft.UI.Composition;
 using System.Runtime.InteropServices;
-using SharpWinver;
 using System.Globalization;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -34,54 +35,47 @@ using System.Globalization;
 
 namespace FluentWinver
 {
-    
     public sealed partial class MainWindow : Window
     {
         //Private Classes
         private ResourceLoader m_resourceLoader;
-
-        private UISettings _uiSettings;
         private CultureInfo userCulture;
-        private string OSName = "";
 
         //Main Codes
-        public MainWindow(ResourceLoader resourceLoader)
+        public MainWindow()
         {
             //Resources API Preloading
-            m_resourceLoader = resourceLoader;
+            m_resourceLoader = new ResourceLoader();
 
-            //Load current user culture info
+            //Get current user culture info
             userCulture = CultureInfoHelper.GetCurrentCulture();
 
             //加载界面组件
             this.InitializeComponent();
 
+            //获取窗口句柄(HWND)
+            IntPtr hwnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
+
             //初始化窗口
-            _uiSettings = new UISettings();
-
             Title = m_resourceLoader.GetString("AppTitle");
-            this.ShapeWindow();
-            this.LoadWindowIcon();
-
-            //加载 Windows Brand
-            this.LoadWindowsBrand();
+            Win32Windowing.SetWindowSizeByScalingFactor(hwnd, 550, 850);
 
             //加载并显示系统信息
-            this.LoadMainInfo();
-            this.LoadMoreInfo();
-
-            //Load License
-            this.LoadLicense();
+            this.LoadMain();
         }
 
-        //[Windows规格]加载代码实现
-        void LoadMainInfo()
+        //主要的加载代码
+        void LoadMain()
         {
             //加载系统名称
-            OSEditionBlock.Text = OSEdition.OSEditionName;
+            string osEdition = OSEdition.OSEditionName;
+            OSEditionBlock.Text = osEdition;
 
             //加载系统版本号
             OSVersionBlock.Text = OSVersion.DisplayVersion;
+
+            //Get the build number of current OS
+            int buildNum = int.Parse(OSVersion.Revision);
 
             //加载系统内部版本号
             OSBuildVersionBlock.Text = OSVersion.FullVersion;
@@ -92,6 +86,9 @@ namespace FluentWinver
             //加载系统架构
             OSArchBlock.Text = OSEdition.OSArchitecture;
 
+            //加载系统安装时间
+            OSInstalledDateBlock.Text = OSEnvironmentInfo.OSInstallationDateTime.ToString("d", userCulture);
+
             //加载系统开发商（版权方）名称
             OSCopyRightBlock.Text = OSLegalInfo.OSCopyRightString;
 
@@ -100,63 +97,32 @@ namespace FluentWinver
                 OSExpirationTimeBlock.Text = TestBuildCheck.OSExpirationTime.ToString("g", userCulture);
             else
             {
-                ExpirationHeader.Visibility = Visibility.Collapsed;
+                OSExpirationTimeHeader.Visibility = Visibility.Collapsed;
                 OSExpirationTimeBlock.Visibility = Visibility.Collapsed;
             }
-        }
 
-        //[更多信息]加载代码实现
-        void LoadMoreInfo()
-        {
-            //加载系统安装时间
-            InstalledDateBlock.Text = OSEnvironmentInfo.OSInstallationDateTime.ToString("d", userCulture);
+            //加载 Windows Legal 信息
+            LicensingTextBlock.Text = m_resourceLoader.GetString("LicensingText").Replace("[Microsoft Windows]", osEdition);
 
             //加载系统注册用户名
             RegisterBlock.Text = OSLegalInfo.OSRegisteredUser;
 
-            //加载系统目录
-            SysdirecBlock.Text = OSEnvironmentInfo.OSDirectory;
-        }
-
-        //Windows Brand 加载
-        void LoadWindowsBrand()
-        {
-            //int BuildNum
-            int BuildNum = int.Parse(OSVersion.Revision);
+            //LicenseLinkButton 链接初始化
+            LicenseLinkButton.NavigateUri = new Uri(m_resourceLoader.GetString("LicenseLink"));
 
             //加载 Windows Brand
-            OSName = BuildNum >= 21996 ? "Windows11" : "Windows10";
-            UpdateWindowsBrand();
-        }
+            string osShortName = buildNum >= 21996 ? "Windows11" : "Windows10";
+            UpdateWindowsBrand(osShortName, new UISettings());
 
-        //Shape this window
-        void ShapeWindow()
-        {
-            //获取窗口句柄(HWND)
-            IntPtr HWND = WinRT.Interop.WindowNative.GetWindowHandle(this);
-
-            [DllImport("user32.dll", SetLastError = true)]
-            static extern uint GetDpiForWindow(IntPtr hWnd);
-
-            //根据DPI调整主窗口大小
-            var dpi = (int)GetDpiForWindow(HWND);
-            float scalingFactor = (float)dpi / 96;
-
-            var size = new Windows.Graphics.SizeInt32();
-            size.Width = (int)(550 * scalingFactor);
-            size.Height = (int)(850 * scalingFactor);
-
-            AppWindow.Resize(size);
+            //窗口图标
+            this.LoadWindowIcon(buildNum);
         }
 
         //窗口图标加载
-        void LoadWindowIcon()
+        void LoadWindowIcon(int buildNum)
         {
-            //Int BuildNum
-            int BuildNum = int.Parse(OSVersion.Revision);
-
             //Set icon of this window
-            if (BuildNum >= 21996)
+            if (buildNum >= 21996)
             {
                 AppWindow.SetIcon("Assets/@WLOGO_11.ico");
             }
@@ -166,25 +132,18 @@ namespace FluentWinver
             }
         }
 
-        //License 一栏加载
-        void LoadLicense()
-        {
-            //LicenseLinkButton 链接初始化
-            LicenseLinkButton.NavigateUri = new Uri(m_resourceLoader.GetString("LicenseLink"));
-        }
-
-        //Windows Brand 支持
-        private void UpdateWindowsBrand()
+        //Windows Brand 加载
+        private void UpdateWindowsBrand(string osShortName, UISettings uiSettings)
         {
             if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.Composition.CompositionShape"))
             {
-                using FirstDisposableTuple<CanvasPathBuilder, float, float> path = OSName == "Windows11" ? OSPathsHelper.GetWindows11Path() : OSPathsHelper.GetWindows10Path();
+                using FirstDisposableTuple<CanvasPathBuilder, float, float> path = osShortName == "Windows11" ? OSPathsHelper.GetWindows11Path() : OSPathsHelper.GetWindows10Path();
                 using CanvasGeometry canvasGeo = CanvasGeometry.CreatePath(path.Item1);
                 CompositionPath compPath = new(canvasGeo);
                 var compositor = Compositor;
                 var compGeo = compositor.CreatePathGeometry(compPath);
                 var shape = compositor.CreateSpriteShape(compGeo);
-                shape.FillBrush = compositor.CreateColorBrush(_uiSettings.GetColorValue(UIColorType.Foreground));
+                shape.FillBrush = compositor.CreateColorBrush(uiSettings.GetColorValue(UIColorType.Foreground));
                 var shapeVisual = compositor.CreateShapeVisual();
                 shapeVisual.Shapes.Add(shape);
                 shapeVisual.Size = new(path.Item2, path.Item3);
@@ -194,7 +153,7 @@ namespace FluentWinver
             }
             else
             {
-                string path = (string)Application.Current.Resources[$"{OSName}Path"];
+                string path = (string)Application.Current.Resources[$"{osShortName}Path"];
                 var geo = (Geometry)XamlBindingHelper.ConvertValue(typeof(Geometry), path);
                 NonCompatiblePath.Data = geo;
             }
@@ -203,17 +162,35 @@ namespace FluentWinver
         //复制 Windows 规格信息到剪贴板
         private void Copy_WS(object sender, RoutedEventArgs e)
         {
-            var package = new DataPackage();
+            string[] strings;
             if(TestBuildCheck.HasExpirationTime)
             {
-                package.SetText(OSEditionBlock.Text + "\r\n" + OSVersionHeader.Text + "  " + OSVersionBlock.Text + "\r\n" + OSBuildVersionHeader.Text + "  " + OSBuildVersionBlock.Text + "\r\n" + OSArchHeader.Text + "  " + OSArchBlock.Text + "\r\n" + ExpirationHeader.Text + "  " + OSExpirationTimeBlock.Text);
+                strings = new string[7]
+                {
+                    OSEditionHeader.Text + "  " + OSEditionBlock.Text,
+                    OSVersionHeader.Text + "  " + OSVersionBlock.Text,
+                    OSBuildVersionHeader.Text + "  " + OSBuildVersionBlock.Text,
+                    OSArchHeader.Text + "  " + OSArchBlock.Text,
+                    OSInstalledDateHeader.Text + "  " + OSInstalledDateBlock.Text,
+                    OSExperienceHeader.Text + "  " +OSExperienceBlock.Text,
+                    OSExpirationTimeHeader.Text + "  " + OSExpirationTimeBlock.Text
+                };
             }
             else
             {
-                package.SetText(OSEditionBlock.Text + "\r\n" + OSVersionHeader.Text + "  " + OSVersionBlock.Text + "\r\n" + OSBuildVersionHeader.Text + "  " + OSBuildVersionBlock.Text + "\r\n" + OSArchHeader.Text + "  " + OSArchBlock.Text);
+                strings = new string[6]
+                {
+                    OSEditionHeader.Text + "  " + OSEditionBlock.Text,
+                    OSVersionHeader.Text + "  " + OSVersionBlock.Text,
+                    OSBuildVersionHeader.Text + "  " + OSBuildVersionBlock.Text,
+                    OSArchHeader.Text + "  " + OSArchBlock.Text,
+                    OSInstalledDateHeader.Text + "  " + OSInstalledDateBlock.Text,
+                    OSExperienceHeader.Text + "  " +OSExperienceBlock.Text
+                };
             }
-            Clipboard.SetContent(package);
-
+            var dataPackage = new DataPackage();
+            dataPackage.SetText(string.Join("\r\n", strings));
+            Clipboard.SetContent(dataPackage);
         }
 
         //“确定”按钮事件
