@@ -101,7 +101,7 @@
                                     <TextBlock Grid.Row="1" Grid.Column="1" x:Name="OSVersionBlock" Style="{StaticResource InfoContentBlockStyle}"/>
                                     <TextBlock Grid.Row="2" Grid.Column="1" x:Name="OSBuildVersionBlock" Style="{StaticResource InfoContentBlockStyle}"/>
                                     <TextBlock Grid.Row="3" Grid.Column="1" x:Name="OSArchBlock" Style="{StaticResource InfoContentBlockStyle}"/>
-                                    <TextBlock Grid.Row="4" Grid.Column="1" x:Name="OSInstalledDateBlock" FontSize="15" IsTextSelectionEnabled="True"/>
+                                    <TextBlock Grid.Row="4" Grid.Column="1" x:Name="OSInstalledDateBlock" Style="{StaticResource InfoContentBlockStyle}"/>
                                     <TextBlock Grid.Row="5" Grid.Column="1" x:Name="OSExperienceBlock" Style="{StaticResource InfoContentBlockStyle}"/>
                                     <TextBlock Grid.Row="6" Grid.Column="1" x:Name="OSExpirationTimeBlock" Style="{StaticResource InfoContentBlockStyle}"/>
                                 </Grid>
