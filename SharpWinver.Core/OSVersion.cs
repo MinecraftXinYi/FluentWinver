@@ -5,14 +5,14 @@
     public static partial class OSVersion
     {
         //获取系统版本代号
-        public static string DisplayVersion
+        public static string ReleaseVersion
         {
             get
             {
-                string osDisplayVersion = OSVersionRaw.OSDisplayVersion;
-                if (osDisplayVersion == string.Empty) osDisplayVersion = OSVersionRaw.OSReleaseId;
-                if (osDisplayVersion == string.Empty) osDisplayVersion = "(Unknown)";
-                return osDisplayVersion;
+                string osReleaseVersion = OSVersionRaw.OSDisplayVersion;
+                if (osReleaseVersion == string.Empty) osReleaseVersion = OSVersionRaw.OSReleaseId;
+                if (osReleaseVersion == string.Empty) osReleaseVersion = "(Unknown)";
+                return osReleaseVersion;
             }
         }
 

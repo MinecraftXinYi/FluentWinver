@@ -27,7 +27,6 @@ using Microsoft.Graphics.Canvas.Geometry;
 using Microsoft.UI.Xaml.Markup;
 using Windows.UI.ViewManagement;
 using Microsoft.UI.Composition;
-using System.Runtime.InteropServices;
 using System.Globalization;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -72,7 +71,7 @@ namespace FluentWinver
             OSEditionBlock.Text = osEdition;
 
             //加载系统版本号
-            OSVersionBlock.Text = OSVersion.DisplayVersion;
+            OSVersionBlock.Text = OSVersion.ReleaseVersion;
 
             //Get the build number of current OS
             int buildNum = int.Parse(OSVersion.Revision);
