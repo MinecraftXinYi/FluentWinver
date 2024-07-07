@@ -11,7 +11,6 @@
     <UseWinUI>true</UseWinUI>
 	<LangVersion>11.0</LangVersion>
 	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-	<WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
 	<Authors>MinecraftXinYi</Authors>
 	<Company>Personal</Company>
 	<Description>A WinUI3 version of winver.</Description>
@@ -19,6 +18,7 @@
 	<FileVersion>1.0.0.0</FileVersion>
 	<EnableMsixTooling>true</EnableMsixTooling>
 	<PublishProfile>win10-$(Platform).pubxml</PublishProfile>
+	<StartupObject>FluentWinverProg.Program</StartupObject>
   </PropertyGroup>
 	
   <ItemGroup>
@@ -35,6 +35,12 @@
 
 	<ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
 		<ProjectCapability Include="Msix" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="WASDKVersionInfo.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
 	</ItemGroup>
 
 	<PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
