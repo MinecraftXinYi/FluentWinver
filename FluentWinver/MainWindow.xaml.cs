@@ -92,8 +92,8 @@ namespace FluentWinver
             OSCopyRightBlock.Text = OSLegalInfo.OSCopyRightString;
 
             //加载系统测试副本过期时间或隐藏
-            if (TestBuildCheck.HasExpirationTime)
-                OSExpirationTimeBlock.Text = TestBuildCheck.OSExpirationTime.ToString("g", userCulture);
+            if (OSTestBuildCheck.HasExpirationTime)
+                OSExpirationTimeBlock.Text = OSTestBuildCheck.OSExpirationTime.ToString("g", userCulture);
             else
             {
                 OSExpirationTimeHeader.Visibility = Visibility.Collapsed;
@@ -161,7 +161,7 @@ namespace FluentWinver
         private void Copy_WS(object sender, RoutedEventArgs e)
         {
             string[] strings;
-            if(TestBuildCheck.HasExpirationTime)
+            if(OSTestBuildCheck.HasExpirationTime)
             {
                 strings = new string[7]
                 {
