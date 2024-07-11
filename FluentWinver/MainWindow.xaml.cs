@@ -10,8 +10,8 @@
 
 using System;
 using SharpWinver;
-using FluentWindowsBrandLogoHelper;
-using Win32WindowHelper;
+using WinverUWP.Helpers;
+using Win32;
 using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
@@ -56,8 +56,8 @@ namespace FluentWinver
             IntPtr hwnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
 
             //初始化窗口
-            Title = m_resourceLoader.GetString("AppTitle");
-            Win32Windowing.SetWindowSizeByScalingFactor(hwnd, 550, 850);
+            Title = m_resourceLoader.GetString("MainWindowTitle");
+            User32Windowing.SetWindowSizeByScalingFactor(hwnd, 550, 850);
 
             //加载并显示系统信息
             this.LoadMain();
@@ -79,7 +79,7 @@ namespace FluentWinver
             //加载系统内部版本号
             OSBuildVersionBlock.Text = OSVersion.FullVersion;
 
-            //Experience
+            //OS Experience
             OSExperienceBlock.Text = $"{OSExperienceInfo.CBSPackName} {OSExperienceInfo.CBSVersion}";
 
             //加载系统架构
@@ -120,7 +120,6 @@ namespace FluentWinver
         //窗口图标加载
         void LoadWindowIcon(int buildNum)
         {
-            //Set icon of this window
             if (buildNum >= 21996)
             {
                 AppWindow.SetIcon("Assets/@WLOGO_11.ico");

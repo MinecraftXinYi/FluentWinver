@@ -1,12 +1,8 @@
 ﻿using Microsoft.Graphics.Canvas.Geometry;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace FluentWindowsBrandLogoHelper;
+namespace WinverUWP.Helpers;
 
 public class FirstDisposableTuple<T1, T2, T3> : Tuple<T1, T2, T3>, IDisposable where T1 : IDisposable
 {

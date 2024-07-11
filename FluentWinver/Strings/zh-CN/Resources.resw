@@ -120,11 +120,11 @@
   <data name="AppName" xml:space="preserve">
     <value>Fluent Winver</value>
   </data>
-  <data name="AppTitle" xml:space="preserve">
-    <value>关于“Windows”</value>
-  </data>
   <data name="CopyButton.Content" xml:space="preserve">
     <value>复制</value>
+  </data>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Fluent Winver</value>
   </data>
   <data name="Legalandlicense.Header" xml:space="preserve">
     <value>许可协议</value>
@@ -140,6 +140,9 @@
   </data>
   <data name="LicensingText" xml:space="preserve">
     <value>[Microsoft Windows] 操作系统及其用户界面受美国和其他国家/地区的商标法和其他待颁布或已颁布的知识产权法保护。</value>
+  </data>
+  <data name="MainWindowTitle" xml:space="preserve">
+    <value>关于“Windows”</value>
   </data>
   <data name="MoreInfo.Header" xml:space="preserve">
     <value>更多信息</value>

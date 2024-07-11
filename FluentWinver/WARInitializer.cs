@@ -15,7 +15,7 @@ internal static class WARInitializer
             try
             {
                 bool result = Bootstrap.TryInitialize(majorMinorVersion.Value, versionTag, minVersion.Value,
-                    NoMatchAndShowUIOption, out HResult);
+                    Bootstrap.InitializeOptions.OnNoMatch_ShowUI, out HResult);
                 return result;
             }
             catch (Exception ex)
@@ -29,11 +29,6 @@ internal static class WARInitializer
             HResult = 1;
             return false;
         }
-    }
-
-    public static Bootstrap.InitializeOptions NoMatchAndShowUIOption
-    {
-        get => Bootstrap.InitializeOptions.OnNoMatch_ShowUI;
     }
 
     public static class WASVersionInfoFromConfig

@@ -120,11 +120,11 @@
   <data name="AppName" xml:space="preserve">
     <value>Fluent Winver</value>
   </data>
-  <data name="AppTitle" xml:space="preserve">
-    <value>About Windows</value>
-  </data>
   <data name="CopyButton.Content" xml:space="preserve">
     <value>Copy</value>
+  </data>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Fluent Winver</value>
   </data>
   <data name="Legalandlicense.Header" xml:space="preserve">
     <value>Legal and license</value>
@@ -140,6 +140,9 @@
   </data>
   <data name="LicensingText" xml:space="preserve">
     <value>The [Microsoft Windows] operating system and its user interface are protected by trademark and other pending or existing intellectual property rights in the United States and other countries/regions.</value>
+  </data>
+  <data name="MainWindowTitle" xml:space="preserve">
+    <value>About Windows</value>
   </data>
   <data name="MoreInfo.Header" xml:space="preserve">
     <value>More info...</value>

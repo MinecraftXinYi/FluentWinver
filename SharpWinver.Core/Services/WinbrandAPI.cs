@@ -5,7 +5,7 @@ namespace SharpWinver.Services;
 
 internal static class WinbrandAPI
 {
-    [DllImport("winbrand.dll", CharSet = CharSet.Unicode)]
+    [DllImport("winbrand.dll", CharSet = CharSet.Unicode, SetLastError = true)]
     [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
     static extern string BrandingFormatString(string format);
 
