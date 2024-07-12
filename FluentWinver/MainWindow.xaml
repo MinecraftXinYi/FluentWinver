@@ -109,7 +109,7 @@
                         </StackPanel>
                     </SettingsControls:SettingsCard.Header>
                     <SettingsControls:SettingsCard.Content>
-                        <Button x:Uid="CopyButton" Click="Copy_WS"/>
+                        <Button MinWidth="90" x:Uid="CopyButton" Click="Copy_WS"/>
                     </SettingsControls:SettingsCard.Content>
                 </SettingsControls:SettingsCard>
 
