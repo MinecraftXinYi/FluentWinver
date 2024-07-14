@@ -79,8 +79,14 @@ namespace FluentWinver
             //加载系统内部版本号
             OSBuildVersionBlock.Text = OSVersion.FullVersion;
 
-            //OS Experience
-            OSExperienceBlock.Text = $"{OSExperienceInfo.CBSPackName} {OSExperienceInfo.CBSVersion}";
+            //加载系统体验包版本
+            if (OSExperienceInfo.UseCBSExperience)
+                OSExperienceBlock.Text = $"{OSExperienceInfo.CBSPackName} {OSExperienceInfo.CBSVersion}";
+            else
+            {
+                OSExperienceHeader.Visibility = Visibility.Collapsed;
+                OSExperienceBlock.Visibility = Visibility.Collapsed;
+            }
 
             //加载系统架构
             OSArchBlock.Text = OSEdition.OSArchitecture;
