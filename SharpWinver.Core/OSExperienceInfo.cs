@@ -1,27 +1,26 @@
-﻿namespace SharpWinver
+﻿namespace SharpWinver;
+
+using L3Services;
+
+public static class OSExperienceInfo
 {
-    using L3Services;
-
-    public static class OSExperienceInfo
+    public static bool UseCBSExperience
     {
-        public static bool UsesCBSExperience
+        get
         {
-            get
-            {
-                return WindowsCBSInfo.UsesCBSPackage;
-            }
+            return WindowsCBSInfo.UseCBSPackage;
         }
+    }
 
-        public static readonly string CBSPackName = "Windows Feature Experience Pack";
+    public static readonly string CBSPackName = "Windows Feature Experience Pack";
 
-        public static string CBSVersion
+    public static string CBSVersion
+    {
+        get
         {
-            get
-            {
-                string cbsVersion = WindowsCBSInfo.CBSPackageVersion;
-                if (cbsVersion == string.Empty) cbsVersion = "(Unknown Version)";
-                return cbsVersion;
-            }
+            string cbsVersion = WindowsCBSInfo.CBSPackageVersion;
+            if (cbsVersion == string.Empty) cbsVersion = "(Unknown Version)";
+            return cbsVersion;
         }
     }
 }

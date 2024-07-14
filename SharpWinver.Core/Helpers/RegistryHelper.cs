@@ -1,13 +1,8 @@
 ﻿using System;
 using Microsoft.Win32;
+using SharpWinver.Models;
 
 namespace SharpWinver.Helpers;
-
-internal class RegistryPath
-{
-    public RegistryHive RootHive { get; set; }
-    public string SubPath { get; set; } = string.Empty;
-}
 
 internal static class RegistryHelper
 {

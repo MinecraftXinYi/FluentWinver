@@ -1,5 +1,6 @@
 ﻿using SharpWinver.Helpers;
 using SharpWinver.L2Services;
+using SharpWinver.Models.Constants;
 using SharpWinver.Services;
 using System;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace SharpWinver.L3Services;
 
 internal static class WindowsCBSInfo
 {
-    public static bool UsesCBSPackage
+    public static bool UseCBSPackage
     {
         get => OSVersionRaw.OSVersionRevision >= 19041 && OSTypeInfo.IsDesktopPlatform;
     }

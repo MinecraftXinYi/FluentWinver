@@ -1,86 +1,86 @@
 ﻿using SharpWinver.Helpers;
+using SharpWinver.Models.Constants;
 using SharpWinver.Services;
 using System;
 
-namespace SharpWinver.L2Services
+namespace SharpWinver.L2Services;
+
+internal static class OSVersionRaw
 {
-    internal static class OSVersionRaw
+    public static string OSDisplayVersion
     {
-        public static string OSDisplayVersion
+        get
         {
-            get
+            RegistryHelper.TryGetRegString(RegistryPaths.WinNTCurrent, "DisplayVersion", out string osDisplayVersion);
+            return osDisplayVersion;
+        }
+    }
+
+    public static string OSReleaseId
+    {
+        get
+        {
+            RegistryHelper.TryGetRegString(RegistryPaths.WinNTCurrent, "ReleaseId", out string osReleaseId);
+            return osReleaseId;
+        }
+    }
+
+    public static ulong OSVersionMajor
+    {
+        get
+        {
+            try
             {
-                RegistryHelper.TryGetRegString(RegistryPaths.WinNTCurrent, "DisplayVersion", out string osDisplayVersion);
-                return osDisplayVersion;
+                return OSFamilyVersion.OSFamilyVersionMajor;
+            }
+            catch (Exception)
+            {
+                return RegistryOSVersion.OSVersionMajor;
             }
         }
+    }
 
-        public static string OSReleaseId
+    public static ulong OSVersionMinor
+    {
+        get
         {
-            get
+            try
             {
-                RegistryHelper.TryGetRegString(RegistryPaths.WinNTCurrent, "ReleaseId", out string osReleaseId);
-                return osReleaseId;
+                return OSFamilyVersion.OSFamilyVersionMinor;
+            }
+            catch (Exception)
+            {
+                return RegistryOSVersion.OSVersionMinor;
             }
         }
+    }
 
-        public static ulong OSVersionMajor
+    public static ulong OSVersionRevision
+    {
+        get
         {
-            get
+            try
             {
-                try
-                {
-                    return OSFamilyVersion.OSFamilyVersionMajor;
-                }
-                catch (Exception)
-                {
-                    return RegistryOSVersion.OSVersionMajor;
-                }
+                return OSFamilyVersion.OSFamilyVersionRevision;
+            }
+            catch (Exception)
+            {
+                return RegistryOSVersion.OSVersionRevision;
             }
         }
+    }
 
-        public static ulong OSVersionMinor
+    public static ulong OSVersionBuild
+    {
+        get
         {
-            get
+            try
             {
-                try
-                {
-                    return OSFamilyVersion.OSFamilyVersionMinor;
-                }
-                catch (Exception)
-                {
-                    return RegistryOSVersion.OSVersionMinor;
-                }
+                return OSFamilyVersion.OSFamilyVersionBuild;
             }
-        }
-
-        public static ulong OSVersionRevision
-        {
-            get
+            catch (Exception)
             {
-                try
-                {
-                    return OSFamilyVersion.OSFamilyVersionRevision;
-                }
-                catch (Exception)
-                {
-                    return RegistryOSVersion.OSVersionRevision;
-                }
-            }
-        }
-
-        public static ulong OSVersionBuild
-        {
-            get
-            {
-                try
-                {
-                    return OSFamilyVersion.OSFamilyVersionBuild;
-                }
-                catch (Exception)
-                {
-                    return RegistryOSVersion.OSVersionBuild;
-                }
+                return RegistryOSVersion.OSVersionBuild;
             }
         }
     }

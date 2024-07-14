@@ -86,7 +86,7 @@ namespace FluentWinver
             OSArchBlock.Text = OSEdition.OSArchitecture;
 
             //加载系统安装时间
-            OSInstalledDateBlock.Text = OSEnvironmentInfo.OSInstallationDateTime.ToString("d", userCulture);
+            OSInstalledDateBlock.Text = OSInstallationInfo.OSInstallationDateTime.ToString("d", userCulture);
 
             //加载系统开发商（版权方）名称
             OSCopyRightBlock.Text = OSLegalInfo.OSCopyRightString;

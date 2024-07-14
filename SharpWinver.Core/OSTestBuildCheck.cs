@@ -1,29 +1,28 @@
 ﻿using System;
 
-namespace SharpWinver
+namespace SharpWinver;
+
+using Services;
+
+public static partial class OSTestBuildCheck
 {
-    using Services;
-
-    public static partial class OSTestBuildCheck
+    //检测系统是否有过期时间
+    public static bool HasExpirationTime
     {
-        //检测系统是否有过期时间
-        public static bool HasExpirationTime
+        get
         {
-            get
-            {
-                return ExpirationInfo.GetSystemExpiration().HasValue;
-            }
+            return ExpirationInfo.GetSystemExpiration().HasValue;
         }
+    }
 
-        //获取测试副本过期时间
-        public static DateTime OSExpirationTime
+    //获取测试副本过期时间
+    public static DateTime OSExpirationTime
+    {
+        get
         {
-            get
-            {
-                DateTime? expirationTime = ExpirationInfo.GetSystemExpiration();
-                if (expirationTime.HasValue) return expirationTime.Value;
-                else return DateTimeOffset.FromUnixTimeSeconds(0).LocalDateTime;
-            }
+            DateTime? expirationTime = ExpirationInfo.GetSystemExpiration();
+            if (expirationTime.HasValue) return expirationTime.Value;
+            else return DateTimeOffset.FromUnixTimeSeconds(0).LocalDateTime;
         }
     }
 }

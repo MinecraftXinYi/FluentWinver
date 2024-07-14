@@ -1,63 +1,62 @@
-﻿namespace SharpWinver
-{
-    using Services;
-    using L3Services;
+﻿namespace SharpWinver;
 
-    public static partial class OSEdition
+using Services;
+using L3Services;
+
+public static partial class OSEdition
+{
+    //获取系统类型名称
+    public static string OSEditionName
     {
-        //获取系统类型名称
-        public static string OSEditionName
+        get
         {
-            get
+            string osEdition;
+            if (WinbrandAPI.CanInvoke)
             {
-                string osEdition;
-                if (WinbrandAPI.CanInvoke)
+                osEdition = WinbrandAPI.GetWinBrandInfo.WindowsLong;
+            }
+            else
+            {
+                if (OSTypeInfo.IsDesktopPlatform)
                 {
-                    osEdition = WinbrandAPI.GetWinBrandInfo.WindowsLong;
+                    osEdition = SpareOSEditionMethods.CreateDesktopEditionName;
                 }
                 else
                 {
-                    if (OSTypeInfo.IsDesktopPlatform)
-                    {
-                        osEdition = SpareOSEditionMethods.CreateDesktopEditionName;
-                    }
-                    else
-                    {
-                        osEdition = SpareOSEditionMethods.GetOSProductName;
-                        if (osEdition == string.Empty) osEdition = "(Unknown)";
-                    }
+                    osEdition = SpareOSEditionMethods.GetOSProductName;
+                    if (osEdition == string.Empty) osEdition = "(Unknown)";
                 }
-                return osEdition;
             }
+            return osEdition;
         }
+    }
 
-        //获取系统平台类型
-        public static string OSFamily
+    //获取系统平台类型
+    public static string OSFamily
+    {
+        get
         {
-            get
-            {
-                string osTypeInfo = OSTypeInfo.OSPlatformType;
-                if (osTypeInfo == string.Empty) osTypeInfo = "(Unknown)";
-                return osTypeInfo;
-            }
+            string osTypeInfo = OSTypeInfo.OSPlatformType;
+            if (osTypeInfo == string.Empty) osTypeInfo = "(Unknown)";
+            return osTypeInfo;
         }
+    }
 
-        //检测系统是否为桌面端 Windows
-        public static bool IsDesktopEdition
+    //检测系统是否为桌面端 Windows
+    public static bool IsDesktopEdition
+    {
+        get
         {
-            get
-            {
-                return OSTypeInfo.IsDesktopPlatform;
-            }
+            return OSTypeInfo.IsDesktopPlatform;
         }
+    }
 
-        //获取系统架构
-        public static string OSArchitecture
+    //获取系统架构
+    public static string OSArchitecture
+    {
+        get
         {
-            get
-            {
-                return OSTypeInfo.OSPlatformArchitecture;
-            }
+            return OSTypeInfo.OSPlatformArchitecture;
         }
     }
 }

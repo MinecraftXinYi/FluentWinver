@@ -1,38 +1,35 @@
-﻿using System;
+﻿namespace SharpWinver;
 
-namespace SharpWinver
+using Services;
+
+public static partial class OSLegalInfo
 {
-    using Services;
+    static readonly string CopyrightMicrosoftString = "(c) Microsoft Corporation";
 
-    public static partial class OSLegalInfo
+    //获取系统CopyRight信息
+    public static string OSCopyRightString
     {
-        static readonly string CopyrightMicrosoftString = "(c) Microsoft Corporation";
-
-        //获取系统CopyRight信息
-        public static string OSCopyRightString
+        get
         {
-            get
+            if (WinbrandAPI.CanInvoke)
             {
-                if (WinbrandAPI.CanInvoke)
-                {
-                    return WinbrandAPI.GetWinBrandInfo.WindowsCopyRight;
-                }
-                else
-                {
-                    return CopyrightMicrosoftString;
-                }
+                return WinbrandAPI.GetWinBrandInfo.WindowsCopyRight;
+            }
+            else
+            {
+                return CopyrightMicrosoftString;
             }
         }
+    }
 
-        //获取系统注册用户名称
-        public static string OSRegisteredUser
+    //获取系统注册用户名称
+    public static string OSRegisteredUser
+    {
+        get
         {
-            get
-            {
-                string registeredUser = InstallationInfo.OSRegisteredUserRaw;
-                if (registeredUser == string.Empty) registeredUser = "(Unknown registered owner)";
-                return registeredUser;
-            }
+            string registeredUser = InstallationInfo.OSRegisteredUserRaw;
+            if (registeredUser == string.Empty) registeredUser = "(Unknown registered owner)";
+            return registeredUser;
         }
     }
 }
