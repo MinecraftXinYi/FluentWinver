@@ -37,8 +37,8 @@ namespace FluentWinver
     public sealed partial class MainWindow : Window
     {
         //Private Classes
-        private ResourceLoader m_resourceLoader;
-        private CultureInfo userCulture;
+        private readonly ResourceLoader m_resourceLoader;
+        private readonly CultureInfo userCulture;
 
         //Main Codes
         public MainWindow()

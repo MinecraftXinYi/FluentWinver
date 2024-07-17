@@ -6,6 +6,7 @@ namespace Win32;
 //Native Win32 Methods
 public static partial class User32
 {
+#pragma warning disable CA1401
     [DllImport("user32.dll", SetLastError = true)]
     public static extern uint GetDpiForWindow(IntPtr hWnd);
 
@@ -22,7 +23,6 @@ public static partial class User32Windowing
         float scalingFactor = (float)dpi / 96;
         width = (int)(width * scalingFactor);
         height = (int)(height * scalingFactor);
-
         User32.SetWindowPos(hWnd, System.IntPtr.Zero, 0, 0, width, height, 2);
     }
 

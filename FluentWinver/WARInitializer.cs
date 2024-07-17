@@ -5,122 +5,63 @@ using System.Text.Json;
 
 internal static class WARInitializer
 {
-    public static bool InitializeWAR(out int HResult)
+    public static bool InitializeWAR(out int hResult)
     {
-        uint? majorMinorVersion = WASVersionInfoFromConfig.MajorMinorVersion;
-        PackageVersion? minVersion = WASVersionInfoFromConfig.MinVersion;
-        string versionTag = WASVersionInfoFromConfig.VersionTag;
-        if (majorMinorVersion.HasValue && minVersion.HasValue)
+        try
         {
-            try
-            {
-                bool result = Bootstrap.TryInitialize(majorMinorVersion.Value, versionTag, minVersion.Value,
-                    Bootstrap.InitializeOptions.OnNoMatch_ShowUI, out HResult);
-                return result;
-            }
-            catch (Exception ex)
-            {
-                HResult = ex.HResult;
-                return false;
-            }
+            WASVersionInfoFromConfig wasVersionInfo = new ();
+            bool result = Bootstrap.TryInitialize
+                (wasVersionInfo.MajorMinorVersion, wasVersionInfo.VersionTag, wasVersionInfo.MinVersion,
+                Bootstrap.InitializeOptions.OnNoMatch_ShowUI, out hResult);
+            return result;
         }
-        else
+        catch (Exception ex)
         {
-            HResult = 1;
+            hResult = ex.HResult;
             return false;
         }
     }
 
-    public static class WASVersionInfoFromConfig
+    public class WASVersionInfoFromConfig
     {
-        static JsonElement? verconfig;
-        static readonly JsonDocumentOptions JsonDocumentOptions = new()
+#pragma warning disable CA1507
+        private readonly JsonElement config;
+        private readonly JsonDocumentOptions jsonDocumentOptions = new ()
         {
             AllowTrailingCommas = true,
             CommentHandling = JsonCommentHandling.Skip,
         };
-        static void GetConfig()
+
+        public WASVersionInfoFromConfig()
         {
-            try
-            {
-                string configString = File.ReadAllText("WASDKVersionInfo.json");
-                JsonDocument configDoc = JsonDocument.Parse(configString, JsonDocumentOptions);
-                verconfig = configDoc.RootElement.GetProperty("WASDKVersionInfo");
-            }
-            catch (Exception)
-            {
-                verconfig = null;
-            }
+            string configString = File.ReadAllText("WASDKVersionInfo.json");
+            JsonDocument configDoc = JsonDocument.Parse(configString, jsonDocumentOptions);
+            config = configDoc.RootElement.GetProperty("WASDKVersionInfo");
         }
 
-        public static uint? MajorMinorVersion
+        public uint MajorMinorVersion
         {
             get
             {
-                if (!verconfig.HasValue) GetConfig();
-                try
-                {
-                    if (verconfig.HasValue)
-                    {
-                        string rawdata = verconfig.Value.GetProperty("MajorMinorVersion").GetString();
-                        return Convert.ToUInt32(rawdata, 16);
-                    }
-                    else
-                    {
-                        return null;
-                    }
-                }
-                catch (Exception)
-                {
-                    return null;
-                }
+                string rawdata = config.GetProperty("MajorMinorVersion").GetString();
+                return Convert.ToUInt32(rawdata, 16);
             }
         }
 
-        public static PackageVersion? MinVersion
+        public PackageVersion MinVersion
         {
             get
             {
-                if (!verconfig.HasValue) GetConfig();
-                try
-                {
-                    if (verconfig.HasValue)
-                    {
-                        string rawdata = verconfig.Value.GetProperty("MinVersion").GetString();
-                        return new PackageVersion(Convert.ToUInt64(rawdata, 16));
-                    }
-                    else
-                    {
-                        return null;
-                    }
-                }
-                catch (Exception)
-                {
-                    return null;
-                }
+                string rawdata = config.GetProperty("MinVersion").GetString();
+                return new PackageVersion(Convert.ToUInt64(rawdata, 16));
             }
         }
 
-        public static string VersionTag
+        public string VersionTag
         {
             get
             {
-                if (!verconfig.HasValue) GetConfig();
-                try
-                {
-                    if (verconfig.HasValue)
-                    {
-                        return verconfig.Value.GetProperty("VersionTag").GetString();
-                    }
-                    else
-                    {
-                        return "";
-                    }
-                }
-                catch (Exception)
-                {
-                    return "";
-                }
+                return config.GetProperty("VersionTag").GetString();
             }
         }
     }
