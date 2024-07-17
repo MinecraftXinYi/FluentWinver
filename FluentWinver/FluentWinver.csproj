@@ -30,7 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SharpWinver.Core\SharpWinver.Core.csproj" />
+    <ProjectReference Include="..\SharpWinverLib\SharpWinverLib.csproj" />
   </ItemGroup>
 
 	<ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
