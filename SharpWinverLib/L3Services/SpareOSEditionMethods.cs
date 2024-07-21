@@ -11,12 +11,12 @@ internal static class SpareOSEditionMethods
         get
         {
             string osNumber = string.Empty;
-            if (OSVersionRaw.OSVersionMajor == 10)
+            if (VersionInfo.OSVersionMajor == 10)
             {
-                if (OSVersionRaw.OSVersionMinor == 0)
+                if (VersionInfo.OSVersionMinor == 0)
                 {
-                    if (OSVersionRaw.OSVersionRevision <= 21390) osNumber = "10";
-                    if (OSVersionRaw.OSVersionRevision >= 21996) osNumber = "11";
+                    if (VersionInfo.OSVersionRevision <= 21390) osNumber = "10";
+                    if (VersionInfo.OSVersionRevision >= 21996) osNumber = "11";
                 }
             }
             return osNumber;

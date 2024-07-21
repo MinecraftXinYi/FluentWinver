@@ -11,7 +11,7 @@ internal static class WindowsCBSInfo
 {
     public static bool UseCBSPackage
     {
-        get => OSVersionRaw.OSVersionRevision >= 19041 && OSTypeInfo.IsDesktopPlatform;
+        get => VersionInfo.OSVersionRevision >= 19041 && OSTypeInfo.IsDesktopPlatform;
     }
 
     public static string CBSPackageVersion

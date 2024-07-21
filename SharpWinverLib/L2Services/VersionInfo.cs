@@ -5,7 +5,7 @@ using System;
 
 namespace SharpWinver.L2Services;
 
-internal static class OSVersionRaw
+internal static class VersionInfo
 {
     public static string OSDisplayVersion
     {

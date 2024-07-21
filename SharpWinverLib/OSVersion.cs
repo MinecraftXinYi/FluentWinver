@@ -9,18 +9,18 @@ public static partial class OSVersion
     {
         get
         {
-            string osReleaseVersion = OSVersionRaw.OSDisplayVersion;
-            if (osReleaseVersion == string.Empty) osReleaseVersion = OSVersionRaw.OSReleaseId;
+            string osReleaseVersion = VersionInfo.OSDisplayVersion;
+            if (osReleaseVersion == string.Empty) osReleaseVersion = VersionInfo.OSReleaseId;
             if (osReleaseVersion == string.Empty) osReleaseVersion = "(Unknown)";
             return osReleaseVersion;
         }
     }
 
     //获取OS内部版本数字
-    static readonly ulong major = OSVersionRaw.OSVersionMajor;
-    static readonly ulong minor = OSVersionRaw.OSVersionMinor;
-    static readonly ulong revision = OSVersionRaw.OSVersionRevision;
-    static readonly ulong build = OSVersionRaw.OSVersionBuild;
+    static readonly ulong major = VersionInfo.OSVersionMajor;
+    static readonly ulong minor = VersionInfo.OSVersionMinor;
+    static readonly ulong revision = VersionInfo.OSVersionRevision;
+    static readonly ulong build = VersionInfo.OSVersionBuild;
 
     public static string FullVersion
     {
