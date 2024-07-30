@@ -1,9 +1,10 @@
-﻿using Microsoft.Windows.ApplicationModel.DynamicDependency;
-using System;
+﻿using System;
 using System.IO;
 using System.Text.Json;
 
-internal static class WARInitializer
+namespace Microsoft.Windows.ApplicationModel.DynamicDependency;
+
+internal static class WARInitializerCs
 {
     public static bool InitializeWAR(out int hResult)
     {
@@ -36,7 +37,7 @@ internal static class WARInitializer
         {
             string configString = File.ReadAllText("WASDKVersionInfo.json");
             JsonDocument configDoc = JsonDocument.Parse(configString, jsonDocumentOptions);
-            config = configDoc.RootElement.GetProperty("WASDKVersionInfo");
+            config = configDoc.RootElement.GetProperty("WASDKVersion");
         }
 
         public uint MajorMinorVersion

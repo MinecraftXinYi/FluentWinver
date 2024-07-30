@@ -1,6 +1,8 @@
 ﻿using System.Globalization;
 using System.Runtime.InteropServices;
 
+namespace System.Windows;
+
 public unsafe class CultureInfoHelper
 {
     [DllImport("api-ms-win-core-localization-l1-2-1.dll", CharSet = CharSet.Unicode)]

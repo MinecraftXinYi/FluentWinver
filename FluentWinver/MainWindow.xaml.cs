@@ -28,6 +28,7 @@ using Microsoft.UI.Xaml.Markup;
 using Windows.UI.ViewManagement;
 using Microsoft.UI.Composition;
 using System.Globalization;
+using System.Windows;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.

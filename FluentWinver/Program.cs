@@ -1,4 +1,6 @@
-﻿using WinRT;
+﻿using Windows;
+using WinRT;
+using Microsoft.Windows.ApplicationModel.DynamicDependency;
 using Microsoft.UI.Xaml;
 using FluentWinver;
 
@@ -10,7 +12,7 @@ namespace FluentWinverProg
         {
             if (!RuntimeHelper.IsMSIX)
             {
-                if (!WARInitializer.InitializeWAR(out int hresult))
+                if (!WARInitializerCs.InitializeWAR(out int hresult))
                 {
                     System.Environment.Exit(hresult);
                 }
