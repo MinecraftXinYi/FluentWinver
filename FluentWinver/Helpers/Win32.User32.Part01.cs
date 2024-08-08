@@ -15,7 +15,7 @@ public static partial class User32
 }
 
 //Packaged Classes
-public static partial class User32Windowing
+public static partial class User32Packaged
 {
     public static void SetWindowSizeByScalingFactor(IntPtr hWnd, int width, int height)
     {

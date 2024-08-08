@@ -58,7 +58,7 @@ namespace FluentWinver
 
             //初始化窗口
             Title = m_resourceLoader.GetString("MainWindowTitle");
-            User32Windowing.SetWindowSizeByScalingFactor(hwnd, 550, 850);
+            User32Packaged.SetWindowSizeByScalingFactor(hwnd, 550, 850);
 
             //加载并显示系统信息
             this.LoadMain();
