@@ -23,7 +23,7 @@ public static partial class User32Packaged
         float scalingFactor = (float)dpi / 96;
         width = (int)(width * scalingFactor);
         height = (int)(height * scalingFactor);
-        User32.SetWindowPos(hWnd, System.IntPtr.Zero, 0, 0, width, height, 2);
+        User32.SetWindowPos(hWnd, IntPtr.Zero, 0, 0, width, height, 2);
     }
 
     public static float GetScalingFactor(IntPtr hWnd)
