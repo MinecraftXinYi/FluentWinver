@@ -3,6 +3,7 @@
   <PropertyGroup>
 	<Product>SharpWinver Core</Product>
     <TargetFrameworks>net6.0-windows10.0.17763.0;netstandard2.0</TargetFrameworks>
+	<AssemblyName>SharpWinver</AssemblyName>
 	<RootNamespace>SharpWinver</RootNamespace>
     <LangVersion>10.0</LangVersion>
 	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
