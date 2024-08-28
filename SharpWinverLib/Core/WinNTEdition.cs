@@ -5,9 +5,9 @@ using System.Runtime.InteropServices;
 
 namespace SharpWinver.Core;
 
-public static class WinEdition
+public static class WinNTEdition
 {
-    public static string WinProductName
+    public static string ProductName
     {
         get
         {

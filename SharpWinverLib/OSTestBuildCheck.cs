@@ -4,7 +4,7 @@ namespace SharpWinver;
 
 using Core;
 
-public static partial class OSTestBuildCheck
+public class OSTestBuildCheck
 {
     //检测系统是否有过期时间
     public static bool HasExpirationTime

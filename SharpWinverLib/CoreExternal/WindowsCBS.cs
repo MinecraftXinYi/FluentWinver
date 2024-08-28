@@ -10,7 +10,7 @@ internal static class WindowsCBS
 {
     public static bool UsesCBSPackage
     {
-        get => RtlNtVersion.WinNTVersion.Build >= 19041 && WinEdition.IsDesktopPlatform;
+        get => RtlNtVersion.WinNTVersion.Build >= 19041 && WinNTEdition.IsDesktopPlatform;
     }
 
     public static string CBSPackageVersion

@@ -4,7 +4,7 @@ using Core;
 
 public class WindowsEdition
 {
-    //获取系统类型名称
+    //获取系统版本名称
     public static string OSEditionName
     {
         get
@@ -16,9 +16,9 @@ public class WindowsEdition
             }
             else
             {
-                osEdition = WinEdition.WinProductName;
+                osEdition = WinNTEdition.ProductName;
                 if (string.IsNullOrEmpty(osEdition))
-                    osEdition = $"Microsoft Windows {WinEdition.EditionID}";
+                    osEdition = $"Microsoft Windows {WinNTEdition.EditionID}";
             }
             return osEdition;
         }
@@ -29,7 +29,7 @@ public class WindowsEdition
     {
         get
         {
-            return WinEdition.IsDesktopPlatform;
+            return WinNTEdition.IsDesktopPlatform;
         }
     }
 
@@ -38,7 +38,7 @@ public class WindowsEdition
     {
         get
         {
-            return WinEdition.PlatformArchitecture;
+            return WinNTEdition.PlatformArchitecture;
         }
     }
 }

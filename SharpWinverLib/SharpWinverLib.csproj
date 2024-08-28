@@ -1,15 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-	<Product>SharpWinver Library</Product>
+    <Product>SharpWinver Library</Product>
     <TargetFramework>netstandard2.0</TargetFramework>
-	<AssemblyName>SharpWinverLib</AssemblyName>
-	<RootNamespace>SharpWinver</RootNamespace>
+    <RootNamespace>SharpWinver</RootNamespace>
     <LangVersion>10.0</LangVersion>
-	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Nullable>enable</Nullable>
-	<ProductVersion>2.0.0.0</ProductVersion>
-	<FileVersion>2.0.0.0</FileVersion>
+    <ProductVersion>2.0.0.0</ProductVersion>
+    <FileVersion>2.0.0.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
