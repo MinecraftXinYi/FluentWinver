@@ -2,27 +2,26 @@
 
 namespace SharpWinver;
 
-using Services;
+using Core;
 
-public static partial class OSInstallationInfo
+public class WinInstallationInfo
 {
     //获取系统安装日期及时间
     public static DateTime OSInstallationDateTime
     {
         get
         {
-            uint datetimeSeconds = InstallationInfo.OSInstallationDateTimeRaw;
+            uint datetimeSeconds = WinInstallation.InstallationDateTimeRaw;
             DateTime installDateTime = DateTimeOffset.FromUnixTimeSeconds(datetimeSeconds).LocalDateTime;
             return installDateTime;
         }
     }
 
-    //获取系统目录路径
     public static string OSDirectory
     {
         get
         {
-            return InstallationInfo.OSDirectoryPath;
+            return Environment.SystemDirectory;
         }
     }
 }

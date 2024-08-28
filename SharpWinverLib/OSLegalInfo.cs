@@ -1,19 +1,19 @@
 ﻿namespace SharpWinver;
 
-using Services;
+using Core;
 
-public static partial class OSLegalInfo
+public class OSLegalInfo
 {
-    static readonly string CopyrightMicrosoftString = "(c) Microsoft Corporation";
+    internal const string CopyrightMicrosoftString = "(c) Microsoft Corporation.";
 
     //获取系统CopyRight信息
-    public static string OSCopyRightString
+    public static string OSCopyrightString
     {
         get
         {
-            if (WinbrandAPI.CanInvoke)
+            if (Winbrand.CanInvoke)
             {
-                return WinbrandAPI.GetWinBrandInfo.WindowsCopyRight;
+                return Winbrand.WinBrandInfo.WindowsCopyright;
             }
             else
             {
@@ -23,13 +23,21 @@ public static partial class OSLegalInfo
     }
 
     //获取系统注册用户名称
-    public static string OSRegisteredUser
+    public static string OSRegisteredOwner
     {
         get
         {
-            string registeredUser = InstallationInfo.OSRegisteredUserRaw;
-            if (registeredUser == string.Empty) registeredUser = "(Unknown registered owner)";
+            string registeredUser = WinInstallation.RegisteredOwner;
+            if (registeredUser == string.Empty) registeredUser = "[Unknown system registered owner]";
             return registeredUser;
+        }
+    }
+
+    public static string OSRegisteredOrganization
+    {
+        get
+        {
+            return WinInstallation.RegisteredOrganization;
         }
     }
 }

@@ -68,35 +68,35 @@ namespace FluentWinver
         void LoadMain()
         {
             //加载系统名称
-            string osEdition = OSEdition.OSEditionName;
+            string osEdition = WindowsEdition.OSEditionName;
             OSEditionBlock.Text = osEdition;
 
             //加载系统版本号
-            OSVersionBlock.Text = OSVersion.ReleaseVersion;
+            OSVersionBlock.Text = WinodwsVersion.ReleaseVersion;
 
             //Get the build number of current OS
-            int buildNum = int.Parse(OSVersion.Revision);
+            int buildNum = int.Parse(WinodwsVersion.BuildNumber);
 
             //加载系统内部版本号
-            OSBuildVersionBlock.Text = OSVersion.FullVersion;
+            OSBuildVersionBlock.Text = WinodwsVersion.FullVersion;
 
             //加载系统体验包版本
-            if (OSExperienceInfo.UseCBSExperience)
-                OSExperienceBlock.Text = $"{OSExperienceInfo.CBSPackName} {OSExperienceInfo.CBSVersion}";
+            if (WindowsUXInfo.HasCBSExperience)
+                OSExperienceBlock.Text = $"{WindowsUXInfo.CBSPackName} {WindowsUXInfo.CBSVersion}";
             else
             {
                 OSExperienceHeader.Visibility = Visibility.Collapsed;
                 OSExperienceBlock.Visibility = Visibility.Collapsed;
             }
 
-            //加载系统架构
-            OSArchBlock.Text = OSEdition.OSArchitecture;
+            //加载系统平台架构
+            OSArchBlock.Text = WindowsEdition.OSArchitecture;
 
             //加载系统安装时间
-            OSInstalledDateBlock.Text = OSInstallationInfo.OSInstallationDateTime.ToString("d", userCulture);
+            OSInstalledDateBlock.Text = WinInstallationInfo.OSInstallationDateTime.ToString("d", userCulture);
 
             //加载系统开发商（版权方）名称
-            OSCopyRightBlock.Text = OSLegalInfo.OSCopyRightString;
+            OSCopyRightBlock.Text = OSLegalInfo.OSCopyrightString;
 
             //加载系统测试副本过期时间或隐藏
             if (OSTestBuildCheck.HasExpirationTime)
@@ -111,7 +111,7 @@ namespace FluentWinver
             LicensingTextBlock.Text = m_resourceLoader.GetString("LicensingText").Replace("[Microsoft Windows]", osEdition);
 
             //加载系统注册用户名
-            RegisterBlock.Text = OSLegalInfo.OSRegisteredUser;
+            RegisterBlock.Text = OSLegalInfo.OSRegisteredOwner;
 
             //LicenseLinkButton 链接初始化
             LicenseLinkButton.NavigateUri = new Uri(m_resourceLoader.GetString("LicenseLink"));

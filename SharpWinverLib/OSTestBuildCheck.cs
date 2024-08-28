@@ -2,7 +2,7 @@
 
 namespace SharpWinver;
 
-using Services;
+using Core;
 
 public static partial class OSTestBuildCheck
 {
@@ -11,7 +11,7 @@ public static partial class OSTestBuildCheck
     {
         get
         {
-            return ExpirationInfo.GetSystemExpiration().HasValue;
+            return WinExpiration.GetSystemExpiration().HasValue;
         }
     }
 
@@ -20,7 +20,7 @@ public static partial class OSTestBuildCheck
     {
         get
         {
-            DateTime? expirationTime = ExpirationInfo.GetSystemExpiration();
+            DateTime? expirationTime = WinExpiration.GetSystemExpiration();
             if (expirationTime.HasValue) return expirationTime.Value;
             else return DateTimeOffset.FromUnixTimeSeconds(0).LocalDateTime;
         }

@@ -1,17 +1,16 @@
-﻿using SharpWinver.Helpers;
-using SharpWinver.L2Services;
+﻿using SharpWinver.Core;
+using SharpWinver.Helpers;
 using SharpWinver.Models.Constants;
-using SharpWinver.Services;
 using System;
 using System.Linq;
 
-namespace SharpWinver.L3Services;
+namespace SharpWinver.CoreExternal;
 
-internal static class WindowsCBSInfo
+internal static class WindowsCBS
 {
-    public static bool UseCBSPackage
+    public static bool UsesCBSPackage
     {
-        get => VersionInfo.OSVersionRevision >= 19041 && OSTypeInfo.IsDesktopPlatform;
+        get => RtlNtVersion.WinNTVersion.Build >= 19041 && WinEdition.IsDesktopPlatform;
     }
 
     public static string CBSPackageVersion
@@ -22,8 +21,7 @@ internal static class WindowsCBSInfo
             {
                 RegistryHelper.TryGetSubKeyList(RegistryPaths.SystemAppxList, out string[] subKeys);
                 string cbs = subKeys.First(f => f.StartsWith("MicrosoftWindows.Client.CBS_", StringComparison.CurrentCultureIgnoreCase));
-                string cbsVersion = cbs.Split('_')[1];
-                return cbsVersion;
+                return cbs.Split('_')[1];
             }
             catch (Exception)
             {
