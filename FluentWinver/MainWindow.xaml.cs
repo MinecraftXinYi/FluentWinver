@@ -72,13 +72,13 @@ namespace FluentWinver
             OSEditionBlock.Text = osEdition;
 
             //加载系统版本号
-            OSVersionBlock.Text = WinodwsVersion.ReleaseVersion;
+            OSVersionBlock.Text = WindowsVersion.ReleaseVersion;
 
             //Get the build number of current OS
-            int buildNum = int.Parse(WinodwsVersion.BuildNumber);
+            int buildNum = int.Parse(WindowsVersion.BuildNumber);
 
             //加载系统内部版本号
-            OSBuildVersionBlock.Text = WinodwsVersion.FullVersion;
+            OSBuildVersionBlock.Text = WindowsVersion.FullVersion;
 
             //加载系统体验包版本
             if (WindowsUXInfo.HasCBSExperience)

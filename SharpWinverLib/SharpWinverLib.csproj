@@ -8,6 +8,11 @@
     <Nullable>enable</Nullable>
     <ProductVersion>2.0.0.0</ProductVersion>
     <FileVersion>2.0.0.0</FileVersion>
+    <AssemblyTitle>SharpWinver Library</AssemblyTitle>
+    <Company>MinecraftXinYi Person</Company>
+    <Title>SharpWinver Library</Title>
+    <Authors>MinecraftXinYi</Authors>
+    <Description>A class library that provides information of Windows OS via C# mathods. </Description>
   </PropertyGroup>
 
   <ItemGroup>

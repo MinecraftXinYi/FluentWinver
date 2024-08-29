@@ -2,7 +2,7 @@
 
 using Core;
 
-public class WinodwsVersion
+public class WindowsVersion
 {
     //获取系统版本代号
     public static string ReleaseVersion
@@ -21,7 +21,7 @@ public class WinodwsVersion
     private static uint Build { get; set; }
     private static uint UBR { get; set; }
 
-    static WinodwsVersion()
+    static WindowsVersion()
     {
         Major = RtlNtVersion.WinNTVersion.Major;
         Minor = RtlNtVersion.WinNTVersion.Minor;
