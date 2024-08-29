@@ -5,7 +5,7 @@ namespace SharpWinver.Core;
 
 public static class ExWinVersion
 {
-    public static string WinRelease
+    public static string WinReleaseTag
     {
         get
         {

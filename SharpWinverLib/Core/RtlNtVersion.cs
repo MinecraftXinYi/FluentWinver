@@ -29,12 +29,12 @@ public static class RtlNtVersion
 
         public static uint Build { get; private set; }
 
-        public static string MainVersion
+        public static string MainVersionTag
         {
             get => $"{Major}.{Minor}";
         }
 
-        public static string FullVersion
+        public static string FullVersionTag
         {
             get => $"{Major}.{Minor}.{Build}";
         }

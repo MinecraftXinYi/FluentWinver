@@ -5,11 +5,11 @@ using Core;
 public class WindowsVersion
 {
     //获取系统版本代号
-    public static string ReleaseVersion
+    public static string ReleaseVersionTag
     {
         get
         {
-            string osReleaseVersion = ExWinVersion.WinRelease;
+            string osReleaseVersion = ExWinVersion.WinReleaseTag;
             if (string.IsNullOrEmpty(osReleaseVersion)) osReleaseVersion = "[Unknown Release Version]";
             return osReleaseVersion;
         }
@@ -29,12 +29,12 @@ public class WindowsVersion
         UBR = ExWinVersion.WinUBR;
     }
 
-    public static string FullVersion
+    public static string FullVersionTag
     {
         get => $"{Major}.{Minor}.{Build}.{UBR}";
     }
 
-    public static string MainVersion
+    public static string MainVersionTag
     {
         get => $"{Major}.{Minor}.{Build}";
     }
@@ -44,7 +44,7 @@ public class WindowsVersion
         get => $"{Major}.{Minor}";
     }
 
-    public static string WinVersion
+    public static string WinOSVersion
     {
         get => $"{Build}.{UBR}";
     }
