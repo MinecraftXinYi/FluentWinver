@@ -8,7 +8,7 @@ public class WindowsUXInfo
     {
         get
         {
-            return WindowsCBS.UsesCBSPackage;
+            return WinClientCBS.UsesCBSPackage;
         }
     }
 
@@ -18,7 +18,7 @@ public class WindowsUXInfo
     {
         get
         {
-            return WindowsCBS.CBSPackageVersion;
+            return WinClientCBS.CBSPackageVersion;
         }
     }
 }

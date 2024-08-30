@@ -6,11 +6,11 @@ using System.Linq;
 
 namespace SharpWinver.CoreExternal;
 
-internal static class WindowsCBS
+internal static class WinClientCBS
 {
     public static bool UsesCBSPackage
     {
-        get => RtlNtVersion.WinNTVersion.Build >= 19041 && WinNTEdition.IsDesktopPlatform;
+        get => RtlNtVersion.WinNTVersion.Build >= 19041 && WinNTEdition.IsWin32DesktopSupported;
     }
 
     public static string CBSPackageVersion

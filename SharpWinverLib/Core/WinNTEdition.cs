@@ -25,7 +25,7 @@ public static class WinNTEdition
         }
     }
 
-    public static bool IsDesktopPlatform
+    public static bool IsWin32DesktopSupported
     {
         get
         {

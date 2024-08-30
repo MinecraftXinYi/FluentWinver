@@ -157,7 +157,7 @@
     <value>OS 内部版本</value>
   </data>
   <data name="OSEditionHeader.Text" xml:space="preserve">
-    <value>类型</value>
+    <value>版本名称</value>
   </data>
   <data name="OSExperienceHeader.Text" xml:space="preserve">
     <value>体验</value>

@@ -10,7 +10,7 @@ public class WindowsEdition
         get
         {
             string osEdition;
-            if (Winbrand.CanInvoke)
+            if (WinNTEdition.IsWin32DesktopSupported && Winbrand.CanInvoke)
             {
                 osEdition = Winbrand.WinBrandInfo.WindowsLong;
             }
@@ -18,18 +18,21 @@ public class WindowsEdition
             {
                 osEdition = WinNTEdition.ProductName;
                 if (string.IsNullOrEmpty(osEdition))
-                    osEdition = $"Microsoft Windows {WinNTEdition.EditionID}";
+                {
+                    string edtidstr = !string.IsNullOrEmpty(WinNTEdition.EditionID) ? $" {WinNTEdition.EditionID}" : string.Empty;
+                    osEdition = "Windows" + edtidstr;
+                }
             }
             return osEdition;
         }
     }
 
     //检测系统是否为桌面端 Windows
-    public static bool IsDesktopEdition
+    public static bool IsWin32Edition
     {
         get
         {
-            return WinNTEdition.IsDesktopPlatform;
+            return WinNTEdition.IsWin32DesktopSupported;
         }
     }
 
