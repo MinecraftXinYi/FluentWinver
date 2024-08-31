@@ -81,8 +81,8 @@ namespace FluentWinver
             OSBuildVersionBlock.Text = WindowsVersion.FullVersionTag;
 
             //加载系统体验包版本
-            if (WindowsUXInfo.HasCBSExperience)
-                OSExperienceBlock.Text = $"{WindowsUXInfo.CBSPackName} {WindowsUXInfo.CBSVersion}";
+            if (WindowsUXInfo.UsingClientCBSExperience)
+                OSExperienceBlock.Text = $"{WindowsUXInfo.ClientCBSPackName} {WindowsUXInfo.ClientCBSVersion}";
             else
             {
                 OSExperienceHeader.Visibility = Visibility.Collapsed;

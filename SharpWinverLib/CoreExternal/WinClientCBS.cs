@@ -8,12 +8,12 @@ namespace SharpWinver.CoreExternal;
 
 internal static class WinClientCBS
 {
-    public static bool UsesCBSPackage
+    public static bool IsClientCBSPackageNeeded
     {
         get => RtlNtVersion.WinNTVersion.Build >= 19041 && WinNTEdition.IsWin32DesktopSupported;
     }
 
-    public static string CBSPackageVersion
+    public static string ClientCBSPackageVersion
     {
         get
         {

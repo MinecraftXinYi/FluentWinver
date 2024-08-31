@@ -4,21 +4,21 @@ using CoreExternal;
 
 public class WindowsUXInfo
 {
-    public static bool HasCBSExperience
+    public static bool UsingClientCBSExperience
     {
         get
         {
-            return WinClientCBS.UsesCBSPackage;
+            return WinClientCBS.IsClientCBSPackageNeeded;
         }
     }
 
-    public const string CBSPackName = "Windows Feature Experience Pack";
+    public const string ClientCBSPackName = "Windows Feature Experience Pack";
 
-    public static string CBSVersion
+    public static string ClientCBSVersion
     {
         get
         {
-            return WinClientCBS.CBSPackageVersion;
+            return WinClientCBS.ClientCBSPackageVersion;
         }
     }
 }
