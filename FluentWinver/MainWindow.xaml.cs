@@ -170,32 +170,32 @@ namespace FluentWinver
             string[] strings;
             if(OSTestBuildCheck.HasExpirationTime)
             {
-                strings = new string[7]
-                {
-                    OSEditionHeader.Text + "  " + OSEditionBlock.Text,
-                    OSVersionHeader.Text + "  " + OSVersionBlock.Text,
-                    OSBuildVersionHeader.Text + "  " + OSBuildVersionBlock.Text,
-                    OSArchHeader.Text + "  " + OSArchBlock.Text,
-                    OSInstalledDateHeader.Text + "  " + OSInstalledDateBlock.Text,
-                    OSExperienceHeader.Text + "  " +OSExperienceBlock.Text,
-                    OSExpirationTimeHeader.Text + "  " + OSExpirationTimeBlock.Text
-                };
+                strings =
+                [
+                    $"{OSEditionHeader.Text} {OSEditionBlock.Text}",
+                    $"{OSVersionHeader.Text} {OSVersionBlock.Text}",
+                    $"{OSBuildVersionHeader.Text} {OSBuildVersionBlock.Text}",
+                    $"{OSArchHeader.Text} {OSArchBlock.Text}",
+                    $"{OSInstalledDateHeader.Text} {OSInstalledDateBlock.Text}",
+                    $"{OSExperienceHeader.Text} {OSExperienceBlock.Text}",
+                    $"{OSExpirationTimeHeader.Text} {OSExpirationTimeBlock.Text}"
+                ];
             }
             else
             {
-                strings = new string[6]
-                {
-                    OSEditionHeader.Text + "  " + OSEditionBlock.Text,
-                    OSVersionHeader.Text + "  " + OSVersionBlock.Text,
-                    OSBuildVersionHeader.Text + "  " + OSBuildVersionBlock.Text,
-                    OSArchHeader.Text + "  " + OSArchBlock.Text,
-                    OSInstalledDateHeader.Text + "  " + OSInstalledDateBlock.Text,
-                    OSExperienceHeader.Text + "  " +OSExperienceBlock.Text
-                };
+                strings =
+                [
+                    $"{OSEditionHeader.Text} {OSEditionBlock.Text}",
+                    $"{OSVersionHeader.Text} {OSVersionBlock.Text}",
+                    $"{OSBuildVersionHeader.Text} {OSBuildVersionBlock.Text}",
+                    $"{OSArchHeader.Text} {OSArchBlock.Text}",
+                    $"{OSInstalledDateHeader.Text} {OSInstalledDateBlock.Text}",
+                    $"{OSExperienceHeader.Text} {OSExperienceBlock.Text}"
+                ];
             }
             var dataPackage = new DataPackage();
             dataPackage.SetText(string.Join("\r\n", strings));
-            Clipboard.SetContent(dataPackage);
+            Clipboard.SetContentWithOptions(dataPackage, new ClipboardContentOptions() { IsRoamable = true });
         }
 
         //“确定”按钮事件

@@ -10,9 +10,8 @@ internal static class WARInitializerCs
     {
         try
         {
-            WASVersionInfoFromConfig wasVersionInfo = new ();
             bool result = Bootstrap.TryInitialize
-                (wasVersionInfo.MajorMinorVersion, wasVersionInfo.VersionTag, wasVersionInfo.MinVersion,
+                (WASVersionInfoConfig.MajorMinorVersion, WASVersionInfoConfig.VersionTag, WASVersionInfoConfig.MinVersion,
                 Bootstrap.InitializeOptions.OnNoMatch_ShowUI, out hResult);
             return result;
         }
@@ -23,24 +22,25 @@ internal static class WARInitializerCs
         }
     }
 
-    public class WASVersionInfoFromConfig
+    public static class WASVersionInfoConfig
     {
 #pragma warning disable CA1507
-        private readonly JsonElement config;
-        private readonly JsonDocumentOptions jsonDocumentOptions = new ()
+        private static readonly JsonElement config;
+
+        private static readonly JsonDocumentOptions jsonDocumentOptions = new ()
         {
             AllowTrailingCommas = true,
             CommentHandling = JsonCommentHandling.Skip,
         };
 
-        public WASVersionInfoFromConfig()
+        static WASVersionInfoConfig()
         {
             string configString = File.ReadAllText("WASDKVersionInfo.json");
             JsonDocument configDoc = JsonDocument.Parse(configString, jsonDocumentOptions);
             config = configDoc.RootElement.GetProperty("WASDKVersion");
         }
 
-        public uint MajorMinorVersion
+        public static uint MajorMinorVersion
         {
             get
             {
@@ -49,7 +49,7 @@ internal static class WARInitializerCs
             }
         }
 
-        public PackageVersion MinVersion
+        public static PackageVersion MinVersion
         {
             get
             {
@@ -58,7 +58,7 @@ internal static class WARInitializerCs
             }
         }
 
-        public string VersionTag
+        public static string VersionTag
         {
             get
             {
