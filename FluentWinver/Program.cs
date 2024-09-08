@@ -10,7 +10,7 @@ namespace FluentWinverProg
     {
         internal static void Main(string[] args)
         {
-            if (!RuntimeHelper.IsMSIX)
+            if (!AppxRuntimeHelper.IsMSIX)
             {
                 if (!WARInitializerCs.InitializeWAR(out int hresult))
                 {
