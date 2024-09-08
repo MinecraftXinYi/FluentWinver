@@ -12,7 +12,7 @@
     <Company>MinecraftXinYi Person</Company>
     <Title>SharpWinver Library</Title>
     <Authors>MinecraftXinYi</Authors>
-    <Description>A class library that provides information of Windows OS via C# mathods. </Description>
+    <Description>A .NET Standard library that provides information of Windows OS via CSharp methods.</Description>
   </PropertyGroup>
 
   <ItemGroup>
