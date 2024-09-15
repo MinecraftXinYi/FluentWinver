@@ -96,11 +96,11 @@ namespace FluentWinver
             OSInstalledDateBlock.Text = WinInstallationInfo.OSInstallationDateTime.ToString("d", userCulture);
 
             //加载系统开发商（版权方）名称
-            OSCopyRightBlock.Text = OSLegalInfo.OSCopyrightString;
+            OSCopyRightBlock.Text = WinOSLegalInfo.OSCopyrightString;
 
             //加载系统测试副本过期时间或隐藏
-            if (OSTestBuildCheck.HasExpirationTime)
-                OSExpirationTimeBlock.Text = OSTestBuildCheck.OSExpirationTime.ToString("g", userCulture);
+            if (WinOSTestBuildInfo.HasExpirationTime)
+                OSExpirationTimeBlock.Text = WinOSTestBuildInfo.OSExpirationTime.ToString("g", userCulture);
             else
             {
                 OSExpirationTimeHeader.Visibility = Visibility.Collapsed;
@@ -111,7 +111,7 @@ namespace FluentWinver
             LicensingTextBlock.Text = m_resourceLoader.GetString("LicensingText").Replace("[Microsoft Windows]", osEdition);
 
             //加载系统注册用户名
-            RegisterBlock.Text = OSLegalInfo.OSRegisteredOwner;
+            RegisterBlock.Text = WinInstallationInfo.OSRegisteredOwner;
 
             //LicenseLinkButton 链接初始化
             LicenseLinkButton.NavigateUri = new Uri(m_resourceLoader.GetString("LicenseLink"));
@@ -168,7 +168,7 @@ namespace FluentWinver
         private void Copy_WS(object sender, RoutedEventArgs e)
         {
             string[] strings;
-            if(OSTestBuildCheck.HasExpirationTime)
+            if(WinOSTestBuildInfo.HasExpirationTime)
             {
                 strings =
                 [

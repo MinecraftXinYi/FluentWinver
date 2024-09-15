@@ -17,11 +17,23 @@ public class WinInstallationInfo
         }
     }
 
-    public static string OSDirectory
+    //获取系统注册的用户名称
+    public static string OSRegisteredOwner
     {
         get
         {
-            return Environment.SystemDirectory;
+            string registeredUser = WinInstallation.RegisteredOwner;
+            if (registeredUser == string.Empty) registeredUser = "[Unknown system registered owner]";
+            return registeredUser;
+        }
+    }
+
+    //获取系统注册的组织名称
+    public static string OSRegisteredOrganization
+    {
+        get
+        {
+            return WinInstallation.RegisteredOrganization;
         }
     }
 }

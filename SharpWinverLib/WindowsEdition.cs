@@ -10,7 +10,7 @@ public class WindowsEdition
         get
         {
             string osEdition;
-            if (WinNTEdition.IsWin32DesktopSupported && Winbrand.CanInvoke)
+            if (WinNTEdition.IsWin32DesktopAPISupported && Winbrand.CanInvoke)
             {
                 osEdition = Winbrand.WinBrandInfo.WindowsLong;
             }
@@ -32,7 +32,7 @@ public class WindowsEdition
     {
         get
         {
-            return WinNTEdition.IsWin32DesktopSupported;
+            return WinNTEdition.IsWin32DesktopAPISupported;
         }
     }
 

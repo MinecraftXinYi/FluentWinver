@@ -1,0 +1,24 @@
+﻿namespace SharpWinver;
+
+using Core;
+
+public class WinOSLegalInfo
+{
+    internal const string CopyrightMicrosoftString = "(c) Microsoft Corporation.";
+
+    //获取系统CopyRight信息
+    public static string OSCopyrightString
+    {
+        get
+        {
+            if (Winbrand.CanInvoke)
+            {
+                return Winbrand.WinBrandInfo.WindowsCopyright;
+            }
+            else
+            {
+                return CopyrightMicrosoftString;
+            }
+        }
+    }
+}

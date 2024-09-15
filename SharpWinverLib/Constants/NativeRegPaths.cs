@@ -1,8 +1,9 @@
 ﻿using Microsoft.Win32;
+using SharpWinver.Models;
 
-namespace SharpWinver.Models.Constants;
+namespace SharpWinver.Constants;
 
-internal static class RegistryPaths
+internal static class NativeRegPaths
 {
     public static readonly RegistryPath WinNTCurrent = new()
     {

@@ -1,5 +1,5 @@
-﻿using SharpWinver.Helpers;
-using SharpWinver.Models.Constants;
+﻿using SharpWinver.Constants;
+using SharpWinver.Helpers;
 
 namespace SharpWinver.Core;
 
@@ -9,7 +9,7 @@ internal static class WinInstallation
     {
         get
         {
-            RegistryHelper.TryGetRegDword(RegistryPaths.WinNTCurrent, "InstallDate", out uint datetime);
+            RegistryHelper.TryGetRegDword(NativeRegPaths.WinNTCurrent, "InstallDate", out uint datetime);
             return datetime;
         }
     }
@@ -18,7 +18,7 @@ internal static class WinInstallation
     {
         get
         {
-            RegistryHelper.TryGetRegString(RegistryPaths.WinNTCurrent, "RegisteredOwner", out string owner);
+            RegistryHelper.TryGetRegString(NativeRegPaths.WinNTCurrent, "RegisteredOwner", out string owner);
             return owner;
         }
     }
@@ -27,7 +27,7 @@ internal static class WinInstallation
     {
         get
         {
-            RegistryHelper.TryGetRegString(RegistryPaths.WinNTCurrent, "RegisteredOrganization", out string organization);
+            RegistryHelper.TryGetRegString(NativeRegPaths.WinNTCurrent, "RegisteredOrganization", out string organization);
             return organization;
         }
     }
