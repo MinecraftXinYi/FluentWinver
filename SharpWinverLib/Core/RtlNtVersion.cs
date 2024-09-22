@@ -8,7 +8,7 @@ public static class RtlNtVersion
     [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
     public static extern void RtlGetNtVersionNumbers(ref uint MajorVersion, ref uint MinorVersion, ref uint BuildNumber);
 
-    public static uint FixedBuildNum(uint build) => build & 0xffff;
+    public static uint CorrectedBuildNum(uint rawBuildNum) => rawBuildNum & 0xffff;
 
     public class WinNTVersion
     {
@@ -20,7 +20,7 @@ public static class RtlNtVersion
             RtlGetNtVersionNumbers(ref major, ref minor, ref build);
             Major = major;
             Minor = minor;
-            Build = FixedBuildNum(build);
+            Build = CorrectedBuildNum(build);
         }
 
         public static uint Major { get; private set; }
