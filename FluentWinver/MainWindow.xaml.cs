@@ -59,6 +59,7 @@ namespace FluentWinver
             //初始化窗口
             Title = m_resourceLoader.GetString("MainWindowTitle");
             User32Packaged.SetWindowSizeByScalingFactor(hwnd, 550, 850);
+            AppWindow.TitleBar.IconShowOptions = IconShowOptions.HideIconAndSystemMenu;
 
             //加载并显示系统信息
             this.LoadMain();
@@ -124,7 +125,7 @@ namespace FluentWinver
             this.LoadWindowIcon(buildNum);
         }
 
-        //窗口图标加载
+        //窗口图标的加载代码
         void LoadWindowIcon(int buildNum)
         {
             if (buildNum >= 21996)
@@ -137,7 +138,7 @@ namespace FluentWinver
             }
         }
 
-        //Windows Brand 加载
+        //Windows Brand 的加载代码
         private void UpdateWindowsBrand(string osShortName, UISettings uiSettings)
         {
             if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.Composition.CompositionShape"))
