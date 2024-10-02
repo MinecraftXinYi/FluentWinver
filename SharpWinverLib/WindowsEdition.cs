@@ -2,7 +2,7 @@
 
 using Core;
 
-public class WindowsEdition
+public static class WindowsEdition
 {
     //获取系统版本名称
     public static string OSEditionName
@@ -27,7 +27,7 @@ public class WindowsEdition
         }
     }
 
-    //检测系统是否为桌面端 Windows
+    //检测系统是否为传统 Win32 桌面端 Windows
     public static bool IsWin32Edition
     {
         get

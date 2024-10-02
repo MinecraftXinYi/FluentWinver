@@ -10,9 +10,11 @@ public static class RtlNtVersion
 
     public static uint CorrectedBuildNum(uint rawBuildNum) => rawBuildNum & 0xffff;
 
-    public class WinNTVersion
+    public static class WinNTVersion
     {
-        static WinNTVersion()
+        static WinNTVersion() => Load();
+
+        public static void Load()
         {
             uint major = 0;
             uint minor = 0;
@@ -28,15 +30,5 @@ public static class RtlNtVersion
         public static uint Minor { get; private set; }
 
         public static uint Build { get; private set; }
-
-        public static string MainVersionTag
-        {
-            get => $"{Major}.{Minor}";
-        }
-
-        public static string FullVersionTag
-        {
-            get => $"{Major}.{Minor}.{Build}";
-        }
     }
 }

@@ -1,70 +1,71 @@
 ﻿using System;
 using Microsoft.Win32;
-using SharpWinver.Models;
 
 namespace SharpWinver.Helpers;
 
 internal static class RegistryHelper
 {
-    public static bool TryGetRegString(RegistryPath registryPath, string? valueName, out string infoString)
+    public static bool TryGetRegString(RegistryKey? registryKey, string? valueName, out string infoString)
     {
         infoString = string.Empty;
-        bool tryGet = false;
-        try
+        if (registryKey != null)
         {
-            RegistryKey rootKey = RegistryKey.OpenBaseKey(registryPath.RootHive, RegistryView.Default);
-            RegistryKey? mainKey = rootKey.OpenSubKey(registryPath.SubPath, false);
-            if (mainKey != null)
+            try
             {
-                object? getValue = mainKey.GetValue(valueName, null);
+                object getValue = registryKey.GetValue(valueName, null);
                 if (getValue != null)
                 {
                     infoString = (string)getValue;
-                    tryGet = true;
+                    return true;
                 }
+                else return false;
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
-        catch (Exception) { }
-        return tryGet;
+        else return false;
     }
 
-    public static bool TryGetRegDword(RegistryPath registryPath, string? valueName, out uint infoUInt)
+    public static bool TryGetRegDword(RegistryKey? registryKey, string? valueName, out uint infoUInt)
     {
         infoUInt = 0;
-        bool tryGet = false;
-        try
+        if (registryKey != null)
         {
-            RegistryKey rootKey = RegistryKey.OpenBaseKey(registryPath.RootHive, RegistryView.Default);
-            RegistryKey? mainKey = rootKey.OpenSubKey(registryPath.SubPath, false);
-            if (mainKey != null)
+            try
             {
-                object? getValue = mainKey.GetValue(valueName, null);
+                object getValue = registryKey.GetValue(valueName, null);
                 if (getValue != null)
                 {
                     infoUInt = Convert.ToUInt32(getValue);
-                    tryGet = true;
+                    return true;
                 }
+                else return false;
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
-        catch (Exception) { }
-        return tryGet;
+        else return false;
     }
 
-    public static bool TryGetSubKeyList(RegistryPath registryPath, out string[] subKeyNames)
+    public static bool TryGetSubKeyList(RegistryKey? registryKey, out string[] subKeyNames)
     {
         subKeyNames = new string[1];
-        bool tryGet = false;
-        try
+        if (registryKey != null)
         {
-            RegistryKey rootKey = RegistryKey.OpenBaseKey(registryPath.RootHive, RegistryView.Default);
-            RegistryKey? mainKey = rootKey.OpenSubKey(registryPath.SubPath, false);
-            if (mainKey != null)
+            try
             {
-                subKeyNames = mainKey.GetSubKeyNames();
-                tryGet = true;
+                subKeyNames = registryKey.GetSubKeyNames();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
-        catch (Exception) { }
-        return tryGet;
+        else return false;
     }
 }

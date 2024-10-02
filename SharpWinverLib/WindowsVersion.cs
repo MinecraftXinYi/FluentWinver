@@ -2,7 +2,7 @@
 
 using Core;
 
-public class WindowsVersion
+public static class WindowsVersion
 {
     //获取系统版本代号
     public static string ReleaseVersionTag
@@ -16,22 +16,24 @@ public class WindowsVersion
     }
 
     //获取OS内部版本数字
-    private static uint Major { get; set; }
-    private static uint Minor { get; set; }
-    private static uint Build { get; set; }
-    private static uint UBR { get; set; }
+    static WindowsVersion() => Load();
 
-    static WindowsVersion()
+    public static void Load()
     {
         Major = RtlNtVersion.WinNTVersion.Major;
         Minor = RtlNtVersion.WinNTVersion.Minor;
         Build = RtlNtVersion.WinNTVersion.Build;
-        UBR = ExWinVersion.WinUBR;
+        Revision = ExWinVersion.WinUBR;
     }
+
+    private static uint Major { get; set; }
+    private static uint Minor { get; set; }
+    private static uint Build { get; set; }
+    private static uint Revision { get; set; }
 
     public static string FullVersionTag
     {
-        get => $"{Major}.{Minor}.{Build}.{UBR}";
+        get => $"{Major}.{Minor}.{Build}.{Revision}";
     }
 
     public static string MainVersionTag
@@ -46,7 +48,7 @@ public class WindowsVersion
 
     public static string WinOSVersion
     {
-        get => $"{Build}.{UBR}";
+        get => $"{Build}.{Revision}";
     }
 
     public static string BuildNumber

@@ -26,11 +26,7 @@ public static class Winbrand
             try
             {
                 string? tryGetContent = BrandingFormatString(PathStrings.WindowsGeneric);
-                if (tryGetContent != null)
-                {
-                    if (tryGetContent.Length > 0) return true;
-                    else return false;
-                }
+                if (tryGetContent != null) return tryGetContent.Length > 0;
                 else return false;
             }
             catch (Exception)

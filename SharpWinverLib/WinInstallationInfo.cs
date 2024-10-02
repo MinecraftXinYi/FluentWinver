@@ -4,7 +4,7 @@ namespace SharpWinver;
 
 using Core;
 
-public class WinInstallationInfo
+public static class WinInstallationInfo
 {
     //获取系统安装日期及时间
     public static DateTime OSInstallationDateTime

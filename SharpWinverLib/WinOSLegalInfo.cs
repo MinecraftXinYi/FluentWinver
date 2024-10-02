@@ -2,7 +2,7 @@
 
 using Core;
 
-public class WinOSLegalInfo
+public static class WinOSLegalInfo
 {
     internal const string CopyrightMicrosoftString = "(c) Microsoft Corporation.";
 

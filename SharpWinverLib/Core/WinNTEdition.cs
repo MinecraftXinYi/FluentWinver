@@ -1,5 +1,4 @@
-﻿using SharpWinver.Constants;
-using SharpWinver.Helpers;
+﻿using SharpWinver.Helpers;
 using System;
 using System.Runtime.InteropServices;
 
@@ -7,11 +6,16 @@ namespace SharpWinver.Core;
 
 public static class WinNTEdition
 {
+    static WinNTEdition()
+    {
+        if (!UsingRegistryKeys.AllLoaded) UsingRegistryKeys.Load();
+    }
+
     public static string ProductName
     {
         get
         {
-            RegistryHelper.TryGetRegString(NativeRegPaths.WinNTCurrent, "ProductName", out string product);
+            RegistryHelper.TryGetRegString(UsingRegistryKeys.WinNTCurrent, "ProductName", out string product);
             return product;
         }
     }
@@ -20,7 +24,7 @@ public static class WinNTEdition
     {
         get
         {
-            RegistryHelper.TryGetRegString(NativeRegPaths.WinNTCurrent, "EditionID", out string edition);
+            RegistryHelper.TryGetRegString(UsingRegistryKeys.WinNTCurrent, "EditionID", out string edition);
             return edition;
         }
     }
@@ -35,8 +39,7 @@ public static class WinNTEdition
 
             try
             {
-                if (GetDesktopWindow() != IntPtr.Zero) return true;
-                else return false;
+                return GetDesktopWindow() != IntPtr.Zero;
             }
             catch (Exception)
             {

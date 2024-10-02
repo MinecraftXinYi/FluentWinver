@@ -2,7 +2,7 @@
 
 using CoreExternal;
 
-public class WindowsUXInfo
+public static class WindowsUXInfo
 {
     public static bool UsingClientCBSExperience
     {

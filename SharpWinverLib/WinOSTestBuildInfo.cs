@@ -4,7 +4,7 @@ namespace SharpWinver;
 
 using Core;
 
-public class WinOSTestBuildInfo
+public static class WinOSTestBuildInfo
 {
     //检测系统是否有过期时间
     public static bool HasExpirationTime
