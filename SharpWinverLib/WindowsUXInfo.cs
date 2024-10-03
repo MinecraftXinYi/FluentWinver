@@ -8,7 +8,7 @@ public static class WindowsUXInfo
     {
         get
         {
-            return WinClientCBS.IsClientCBSPackageNeeded;
+            return WinClientCBSInf.IsClientCBSPackageNeeded;
         }
     }
 
@@ -18,7 +18,7 @@ public static class WindowsUXInfo
     {
         get
         {
-            return WinClientCBS.ClientCBSPackageVersion;
+            return WinClientCBSInf.ClientCBSPackageVersion;
         }
     }
 }

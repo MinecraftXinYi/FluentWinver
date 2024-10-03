@@ -10,8 +10,9 @@ internal static class WARInitializerCs
     {
         try
         {
+            if (!WARVersionConfig.Loaded) WARVersionConfig.Load();
             bool result = Bootstrap.TryInitialize
-                (WASVersionInfoConfig.MajorMinorVersion, WASVersionInfoConfig.VersionTag, WASVersionInfoConfig.MinVersion,
+                (WARVersionConfig.MajorMinorVersion, WARVersionConfig.VersionTag, WARVersionConfig.MinVersion,
                 Bootstrap.InitializeOptions.OnNoMatch_ShowUI, out hResult);
             return result;
         }
@@ -22,10 +23,10 @@ internal static class WARInitializerCs
         }
     }
 
-    public static class WASVersionInfoConfig
+    public static class WARVersionConfig
     {
 #pragma warning disable CA1507
-        private static readonly JsonElement config;
+        private static JsonElement config;
 
         private static readonly JsonDocumentOptions jsonDocumentOptions = new ()
         {
@@ -33,12 +34,15 @@ internal static class WARInitializerCs
             CommentHandling = JsonCommentHandling.Skip,
         };
 
-        static WASVersionInfoConfig()
+        public static void Load()
         {
-            string configString = File.ReadAllText("WASDKVersionInfo.json");
+            string configString = File.ReadAllText("MSIXRuntimeInfo.json");
             JsonDocument configDoc = JsonDocument.Parse(configString, jsonDocumentOptions);
-            config = configDoc.RootElement.GetProperty("WASDKVersion");
+            config = configDoc.RootElement.GetProperty("MSIXRuntimeInfo").GetProperty("Microsoft.WindowsAppRuntime");
+            Loaded = true;
         }
+
+        public static bool Loaded { get; private set; } = false;
 
         public static uint MajorMinorVersion
         {

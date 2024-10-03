@@ -19,6 +19,14 @@
     <AssemblyTitle>Fluent Winver</AssemblyTitle>
     <Company>MinecraftXinYi Person</Company>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="MSIXRuntimeInfo.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MSIXRuntimeInfo.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Labs.WinUI.SettingsControls" Version="0.0.18" />
@@ -34,12 +42,6 @@
 
 	<ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
 		<ProjectCapability Include="Msix" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <None Update="WASDKVersionInfo.json">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </None>
 	</ItemGroup>
 
 	<PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">

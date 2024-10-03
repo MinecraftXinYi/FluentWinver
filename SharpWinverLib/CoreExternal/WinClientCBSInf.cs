@@ -5,9 +5,9 @@ using System.Linq;
 
 namespace SharpWinver.CoreExternal;
 
-internal static class WinClientCBS
+internal static class WinClientCBSInf
 {
-    static WinClientCBS()
+    static WinClientCBSInf()
     {
         if (!UsingRegistryKeys.AllLoaded) UsingRegistryKeys.Load();
     }
