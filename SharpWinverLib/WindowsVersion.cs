@@ -16,9 +16,13 @@ public static class WindowsVersion
     }
 
     //获取OS内部版本数字
-    static WindowsVersion() => Load();
+    static WindowsVersion()
+    {
+        Load();
+        LoadedOnce = true;
+    }
 
-    public static void Load()
+    private static void Load()
     {
         Major = RtlNtVersion.WinNTVersion.Major;
         Minor = RtlNtVersion.WinNTVersion.Minor;
@@ -26,9 +30,14 @@ public static class WindowsVersion
         Revision = ExWinVersion.WinUBR;
     }
 
+    private static bool LoadedOnce = false;
+
     private static uint Major { get; set; }
+
     private static uint Minor { get; set; }
+
     private static uint Build { get; set; }
+
     private static uint Revision { get; set; }
 
     public static string FullVersionTag
@@ -41,7 +50,7 @@ public static class WindowsVersion
         get => $"{Major}.{Minor}.{Build}";
     }
 
-    public static string NTVersion
+    public static string WinNTVersion
     {
         get => $"{Major}.{Minor}";
     }
@@ -54,5 +63,11 @@ public static class WindowsVersion
     public static string BuildNumber
     {
         get => $"{Build}";
+    }
+
+    public static void Reload()
+    {
+        if (LoadedOnce) LoadedOnce = false;
+        else Load();
     }
 }

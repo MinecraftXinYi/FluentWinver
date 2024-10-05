@@ -6,7 +6,7 @@ public static class ExWinVersion
 {
     static ExWinVersion()
     {
-        if (!UsingRegistryKeys.AllLoaded) UsingRegistryKeys.Load();
+        if (!UsingRegistryKeys.AllLoaded) UsingRegistryKeys.Initialize();
     }
 
     public static string WinReleaseTag

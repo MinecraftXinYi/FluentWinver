@@ -12,9 +12,13 @@ public static class RtlNtVersion
 
     public static class WinNTVersion
     {
-        static WinNTVersion() => Load();
+        static WinNTVersion()
+        {
+            Load();
+            LoadedOnce = true;
+        }
 
-        public static void Load()
+        private static void Load()
         {
             uint major = 0;
             uint minor = 0;
@@ -25,10 +29,18 @@ public static class RtlNtVersion
             Build = CorrectedBuildNum(build);
         }
 
+        private static bool LoadedOnce = false;
+
         public static uint Major { get; private set; }
 
         public static uint Minor { get; private set; }
 
         public static uint Build { get; private set; }
+
+        public static void Reload()
+        {
+            if (LoadedOnce) LoadedOnce = false;
+            else Load();
+        }
     }
 }

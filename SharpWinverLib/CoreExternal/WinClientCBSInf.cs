@@ -9,7 +9,7 @@ internal static class WinClientCBSInf
 {
     static WinClientCBSInf()
     {
-        if (!UsingRegistryKeys.AllLoaded) UsingRegistryKeys.Load();
+        if (!UsingRegistryKeys.AllLoaded) UsingRegistryKeys.Initialize();
     }
 
     public static bool IsClientCBSPackageNeeded

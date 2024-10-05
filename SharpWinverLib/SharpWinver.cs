@@ -8,10 +8,10 @@ using Helpers;
 
 public static class SharpWinverNative
 {
-    public static void Load()
+    public static void ReInitialize()
     {
-        RtlNtVersion.WinNTVersion.Load();
-        UsingRegistryKeys.Load();
-        WindowsVersion.Load();
+        RtlNtVersion.WinNTVersion.Reload();
+        UsingRegistryKeys.Initialize();
+        WindowsVersion.Reload();
     }
 }

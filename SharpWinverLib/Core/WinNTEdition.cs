@@ -8,7 +8,7 @@ public static class WinNTEdition
 {
     static WinNTEdition()
     {
-        if (!UsingRegistryKeys.AllLoaded) UsingRegistryKeys.Load();
+        if (!UsingRegistryKeys.AllLoaded) UsingRegistryKeys.Initialize();
     }
 
     public static string ProductName

@@ -6,7 +6,7 @@ internal static class WinInstallation
 {
     static WinInstallation()
     {
-        if (!UsingRegistryKeys.AllLoaded) UsingRegistryKeys.Load();
+        if (!UsingRegistryKeys.AllLoaded) UsingRegistryKeys.Initialize();
     }
 
     public static uint InstallationDateTimeRaw

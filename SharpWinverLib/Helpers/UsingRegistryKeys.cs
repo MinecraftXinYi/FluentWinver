@@ -6,7 +6,7 @@ namespace SharpWinver.Helpers;
 
 internal static class UsingRegistryKeys
 {
-    public static void Load()
+    public static void Initialize()
     {
         try
         {
