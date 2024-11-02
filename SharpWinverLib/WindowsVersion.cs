@@ -16,29 +16,28 @@ public static class WindowsVersion
     }
 
     //获取OS内部版本数字
-    static WindowsVersion()
-    {
-        Load();
-        LoadedOnce = true;
-    }
+    static WindowsVersion() => Load();
 
     private static void Load()
     {
-        Major = RtlNtVersion.WinNTVersion.Major;
-        Minor = RtlNtVersion.WinNTVersion.Minor;
-        Build = RtlNtVersion.WinNTVersion.Build;
-        Revision = ExWinVersion.WinUBR;
+        uint rawBuildNum = 0;
+        RtlNtVersion.RtlGetNtVersionNumbers(ref major, ref minor, ref rawBuildNum);
+        build = RtlNtVersion.CorrectedBuildNum(rawBuildNum);
+        revision = ExWinVersion.WinUBR;
     }
 
-    private static bool LoadedOnce = false;
+    private static uint major = 0;
+    private static uint minor = 0;
+    private static uint build = 0;
+    private static uint revision = 0;
 
-    private static uint Major { get; set; }
+    public static uint Major { get => GetAndInvoke(major); }
 
-    private static uint Minor { get; set; }
+    public static uint Minor { get => GetAndInvoke(minor); }
 
-    private static uint Build { get; set; }
+    public static uint Build { get => GetAndInvoke(build); }
 
-    private static uint Revision { get; set; }
+    public static uint Revision { get => GetAndInvoke(revision); }
 
     public static string FullVersionTag
     {
@@ -60,14 +59,16 @@ public static class WindowsVersion
         get => $"{Build}.{Revision}";
     }
 
-    public static string BuildNumber
-    {
-        get => $"{Build}";
-    }
-
     public static void Reload()
     {
-        if (LoadedOnce) LoadedOnce = false;
-        else Load();
+        if (IsInvokedOnce) Load();
     }
+
+    private static uint GetAndInvoke(uint InvokingUInt)
+    {
+        IsInvokedOnce = true;
+        return InvokingUInt;
+    }
+
+    private static bool IsInvokedOnce { get; set; } = false;
 }

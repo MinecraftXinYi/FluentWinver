@@ -1,19 +1,15 @@
-﻿using SharpWinver.Helpers;
+﻿using SharpWinver.Constants;
+using SharpWinver.Helpers;
 
 namespace SharpWinver.Core;
 
 internal static class WinInstallation
 {
-    static WinInstallation()
-    {
-        if (!UsingRegistryKeys.AllLoaded) UsingRegistryKeys.Initialize();
-    }
-
     public static uint InstallationDateTimeRaw
     {
         get
         {
-            RegistryHelper.TryGetRegDword(UsingRegistryKeys.WinNTCurrent, "InstallDate", out uint datetime);
+            RegistryHelper.TryGetRegDword(UsingRegistryPaths.WinNTCurrentVersion, "InstallDate", out uint datetime);
             return datetime;
         }
     }
@@ -22,7 +18,7 @@ internal static class WinInstallation
     {
         get
         {
-            RegistryHelper.TryGetRegString(UsingRegistryKeys.WinNTCurrent, "RegisteredOwner", out string owner);
+            RegistryHelper.TryGetRegString(UsingRegistryPaths.WinNTCurrentVersion, "RegisteredOwner", out string owner);
             return owner;
         }
     }
@@ -31,7 +27,7 @@ internal static class WinInstallation
     {
         get
         {
-            RegistryHelper.TryGetRegString(UsingRegistryKeys.WinNTCurrent, "RegisteredOrganization", out string organization);
+            RegistryHelper.TryGetRegString(UsingRegistryPaths.WinNTCurrentVersion, "RegisteredOrganization", out string organization);
             return organization;
         }
     }

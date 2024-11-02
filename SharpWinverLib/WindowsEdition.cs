@@ -9,30 +9,15 @@ public static class WindowsEdition
     {
         get
         {
-            string osEdition;
-            if (WinNTEdition.IsWin32DesktopAPISupported && Winbrand.CanInvoke)
+            string osEdition = string.Empty;
+            if (Winbrand.CanInvoke) osEdition = WinBrandInfo.FullWindowsProductString;
+            if (string.IsNullOrEmpty(osEdition)) osEdition = WinNTEdition.ProductName;
+            if (string.IsNullOrEmpty(osEdition))
             {
-                osEdition = Winbrand.WinBrandInfo.WindowsLong;
-            }
-            else
-            {
-                osEdition = WinNTEdition.ProductName;
-                if (string.IsNullOrEmpty(osEdition))
-                {
-                    string edtidstr = !string.IsNullOrEmpty(WinNTEdition.EditionID) ? $" {WinNTEdition.EditionID}" : string.Empty;
-                    osEdition = "Windows" + edtidstr;
-                }
+                string edtidstr = !string.IsNullOrEmpty(WinNTEdition.EditionID) ? $" {WinNTEdition.EditionID}" : string.Empty;
+                osEdition = "Windows" + edtidstr;
             }
             return osEdition;
-        }
-    }
-
-    //检测系统是否为传统 Win32 桌面端 Windows
-    public static bool IsWin32Edition
-    {
-        get
-        {
-            return WinNTEdition.IsWin32DesktopAPISupported;
         }
     }
 

@@ -13,6 +13,8 @@
     <Title>SharpWinver Library</Title>
     <Authors>MinecraftXinYi</Authors>
     <Description>A .NET Standard library that provides information of Windows OS via CSharp methods.</Description>
+    <CheckNotRecommendedTargetFramework>false</CheckNotRecommendedTargetFramework>
+    <NoWarn>$(NoWarn);NETSDK1215</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

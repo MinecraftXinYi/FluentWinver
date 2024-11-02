@@ -1,21 +1,17 @@
-﻿using SharpWinver.Helpers;
+﻿using SharpWinver.Constants;
+using SharpWinver.Helpers;
 
 namespace SharpWinver.Core;
 
 public static class ExWinVersion
 {
-    static ExWinVersion()
-    {
-        if (!UsingRegistryKeys.AllLoaded) UsingRegistryKeys.Initialize();
-    }
-
     public static string WinReleaseTag
     {
         get
         {
-            if (!RegistryHelper.TryGetRegString(UsingRegistryKeys.WinNTCurrent, "DisplayVersion", out string version))
-                if (!RegistryHelper.TryGetRegString(UsingRegistryKeys.WinNTCurrent, "ReleaseId", out version))
-                    RegistryHelper.TryGetRegString(UsingRegistryKeys.WinNTCurrent, "CSDVersion", out version);
+            if (!RegistryHelper.TryGetRegString(UsingRegistryPaths.WinNTCurrentVersion, "DisplayVersion", out string version))
+                if (!RegistryHelper.TryGetRegString(UsingRegistryPaths.WinNTCurrentVersion, "ReleaseId", out version))
+                    RegistryHelper.TryGetRegString(UsingRegistryPaths.WinNTCurrentVersion, "CSDVersion", out version);
             return version;
         }
     }
@@ -24,7 +20,7 @@ public static class ExWinVersion
     {
         get
         {
-            RegistryHelper.TryGetRegDword(UsingRegistryKeys.WinNTCurrent, "UBR", out uint ubr);
+            RegistryHelper.TryGetRegDword(UsingRegistryPaths.WinNTCurrentVersion, "UBR", out uint ubr);
             return ubr;
         }
     }

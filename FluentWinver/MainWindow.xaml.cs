@@ -10,6 +10,7 @@
 
 using System;
 using SharpWinver;
+using SharpWinverEx;
 using WinverUWP.Helpers;
 using Win32;
 using Microsoft.UI;
@@ -76,7 +77,7 @@ namespace FluentWinver
             OSVersionBlock.Text = WindowsVersion.ReleaseVersionTag;
 
             //Get the build number of current OS
-            int buildNum = int.Parse(WindowsVersion.BuildNumber);
+            uint buildNum = WindowsVersion.Build;
 
             //加载系统内部版本号
             OSBuildVersionBlock.Text = WindowsVersion.FullVersionTag;
@@ -126,7 +127,7 @@ namespace FluentWinver
         }
 
         //窗口图标的加载代码
-        void LoadWindowIcon(int buildNum)
+        void LoadWindowIcon(uint buildNum)
         {
             if (buildNum >= 21996)
             {

@@ -7,16 +7,16 @@ public static class Winbrand
 {
     [DllImport("winbrand.dll", CharSet = CharSet.Unicode, SetLastError = true)]
     [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
-    public static extern string BrandingFormatString(string format);
+    public static extern string BrandingFormatString(string Format);
 
-    public static class PathStrings
+    public static class Variables
     {
-        public const string WindowsGeneric = "%WINDOWS_GENERIC%";
-        public const string WindowsShort = "%WINDOWS_SHORT%";
         public const string WindowsLong = "%WINDOWS_LONG%";
         public const string WindowsProduct = "%WINDOWS_PRODUCT%";
         public const string WindowsCopyright = "%WINDOWS_COPYRIGHT%";
+        public const string WindowsGeneric = "%WINDOWS_GENERIC%";
         public const string MicrosoftCompanyName = "%MICROSOFT_COMPANYNAME%";
+        public const string WindowsShort = "%WINDOWS_SHORT%";
     }
 
     public static bool CanInvoke
@@ -25,7 +25,7 @@ public static class Winbrand
         {
             try
             {
-                string? tryGetContent = BrandingFormatString(PathStrings.WindowsGeneric);
+                string? tryGetContent = BrandingFormatString(Variables.WindowsGeneric);
                 if (tryGetContent != null) return tryGetContent.Length > 0;
                 else return false;
             }
@@ -35,17 +35,17 @@ public static class Winbrand
             }
         }
     }
+}
 
-    public static class WinBrandInfo
+public static class WinBrandInfo
+{
+    public static string FullWindowsProductString
     {
-        public static string WindowsLong
-        {
-            get => BrandingFormatString(PathStrings.WindowsLong);
-        }
+        get => Winbrand.BrandingFormatString(Winbrand.Variables.WindowsLong);
+    }
 
-        public static string WindowsCopyright
-        {
-            get => BrandingFormatString(PathStrings.WindowsCopyright);
-        }
+    public static string WindowsCopyrightString
+    {
+        get => Winbrand.BrandingFormatString(Winbrand.Variables.WindowsCopyright);
     }
 }

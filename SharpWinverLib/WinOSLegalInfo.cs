@@ -13,7 +13,7 @@ public static class WinOSLegalInfo
         {
             if (Winbrand.CanInvoke)
             {
-                return Winbrand.WinBrandInfo.WindowsCopyright;
+                return WinBrandInfo.WindowsCopyrightString;
             }
             else
             {

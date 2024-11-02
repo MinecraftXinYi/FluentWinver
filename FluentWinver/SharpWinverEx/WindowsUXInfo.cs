@@ -1,4 +1,4 @@
-﻿namespace SharpWinver;
+﻿namespace SharpWinverEx;
 
 using CoreExternal;
 
