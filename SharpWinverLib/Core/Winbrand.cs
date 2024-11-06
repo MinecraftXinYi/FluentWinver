@@ -3,7 +3,9 @@ using System.Runtime.InteropServices;
 
 namespace SharpWinver.Core;
 
-public static class Winbrand
+using static WinBrand;
+
+public static class WinBrand
 {
     [DllImport("winbrand.dll", CharSet = CharSet.Unicode, SetLastError = true)]
     [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
@@ -41,11 +43,11 @@ public static class WinBrandInfo
 {
     public static string FullWindowsProductString
     {
-        get => Winbrand.BrandingFormatString(Winbrand.Variables.WindowsLong);
+        get => BrandingFormatString(Variables.WindowsLong);
     }
 
     public static string WindowsCopyrightString
     {
-        get => Winbrand.BrandingFormatString(Winbrand.Variables.WindowsCopyright);
+        get => BrandingFormatString(Variables.WindowsCopyright);
     }
 }

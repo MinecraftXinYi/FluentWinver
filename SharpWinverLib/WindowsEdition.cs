@@ -10,7 +10,7 @@ public static class WindowsEdition
         get
         {
             string osEdition = string.Empty;
-            if (Winbrand.CanInvoke) osEdition = WinBrandInfo.FullWindowsProductString;
+            if (WinBrand.CanInvoke) osEdition = WinBrandInfo.FullWindowsProductString;
             if (string.IsNullOrEmpty(osEdition)) osEdition = WinNTEdition.ProductName;
             if (string.IsNullOrEmpty(osEdition))
             {
