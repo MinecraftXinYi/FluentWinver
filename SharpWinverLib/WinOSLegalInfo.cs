@@ -1,11 +1,10 @@
 ﻿namespace SharpWinver;
 
 using Core;
+using Constants;
 
 public static class WinOSLegalInfo
 {
-    internal const string CopyrightMicrosoftString = "(c) Microsoft Corporation.";
-
     //获取系统CopyRight信息
     public static string OSCopyrightString
     {
@@ -17,7 +16,7 @@ public static class WinOSLegalInfo
             }
             else
             {
-                return CopyrightMicrosoftString;
+                return ConstantStrings.CopyrightMicrosoftString;
             }
         }
     }

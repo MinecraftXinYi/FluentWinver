@@ -3,6 +3,7 @@
 namespace SharpWinver;
 
 using Core;
+using Constants;
 
 public static class WinInstallationInfo
 {
@@ -23,7 +24,7 @@ public static class WinInstallationInfo
         get
         {
             string registeredUser = WinInstallation.RegisteredOwner;
-            if (registeredUser == string.Empty) registeredUser = "[Unknown system registered owner]";
+            if (registeredUser == string.Empty) registeredUser = ConstantStrings.IUnknown;
             return registeredUser;
         }
     }

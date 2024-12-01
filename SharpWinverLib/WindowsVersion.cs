@@ -1,6 +1,7 @@
 ﻿namespace SharpWinver;
 
 using Core;
+using Constants;
 
 public static class WindowsVersion
 {
@@ -10,7 +11,7 @@ public static class WindowsVersion
         get
         {
             string osReleaseVersion = ExWinVersion.WinReleaseTag;
-            if (string.IsNullOrEmpty(osReleaseVersion)) osReleaseVersion = "[Unknown Release Version]";
+            if (string.IsNullOrEmpty(osReleaseVersion)) osReleaseVersion = ConstantStrings.IUnknown;
             return osReleaseVersion;
         }
     }
