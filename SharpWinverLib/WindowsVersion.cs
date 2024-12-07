@@ -67,10 +67,10 @@ public static partial class Winver
             if (IsInvokedOnce) Load();
         }
 
-        private static uint GetAndInvoke(uint InvokingUInt)
+        private static uint GetAndInvoke(uint value)
         {
             IsInvokedOnce = true;
-            return InvokingUInt;
+            return value;
         }
 
         private static bool IsInvokedOnce { get; set; } = false;
