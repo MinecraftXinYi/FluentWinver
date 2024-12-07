@@ -5,36 +5,39 @@ namespace SharpWinver;
 using Core;
 using Constants;
 
-public static class WinInstallationInfo
+public static partial class Winver
 {
-    //获取系统安装日期及时间
-    public static DateTime OSInstallationDateTime
+    public static class WinInstallationInfo
     {
-        get
+        //获取系统安装日期及时间
+        public static DateTime OSInstallationDateTime
         {
-            uint datetimeSeconds = WinInstallation.InstallationDateTimeRaw;
-            DateTime installDateTime = DateTimeOffset.FromUnixTimeSeconds(datetimeSeconds).LocalDateTime;
-            return installDateTime;
+            get
+            {
+                uint datetimeSeconds = WinInstallation.InstallationDateTimeRaw;
+                DateTime installDateTime = DateTimeOffset.FromUnixTimeSeconds(datetimeSeconds).LocalDateTime;
+                return installDateTime;
+            }
         }
-    }
 
-    //获取系统注册的用户名称
-    public static string OSRegisteredOwner
-    {
-        get
+        //获取系统注册的用户名称
+        public static string OSRegisteredOwner
         {
-            string registeredUser = WinInstallation.RegisteredOwner;
-            if (registeredUser == string.Empty) registeredUser = ConstantStrings.IUnknown;
-            return registeredUser;
+            get
+            {
+                string registeredUser = WinInstallation.RegisteredOwner;
+                if (registeredUser == string.Empty) registeredUser = ConstantStrings.IUnknown;
+                return registeredUser;
+            }
         }
-    }
 
-    //获取系统注册的组织名称
-    public static string OSRegisteredOrganization
-    {
-        get
+        //获取系统注册的组织名称
+        public static string OSRegisteredOrganization
         {
-            return WinInstallation.RegisteredOrganization;
+            get
+            {
+                return WinInstallation.RegisteredOrganization;
+            }
         }
     }
 }

@@ -70,17 +70,17 @@ namespace FluentWinver
         void LoadMain()
         {
             //加载系统名称
-            string osEdition = WindowsEdition.OSEditionName;
+            string osEdition = Winver.WindowsEdition;
             OSEditionBlock.Text = osEdition;
 
             //加载系统版本号
-            OSVersionBlock.Text = WindowsVersion.ReleaseVersionTag;
+            OSVersionBlock.Text = Winver.WindowsVersion.ReleaseVersionTag;
 
             //Get the build number of current OS
-            uint buildNum = WindowsVersion.Build;
+            uint buildNum = Winver.WindowsVersion.Build;
 
             //加载系统内部版本号
-            OSBuildVersionBlock.Text = WindowsVersion.FullVersionTag;
+            OSBuildVersionBlock.Text = Winver.WindowsVersion.FullVersionTag;
 
             //加载系统体验包版本
             if (WindowsUXInfo.UsingClientCBSExperience)
@@ -92,17 +92,17 @@ namespace FluentWinver
             }
 
             //加载系统平台架构
-            OSArchBlock.Text = WindowsEdition.OSArchitecture;
+            OSArchBlock.Text = Winver.OSArchitecture;
 
             //加载系统安装时间
-            OSInstalledDateBlock.Text = WinInstallationInfo.OSInstallationDateTime.ToString("d", userCulture);
+            OSInstalledDateBlock.Text = Winver.WinInstallationInfo.OSInstallationDateTime.ToString("d", userCulture);
 
             //加载系统开发商（版权方）名称
-            OSCopyRightBlock.Text = WinOSLegalInfo.OSCopyrightString;
+            OSCopyRightBlock.Text = Winver.WinOSLegalInfo.OSCopyrightString;
 
             //加载系统测试副本过期时间或隐藏
-            if (WinOSTestBuildInfo.HasExpirationTime)
-                OSExpirationTimeBlock.Text = WinOSTestBuildInfo.OSExpirationTime.ToString("g", userCulture);
+            if (Winver.WinOSTestBuildInfo.HasExpirationTime)
+                OSExpirationTimeBlock.Text = Winver.WinOSTestBuildInfo.OSExpirationTime.ToString("g", userCulture);
             else
             {
                 OSExpirationTimeHeader.Visibility = Visibility.Collapsed;
@@ -113,7 +113,7 @@ namespace FluentWinver
             LicensingTextBlock.Text = m_resourceLoader.GetString("LicensingText").Replace("[Microsoft Windows]", osEdition);
 
             //加载系统注册用户名
-            RegisterBlock.Text = WinInstallationInfo.OSRegisteredOwner;
+            RegisterBlock.Text = Winver.WinInstallationInfo.OSRegisteredOwner;
 
             //LicenseLinkButton 链接初始化
             LicenseLinkButton.NavigateUri = new Uri(m_resourceLoader.GetString("LicenseLink"));
@@ -170,7 +170,7 @@ namespace FluentWinver
         private void Copy_WS(object sender, RoutedEventArgs e)
         {
             string[] strings;
-            if(WinOSTestBuildInfo.HasExpirationTime)
+            if(Winver.WinOSTestBuildInfo.HasExpirationTime)
             {
                 strings =
                 [
@@ -198,6 +198,7 @@ namespace FluentWinver
             var dataPackage = new DataPackage();
             dataPackage.SetText(string.Join("\r\n", strings));
             Clipboard.SetContentWithOptions(dataPackage, new ClipboardContentOptions() { IsRoamable = true });
+            Clipboard.Flush();
         }
 
         //“确定”按钮事件

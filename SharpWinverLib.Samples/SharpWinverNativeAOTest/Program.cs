@@ -11,10 +11,10 @@ internal class Program
         Console.WriteLine("-------------------------------");
         Console.WriteLine("----Current Windows OS Info----");
         Console.WriteLine("-------------------------------");
-        Console.WriteLine("Windows Edition" + ":  " + WindowsEdition.OSEditionName);
-        Console.WriteLine("Windows Version" + ":  " + WindowsVersion.ReleaseVersionTag);
-        Console.WriteLine("OS Version" + ":  " + WindowsVersion.FullVersionTag);
-        Console.WriteLine("OS Architecture" + ":  " + WindowsEdition.OSArchitecture);
+        Console.WriteLine("Windows Edition" + ":  " + Winver.WindowsEdition);
+        Console.WriteLine("Windows Version" + ":  " + Winver.WindowsVersion.ReleaseVersionTag);
+        Console.WriteLine("OS Version" + ":  " + Winver.WindowsVersion.FullVersionTag);
+        Console.WriteLine("OS Architecture" + ":  " + Winver.OSArchitecture);
         Console.WriteLine("-------------------------------");
         Console.WriteLine("Press any key to continue...");
         Console.ReadKey();

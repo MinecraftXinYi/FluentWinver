@@ -2,10 +2,10 @@
 
 using Core;
 
-public static class WindowsEdition
+public static partial class Winver
 {
     //获取系统版本名称
-    public static string OSEditionName
+    public static string WindowsEdition
     {
         get
         {

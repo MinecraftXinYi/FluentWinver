@@ -3,20 +3,23 @@
 using Core;
 using Constants;
 
-public static class WinOSLegalInfo
+public static partial class Winver
 {
-    //获取系统CopyRight信息
-    public static string OSCopyrightString
+    public static class WinOSLegalInfo
     {
-        get
+        //获取系统CopyRight信息
+        public static string OSCopyrightString
         {
-            if (WinBrand.CanInvoke)
+            get
             {
-                return WinBrandInfo.WindowsCopyrightString;
-            }
-            else
-            {
-                return ConstantStrings.CopyrightMicrosoftString;
+                if (WinBrand.CanInvoke)
+                {
+                    return WinBrandInfo.WindowsCopyrightString;
+                }
+                else
+                {
+                    return ConstantStrings.CopyrightMicrosoftString;
+                }
             }
         }
     }

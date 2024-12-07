@@ -1,8 +1,8 @@
 ﻿{
   "MSIXRuntimeInfo": {
     "Microsoft.WindowsAppRuntime": {
-      "MajorMinorVersion": "0x00010005",
-      "MinVersion": "0x1389009F00370000",
+      "MajorMinorVersion": "0x00010006",
+      "MinVersion": "0x1770010A08C10000",
       "VersionTag": ""
     }
   }

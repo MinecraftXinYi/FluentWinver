@@ -4,25 +4,28 @@ namespace SharpWinver;
 
 using Core;
 
-public static class WinOSTestBuildInfo
+public static partial class Winver
 {
-    //检测系统是否有过期时间
-    public static bool HasExpirationTime
+    public static class WinOSTestBuildInfo
     {
-        get
+        //检测系统是否有过期时间
+        public static bool HasExpirationTime
         {
-            return WinExpiration.GetSystemExpiration().HasValue;
+            get
+            {
+                return WinExpiration.GetSystemExpiration().HasValue;
+            }
         }
-    }
 
-    //获取测试副本过期时间
-    public static DateTime OSExpirationTime
-    {
-        get
+        //获取测试副本过期时间
+        public static DateTime OSExpirationTime
         {
-            DateTime? expirationTime = WinExpiration.GetSystemExpiration();
-            if (expirationTime.HasValue) return expirationTime.Value;
-            else return DateTimeOffset.FromUnixTimeSeconds(0).LocalDateTime;
+            get
+            {
+                DateTime? expirationTime = WinExpiration.GetSystemExpiration();
+                if (expirationTime.HasValue) return expirationTime.Value;
+                else return DateTimeOffset.FromUnixTimeSeconds(0).LocalDateTime;
+            }
         }
     }
 }

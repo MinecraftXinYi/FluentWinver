@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text.Json;
+using System.Runtime.InteropServices;
 
 namespace Microsoft.Windows.ApplicationModel.DynamicDependency;
 
@@ -70,4 +71,8 @@ internal static class WARInitializerCs
             }
         }
     }
+
+    [DllImport("Microsoft.ui.xaml.dll")]
+    [DefaultDllImportSearchPaths(DllImportSearchPath.SafeDirectories)]
+    public static extern void XamlCheckProcessRequirements();
 }
