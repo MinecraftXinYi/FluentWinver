@@ -2,6 +2,6 @@
 
 public static class ConstantStrings
 {
-    public const string CopyrightMicrosoftString = "(c) Microsoft Corporation.";
-    internal const string IUnknown ="Unknown_Or_Failed";
+    internal const string CopyrightMicrosoftString = "(c) Microsoft Corporation.";
+    public const string IUnknown ="Unknown_Or_Failed";
 }

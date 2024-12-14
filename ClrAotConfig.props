@@ -1,0 +1,11 @@
+<Project>
+	<!-- NativeAOT -->
+	<PropertyGroup Condition="$(Configuration.Contains('AOT'))">
+		<PublishAot>true</PublishAot>
+		<CsWinRTAotOptimizerEnabled>true</CsWinRTAotOptimizerEnabled>
+	</PropertyGroup>
+	<!-- CoreCLR -->
+	<PropertyGroup Condition="!$(Configuration.Contains('AOT'))">
+		<PublishAot>false</PublishAot>
+	</PropertyGroup>
+</Project>
