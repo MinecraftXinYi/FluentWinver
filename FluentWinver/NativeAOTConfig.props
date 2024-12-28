@@ -4,8 +4,9 @@
 		<PublishAot>true</PublishAot>
 		<CsWinRTAotOptimizerEnabled>true</CsWinRTAotOptimizerEnabled>
 	</PropertyGroup>
-	<!-- CoreCLR -->
+	<!-- CLR -->
 	<PropertyGroup Condition="!$(Configuration.Contains('AOT'))">
 		<PublishAot>false</PublishAot>
+		<CsWinRTAotOptimizerEnabled>false</CsWinRTAotOptimizerEnabled>
 	</PropertyGroup>
 </Project>

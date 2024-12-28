@@ -24,8 +24,8 @@ public static partial class Winver
         private static void Load()
         {
             uint rawBuildNum = 0;
-            RtlNtVersion.RtlGetNtVersionNumbers(ref major, ref minor, ref rawBuildNum);
-            build = RtlNtVersion.CorrectedBuildNum(rawBuildNum);
+            Core.WinNTVersion.RtlGetNtVersionNumbers(ref major, ref minor, ref rawBuildNum);
+            build = Core.WinNTVersion.CorrectedBuildNum(rawBuildNum);
             revision = ExWinVersion.WinUBR;
         }
 

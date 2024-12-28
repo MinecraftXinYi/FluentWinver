@@ -10,7 +10,7 @@ public static partial class Winver
         get
         {
             string osEdition = string.Empty;
-            if (WinBrand.CanInvoke) osEdition = WinBrandInfo.FullWindowsProductString;
+            if (WinBrand.CanInvoke) osEdition = WinBrand.BrandingFormatString(WinBrand.VariableNames.WindowsLong);
             if (string.IsNullOrEmpty(osEdition)) osEdition = WinNTEdition.ProductName;
             if (string.IsNullOrEmpty(osEdition))
             {

@@ -2,7 +2,7 @@
 
 namespace SharpWinver.Core;
 
-public static class RtlNtVersion
+public static class WinNTVersion
 {
     [DllImport("ntdll.dll", SetLastError = true)]
     [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]

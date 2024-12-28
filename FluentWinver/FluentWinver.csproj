@@ -21,7 +21,7 @@
     <AssemblyTitle>Fluent Winver</AssemblyTitle>
     <Company>MinecraftXinYi Person</Company>
   </PropertyGroup>
-  <Import Project="..\ClrAotConfig.props" />
+  <Import Project="NativeAOTConfig.props" />
   <ItemGroup>
     <None Remove="MSIXRuntimeInfo.json" />
   </ItemGroup>

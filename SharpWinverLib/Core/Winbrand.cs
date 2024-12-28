@@ -3,22 +3,20 @@ using System.Runtime.InteropServices;
 
 namespace SharpWinver.Core;
 
-using static WinBrand;
-
 public static class WinBrand
 {
     [DllImport("winbrand.dll", CharSet = CharSet.Unicode, SetLastError = true)]
     [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
-    public static extern string BrandingFormatString(string Format);
+    public static extern string BrandingFormatString(string format);
 
-    public static class Variables
+    public static class VariableNames
     {
         public const string WindowsLong = "%WINDOWS_LONG%";
-        public const string WindowsProduct = "%WINDOWS_PRODUCT%";
         public const string WindowsCopyright = "%WINDOWS_COPYRIGHT%";
-        public const string WindowsGeneric = "%WINDOWS_GENERIC%";
-        public const string MicrosoftCompanyName = "%MICROSOFT_COMPANYNAME%";
+        public const string WindowsProduct = "%WINDOWS_PRODUCT%";
         public const string WindowsShort = "%WINDOWS_SHORT%";
+        public const string MicrosoftCompanyName = "%MICROSOFT_COMPANYNAME%";
+        public const string WindowsGeneric = "%WINDOWS_GENERIC%";
     }
 
     public static bool CanInvoke
@@ -27,7 +25,7 @@ public static class WinBrand
         {
             try
             {
-                string? tryGetContent = BrandingFormatString(Variables.WindowsGeneric);
+                string? tryGetContent = BrandingFormatString(VariableNames.WindowsGeneric);
                 if (tryGetContent != null) return tryGetContent.Length > 0;
                 else return false;
             }
@@ -36,18 +34,5 @@ public static class WinBrand
                 return false;
             }
         }
-    }
-}
-
-public static class WinBrandInfo
-{
-    public static string FullWindowsProductString
-    {
-        get => BrandingFormatString(Variables.WindowsLong);
-    }
-
-    public static string WindowsCopyrightString
-    {
-        get => BrandingFormatString(Variables.WindowsCopyright);
     }
 }
