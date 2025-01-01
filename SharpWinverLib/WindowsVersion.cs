@@ -12,8 +12,8 @@ public static partial class Winver
         {
             get
             {
-                string osReleaseVersion = ExWinVersion.WinReleaseTag;
-                if (string.IsNullOrEmpty(osReleaseVersion)) osReleaseVersion = ConstantStrings.IUnknown;
+                string? osReleaseVersion = ExWinVersion.WinReleaseTag;
+                if (osReleaseVersion == null) osReleaseVersion = ConstantStrings.IUnknown;
                 return osReleaseVersion;
             }
         }
@@ -26,7 +26,7 @@ public static partial class Winver
             uint rawBuildNum = 0;
             Core.WinNTVersion.RtlGetNtVersionNumbers(ref major, ref minor, ref rawBuildNum);
             build = Core.WinNTVersion.CorrectedBuildNum(rawBuildNum);
-            revision = ExWinVersion.WinUBR;
+            revision = ExWinVersion.WinUBR ?? 0;
         }
 
         private static uint major = 0;

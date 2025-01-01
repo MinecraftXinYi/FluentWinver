@@ -1,25 +1,25 @@
-﻿using SharpWinver.Constants;
-using SharpWinver.Helpers;
+﻿using NanoWin32Registry;
+using SharpWinver.Constants;
 using System.Runtime.InteropServices;
 
 namespace SharpWinver.Core;
 
 public static class WinNTEdition
 {
-    public static string ProductName
+    public static string? ProductName
     {
         get
         {
-            RegistryHelper.TryGetRegString(UsingRegistryPaths.WinNTCurrentVersion, "ProductName", out string product);
+            NanoRegistryManager.TryGetStringValue(UsingRegistryPaths.WinNTCurrentVersion, "ProductName", out string? product);
             return product;
         }
     }
 
-    public static string EditionID
+    public static string? EditionID
     {
         get
         {
-            RegistryHelper.TryGetRegString(UsingRegistryPaths.WinNTCurrentVersion, "EditionID", out string edition);
+            NanoRegistryManager.TryGetStringValue(UsingRegistryPaths.WinNTCurrentVersion, "EditionID", out string? edition);
             return edition;
         }
     }

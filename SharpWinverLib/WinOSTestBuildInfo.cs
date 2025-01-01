@@ -18,13 +18,11 @@ public static partial class Winver
         }
 
         //获取测试副本过期时间
-        public static DateTime OSExpirationTime
+        public static DateTime? OSExpirationTime
         {
             get
             {
-                DateTime? expirationTime = WinExpiration.GetSystemExpiration();
-                if (expirationTime.HasValue) return expirationTime.Value;
-                else return DateTimeOffset.FromUnixTimeSeconds(0).LocalDateTime;
+                return WinExpiration.GetSystemExpiration();
             }
         }
     }

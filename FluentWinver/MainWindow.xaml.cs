@@ -102,7 +102,7 @@ namespace FluentWinver
 
             //加载系统测试副本过期时间或隐藏
             if (Winver.WinOSTestBuildInfo.HasExpirationTime)
-                OSExpirationTimeBlock.Text = Winver.WinOSTestBuildInfo.OSExpirationTime.ToString("g", userCulture);
+                OSExpirationTimeBlock.Text = Winver.WinOSTestBuildInfo.OSExpirationTime!.Value.ToString("g", userCulture);
             else
             {
                 OSExpirationTimeHeader.Visibility = Visibility.Collapsed;

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Product>SharpWinver Library</Product>
-    <TargetFramework>netstandard1.3</TargetFramework>
+    <TargetFramework>netstandard1.1</TargetFramework>
     <RootNamespace>SharpWinver</RootNamespace>
     <LangVersion>10.0</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -18,7 +18,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
+    <ProjectReference Include="..\NanoWin32Registry\NanoWin32Registry.csproj" />
   </ItemGroup>
 
 </Project>
