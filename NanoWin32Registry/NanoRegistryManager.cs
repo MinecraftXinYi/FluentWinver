@@ -13,12 +13,6 @@ using Core;
 /// </summary>
 public static partial class NanoRegistryManager
 {
-    private static void MarshalAssert(int apiResult)
-    {
-        if (apiResult != 0)
-            throw new InvalidOperationException(apiResult.ToString());
-    }
-
     /// <summary>
     /// 获取注册表根键
     /// Get registry root key
@@ -49,10 +43,22 @@ public static partial class NanoRegistryManager
                 rootKey = RegistryHive.HKEY_CURRENT_CONFIG;
                 break;
             default:
-                throw new ArgumentException("This registry path includes an invalid registry root.", "fullKeyPath", null);
+                throw new ArgumentException(ErrorMessage.InvalidRegistryRoot, "fullKeyPath", null);
         }
         subKeyPath = fullKeyPath.Substring(fullKeyPath.IndexOf('\\') + 1);
         return rootKey;
+    }
+
+    /// <summary>
+    /// 根据 Win32 API 返回的错误代码决定是否抛出异常
+    /// </summary>
+    /// <param name="apiResult">Win32 API 返回的错误代码</param>
+    /// <param name="errorMessage">将要显示的错误信息</param>
+    /// <exception cref="InvalidOperationException"></exception>
+    private static void LoadWin32Exception(int apiResult, string errorMessage)
+    {
+        if (apiResult != 0)
+            throw new InvalidOperationException($"{errorMessage} (ErrorCode: {apiResult})");
     }
 
     /// <summary>
@@ -64,8 +70,8 @@ public static partial class NanoRegistryManager
     public static void CreateKey(string path)
     {
         IntPtr hKey = GetRegistryRootKeyFromFullPath(path, out string subKey);
-        int result = MsWinCoreRegistry.RegCreateKeyExW(hKey, subKey, 0, null, RegOptions.REG_OPTION_NON_VOLATILE, KeyAccess.KEY_WRITE, IntPtr.Zero, out IntPtr phkResult, out _);
-        MarshalAssert(result);
+        int result = MsWinCoreRegistry.RegCreateKeyExW(hKey, subKey, 0, null, RegOption.REG_OPTION_NON_VOLATILE, KeyAccess.KEY_WRITE, IntPtr.Zero, out IntPtr phkResult, out _);
+        LoadWin32Exception(result, ErrorMessage.RegistryOperationFailed);
         MsWinCoreRegistry.RegCloseKey(phkResult);
     }
 
@@ -79,7 +85,7 @@ public static partial class NanoRegistryManager
     {
         IntPtr hKey = GetRegistryRootKeyFromFullPath(path, out string subKey);
         int result = MsWinCoreRegistry.RegDeleteKeyW(hKey, subKey);
-        MarshalAssert(result);
+        LoadWin32Exception(result, ErrorMessage.WriteRegistryFailed);
     }
 
     /// <summary>
@@ -94,11 +100,11 @@ public static partial class NanoRegistryManager
     {
         IntPtr hKey = GetRegistryRootKeyFromFullPath(path, out string subKey);
         int result = MsWinCoreRegistry.RegOpenKeyExW(hKey, subKey, 0, KeyAccess.KEY_WRITE, out IntPtr phkResult);
-        MarshalAssert(result);
+        LoadWin32Exception(result, ErrorMessage.OpenRegistryFailed);
         byte[] data = Encoding.Unicode.GetBytes(value);
         result = MsWinCoreRegistry.RegSetValueExW(phkResult, valueName, 0, KeyType.REG_SZ, data, data.Length);
         MsWinCoreRegistry.RegCloseKey(phkResult);
-        MarshalAssert(result);
+        LoadWin32Exception(result, ErrorMessage.WriteRegistryFailed);
     }
 
     /// <summary>
@@ -113,11 +119,11 @@ public static partial class NanoRegistryManager
     {
         IntPtr hKey = GetRegistryRootKeyFromFullPath(path, out string subKey);
         int result = MsWinCoreRegistry.RegOpenKeyExW(hKey, subKey, 0, KeyAccess.KEY_WRITE, out IntPtr phkResult);
-        MarshalAssert(result);
+        LoadWin32Exception(result, ErrorMessage.OpenRegistryFailed);
         byte[] data = BitConverter.GetBytes(value);
         result = MsWinCoreRegistry.RegSetValueExW(phkResult, valueName, 0, KeyType.REG_DWORD, data, data.Length);
         MsWinCoreRegistry.RegCloseKey(phkResult);
-        MarshalAssert(result);
+        LoadWin32Exception(result, ErrorMessage.WriteRegistryFailed);
     }
 
     /// <summary>
@@ -132,11 +138,11 @@ public static partial class NanoRegistryManager
     {
         IntPtr hKey = GetRegistryRootKeyFromFullPath(path, out string subKey);
         int result = MsWinCoreRegistry.RegOpenKeyExW(hKey, subKey, 0, KeyAccess.KEY_WRITE, out IntPtr phkResult);
-        MarshalAssert(result);
+        LoadWin32Exception(result, ErrorMessage.OpenRegistryFailed);
         byte[] data = BitConverter.GetBytes(value);
         result = MsWinCoreRegistry.RegSetValueExW(phkResult, valueName, 0, KeyType.REG_QWORD, data, data.Length);
         MsWinCoreRegistry.RegCloseKey(phkResult);
-        MarshalAssert(result);
+        LoadWin32Exception(result, ErrorMessage.WriteRegistryFailed);
     }
 
     /// <summary>
@@ -151,14 +157,14 @@ public static partial class NanoRegistryManager
     {
         IntPtr hKey = GetRegistryRootKeyFromFullPath(path, out string subKey);
         int result = MsWinCoreRegistry.RegOpenKeyExW(hKey, subKey, 0, KeyAccess.KEY_READ, out IntPtr phkResult);
-        MarshalAssert(result);
+        LoadWin32Exception(result, ErrorMessage.OpenRegistryFailed);
         int size = 1024;
-        IntPtr rawData = WinMemory.FastLocalAlloc(size);
+        IntPtr rawData = WinMemoryPackaged.Alloc(size);
         result = MsWinCoreRegistry.RegGetValueW(phkResult, null, valueName, KeyRrf.RRF_RT_REG_SZ, out int _, rawData, ref size);
         MsWinCoreRegistry.RegCloseKey(phkResult);
-        MarshalAssert(result);
+        LoadWin32Exception(result, ErrorMessage.ReadValueFailed);
         string data = Marshal.PtrToStringUni(rawData);
-        WinMemory.FastLocalFree(rawData);
+        WinMemoryPackaged.Free(rawData);
         return data;
     }
 
@@ -174,14 +180,14 @@ public static partial class NanoRegistryManager
     {
         IntPtr hKey = GetRegistryRootKeyFromFullPath(path, out string subKey);
         int result = MsWinCoreRegistry.RegOpenKeyExW(hKey, subKey, 0, KeyAccess.KEY_READ, out IntPtr phkResult);
-        MarshalAssert(result);
+        LoadWin32Exception(result, ErrorMessage.OpenRegistryFailed);
         int size = 1024;
-        IntPtr rawData = WinMemory.FastLocalAlloc(size);
+        IntPtr rawData = WinMemoryPackaged.Alloc(size);
         result = MsWinCoreRegistry.RegGetValueW(phkResult, null, valueName, KeyRrf.RRF_RT_DWORD, out int _, rawData, ref size);
         MsWinCoreRegistry.RegCloseKey(phkResult);
-        MarshalAssert(result);
+        LoadWin32Exception(result, ErrorMessage.ReadValueFailed);
         uint data = (uint)Marshal.ReadInt64(rawData);
-        WinMemory.FastLocalFree(rawData);
+        WinMemoryPackaged.Free(rawData);
         return data;
     }
 
@@ -197,14 +203,14 @@ public static partial class NanoRegistryManager
     {
         IntPtr hKey = GetRegistryRootKeyFromFullPath(path, out string subKey);
         int result = MsWinCoreRegistry.RegOpenKeyExW(hKey, subKey, 0, KeyAccess.KEY_READ, out IntPtr phkResult);
-        MarshalAssert(result);
+        LoadWin32Exception(result, ErrorMessage.OpenRegistryFailed);
         int size = 1024;
-        IntPtr rawData = WinMemory.FastLocalAlloc(size);
+        IntPtr rawData = WinMemoryPackaged.Alloc(size);
         result = MsWinCoreRegistry.RegGetValueW(phkResult, null, valueName, KeyRrf.RRF_RT_QWORD, out int _, rawData, ref size);
         MsWinCoreRegistry.RegCloseKey(phkResult);
-        MarshalAssert(result);
+        LoadWin32Exception(result, ErrorMessage.ReadValueFailed);
         ulong data = (ulong)Marshal.ReadInt64(rawData);
-        WinMemory.FastLocalFree(rawData);
+        WinMemoryPackaged.Free(rawData);
         return data;
     }
 
@@ -219,9 +225,9 @@ public static partial class NanoRegistryManager
     {
         IntPtr hKey = GetRegistryRootKeyFromFullPath(path, out string subKey);
         int result = MsWinCoreRegistry.RegOpenKeyExW(hKey, subKey, 0, KeyAccess.KEY_WRITE, out IntPtr phkResult);
-        MarshalAssert(result);
+        LoadWin32Exception(result, ErrorMessage.OpenRegistryFailed);
         result = MsWinCoreRegistry.RegDeleteValueW(phkResult, valueName);
         MsWinCoreRegistry.RegCloseKey(phkResult);
-        MarshalAssert(result);
+        LoadWin32Exception(result, ErrorMessage.WriteRegistryFailed);
     }
 }

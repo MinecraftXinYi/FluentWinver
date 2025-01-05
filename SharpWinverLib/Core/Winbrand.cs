@@ -5,7 +5,9 @@ namespace SharpWinver.Core;
 
 public static class WinBrand
 {
-    [DllImport("winbrand.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+    private const string WinBrandDll = "winbrand.dll";
+
+    [DllImport(WinBrandDll, CharSet = CharSet.Unicode, SetLastError = true)]
     [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
     public static extern string BrandingFormatString(string format);
 

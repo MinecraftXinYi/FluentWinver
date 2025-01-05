@@ -21,7 +21,7 @@ public static class ExWinVersion
         get
         {
             NanoRegistryManager.TryGetDwordValue(UsingRegistryPaths.WinNTCurrentVersion, "UBR", out uint? ubr);
-            return ubr ?? 0;
+            return ubr;
         }
     }
 }

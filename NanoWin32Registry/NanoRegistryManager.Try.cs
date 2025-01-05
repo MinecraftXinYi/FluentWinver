@@ -51,7 +51,7 @@ public static partial class NanoRegistryManager
     public static bool TryCreateKey(string path)
     {
         IntPtr hKey = GetRegistryRootKeyFromFullPath(path, out string subKey);
-        int result = MsWinCoreRegistry.RegCreateKeyExW(hKey, subKey, 0, null, RegOptions.REG_OPTION_NON_VOLATILE, KeyAccess.KEY_WRITE, IntPtr.Zero, out IntPtr phkResult, out _);
+        int result = MsWinCoreRegistry.RegCreateKeyExW(hKey, subKey, 0, null, RegOption.REG_OPTION_NON_VOLATILE, KeyAccess.KEY_WRITE, IntPtr.Zero, out IntPtr phkResult, out _);
         if (result == 0)
         {
             MsWinCoreRegistry.RegCloseKey(phkResult);
@@ -148,7 +148,7 @@ public static partial class NanoRegistryManager
             return false;
         }
         int size = 1024;
-        IntPtr rawData = WinMemory.FastLocalAlloc(size);
+        IntPtr rawData = WinMemoryPackaged.Alloc(size);
         result = MsWinCoreRegistry.RegGetValueW(phkResult, null, valueName, KeyRrf.RRF_RT_REG_SZ, out int _, rawData, ref size);
         MsWinCoreRegistry.RegCloseKey(phkResult);
         if (result != 0)
@@ -157,7 +157,7 @@ public static partial class NanoRegistryManager
             return false;
         }
         value = Marshal.PtrToStringUni(rawData);
-        WinMemory.FastLocalFree(rawData);
+        WinMemoryPackaged.Free(rawData);
         return true;
     }
 
@@ -179,7 +179,7 @@ public static partial class NanoRegistryManager
             return false;
         }
         int size = 1024;
-        IntPtr rawData = WinMemory.FastLocalAlloc(size);
+        IntPtr rawData = WinMemoryPackaged.Alloc(size);
         result = MsWinCoreRegistry.RegGetValueW(phkResult, null, valueName, KeyRrf.RRF_RT_DWORD, out int _, rawData, ref size);
         MsWinCoreRegistry.RegCloseKey(phkResult);
         if (result != 0)
@@ -188,7 +188,7 @@ public static partial class NanoRegistryManager
             return false;
         }
         value = (uint)Marshal.ReadInt64(rawData);
-        WinMemory.FastLocalFree(rawData);
+        WinMemoryPackaged.Free(rawData);
         return true;
     }
 
@@ -210,7 +210,7 @@ public static partial class NanoRegistryManager
             return false;
         }
         int size = 1024;
-        IntPtr rawData = WinMemory.FastLocalAlloc(size);
+        IntPtr rawData = WinMemoryPackaged.Alloc(size);
         result = MsWinCoreRegistry.RegGetValueW(phkResult, null, valueName, KeyRrf.RRF_RT_QWORD, out int _, rawData, ref size);
         MsWinCoreRegistry.RegCloseKey(phkResult);
         if(result != 0)
@@ -219,7 +219,7 @@ public static partial class NanoRegistryManager
             return false;
         }
         value = (ulong)Marshal.ReadInt64(rawData);
-        WinMemory.FastLocalFree(rawData);
+        WinMemoryPackaged.Free(rawData);
         return true;
     }
 

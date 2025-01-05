@@ -22,7 +22,9 @@ public static partial class Winver
         {
             get
             {
-                return WinExpiration.GetSystemExpiration();
+                DateTime? expirationDateTime = WinExpiration.GetSystemExpiration();
+                if (expirationDateTime.HasValue) return expirationDateTime.Value.ToUniversalTime();
+                else return null;
             }
         }
     }

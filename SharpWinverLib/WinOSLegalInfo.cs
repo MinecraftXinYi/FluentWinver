@@ -12,14 +12,8 @@ public static partial class Winver
         {
             get
             {
-                if (WinBrand.CanInvoke)
-                {
-                    return WinBrand.BrandingFormatString(WinBrand.VariableNames.WindowsCopyright);
-                }
-                else
-                {
-                    return ConstantStrings.CopyrightMicrosoftString;
-                }
+                if (WinBrand.CanInvoke) return WinBrand.BrandingFormatString(WinBrand.VariableNames.WindowsCopyright);
+                else return ConstantStrings.CopyrightMicrosoftString;
             }
         }
     }

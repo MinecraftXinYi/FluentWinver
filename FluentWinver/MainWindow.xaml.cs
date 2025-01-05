@@ -95,14 +95,14 @@ namespace FluentWinver
             OSArchBlock.Text = Winver.OSArchitecture;
 
             //加载系统安装时间
-            OSInstalledDateBlock.Text = Winver.WinInstallationInfo.OSInstallationDateTime.ToString("d", userCulture);
+            OSInstalledDateBlock.Text = Winver.WinInstallationInfo.OSInstallationDateTime.ToLocalTime().ToString("d", userCulture);
 
             //加载系统开发商（版权方）名称
             OSCopyRightBlock.Text = Winver.WinOSLegalInfo.OSCopyrightString;
 
             //加载系统测试副本过期时间或隐藏
             if (Winver.WinOSTestBuildInfo.HasExpirationTime)
-                OSExpirationTimeBlock.Text = Winver.WinOSTestBuildInfo.OSExpirationTime!.Value.ToString("g", userCulture);
+                OSExpirationTimeBlock.Text = Winver.WinOSTestBuildInfo.OSExpirationTime!.Value.ToLocalTime().ToString("g", userCulture);
             else
             {
                 OSExpirationTimeHeader.Visibility = Visibility.Collapsed;

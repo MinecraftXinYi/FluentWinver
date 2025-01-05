@@ -15,18 +15,8 @@ public static partial class Winver
             get
             {
                 uint? datetimeSeconds = WinInstallation.InstallationDateTimeRaw;
-                DateTime installDateTime;
-                if (datetimeSeconds.HasValue)
-                    try
-                    {
-                        installDateTime = (new DateTime(1970, 1, 1)).AddSeconds(datetimeSeconds.Value).ToLocalTime();
-                    }
-                    catch (Exception)
-                    {
-                        installDateTime = new DateTime(1970, 1, 1);
-                    }
-                else installDateTime = new DateTime(1970, 1, 1);
-                return installDateTime;
+                UnixDateTime.TryConvertFromUnixTimeSeconds(datetimeSeconds ?? 0, out DateTime? installDateTime);
+                return installDateTime ?? UnixDateTime.MinValue;
             }
         }
 
@@ -48,8 +38,7 @@ public static partial class Winver
             get
             {
                 string? registeredOrganization = WinInstallation.RegisteredOrganization;
-                if (registeredOrganization == null)
-                    registeredOrganization = ConstantStrings.IUnknown;
+                registeredOrganization ??= ConstantStrings.IUnknown;
                 return registeredOrganization;
             }
         }

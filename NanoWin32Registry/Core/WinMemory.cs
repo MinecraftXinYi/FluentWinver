@@ -3,17 +3,24 @@ using System.Runtime.InteropServices;
 
 namespace NanoWin32Registry.Core;
 
+using static WinMemory;
+
 public static class WinMemory
 {
-    [DllImport("KernelBase.dll", SetLastError = true)]
+    private const string KernelBaseDll = "KernelBase.dll";
+
+    [DllImport(KernelBaseDll, SetLastError = true)]
     [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
     public static extern IntPtr LocalAlloc(uint uFlags, UIntPtr sizetdwBytes);
 
-    [DllImport("KernelBase.dll", SetLastError = true)]
+    [DllImport(KernelBaseDll, SetLastError = true)]
     [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
     public static extern IntPtr LocalFree(IntPtr handle);
+}
 
-    public static IntPtr FastLocalAlloc(IntPtr cb, bool win32 = true)
+public static class WinMemoryPackaged
+{
+    public static IntPtr Alloc(IntPtr cb, bool win32 = true)
     {
         UIntPtr numBytes;
         if (win32) numBytes = (UIntPtr)unchecked((uint)cb.ToInt32());
@@ -24,10 +31,10 @@ public static class WinMemory
         return pNewMem;
     }
 
-    public static IntPtr FastLocalAlloc(int cb, bool win32 = true)
-        => FastLocalAlloc((IntPtr)cb, win32);
+    public static IntPtr Alloc(int cb, bool win32 = true)
+        => Alloc((IntPtr)cb, win32);
 
-    public static void FastLocalFree(IntPtr handle)
+    public static void Free(IntPtr handle)
     {
         if (LocalFree(handle) != IntPtr.Zero)
             Marshal.ThrowExceptionForHR(Marshal.GetLastWin32Error());

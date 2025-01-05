@@ -13,7 +13,7 @@ public static partial class Winver
             get
             {
                 string? osReleaseVersion = ExWinVersion.WinReleaseTag;
-                if (osReleaseVersion == null) osReleaseVersion = ConstantStrings.IUnknown;
+                osReleaseVersion ??= ConstantStrings.IUnknown;
                 return osReleaseVersion;
             }
         }

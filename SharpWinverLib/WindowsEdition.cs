@@ -14,8 +14,8 @@ public static partial class Winver
             if (string.IsNullOrEmpty(osEdition)) osEdition = WinNTEdition.ProductName ?? string.Empty;
             if (string.IsNullOrEmpty(osEdition))
             {
-                string edtidstr = WinNTEdition.EditionID != null ? $" {WinNTEdition.EditionID}" : string.Empty;
-                osEdition = "Windows" + edtidstr;
+                string str2 = WinNTEdition.EditionID != null ? $" {WinNTEdition.EditionID}" : string.Empty;
+                osEdition = "Windows" + str2;
             }
             return osEdition;
         }

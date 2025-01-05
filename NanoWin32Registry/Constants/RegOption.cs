@@ -1,6 +1,6 @@
 ﻿namespace NanoWin32Registry.Constants;
 
-public static class RegOptions
+public static class RegOption
 {
     public const int REG_OPTION_NON_VOLATILE = 0x00000000;
     public const int REG_OPTION_VOLATILE = 0x00000001;
