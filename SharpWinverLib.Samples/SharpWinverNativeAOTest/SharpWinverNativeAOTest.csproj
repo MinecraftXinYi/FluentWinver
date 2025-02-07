@@ -5,6 +5,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <RootNamespace>SharpWinverNativeAOTest</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Nullable>enable</Nullable>
     <PublishAot>true</PublishAot>
     <IsAotCompatible>true</IsAotCompatible>

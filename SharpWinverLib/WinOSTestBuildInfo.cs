@@ -6,9 +6,14 @@ using Core;
 
 public static partial class Winver
 {
+    /// <summary>
+    /// 当前运行的 Windows 系统副本的测试构建信息
+    /// </summary>
     public static class WinOSTestBuildInfo
     {
-        //检测系统是否有过期时间
+        /// <summary>
+        /// 检测当前系统副本是否有过期时间
+        /// </summary>
         public static bool HasExpirationTime
         {
             get
@@ -17,7 +22,9 @@ public static partial class Winver
             }
         }
 
-        //获取测试副本过期时间
+        /// <summary>
+        /// 当前系统副本过期时间
+        /// </summary>
         public static DateTime? OSExpirationTime
         {
             get

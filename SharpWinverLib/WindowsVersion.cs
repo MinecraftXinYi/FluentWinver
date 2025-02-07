@@ -1,78 +1,61 @@
-﻿namespace SharpWinver;
+﻿using System;
+
+namespace SharpWinver;
 
 using Core;
-using Constants;
 
 public static partial class Winver
 {
+    /// <summary>
+    /// 当前运行的 Windows 系统版本
+    /// </summary>
     public static class WindowsVersion
     {
-        //获取系统版本代号
-        public static string ReleaseVersionTag
+        /// <summary>
+        /// Windows 系统版本代号
+        /// </summary>
+        /// <example>
+        /// RTM; SP1; SP2; 1709; 1903; 21H2; 22H2
+        /// </example>
+        public static string VersionTag
         {
             get
             {
-                string? osReleaseVersion = ExWinVersion.WinReleaseTag;
-                osReleaseVersion ??= ConstantStrings.IUnknown;
-                return osReleaseVersion;
+                string? osVersionTag = WinVersionEx.GetWindowsVersionTag();
+                osVersionTag ??= ConstantStrings.ErrorMsg;
+                return osVersionTag;
             }
         }
 
-        //获取OS内部版本数字
-        static WindowsVersion() => Load();
-
-        private static void Load()
+        /// <summary>
+        /// Windows NT 系统内核版本
+        /// </summary>
+        /// <example>
+        /// 6.0.6000; 6.1.7600; 10.0.16299; 10.0.22000
+        /// </example>
+        public static Version NTVersion
         {
-            uint rawBuildNum = 0;
-            Core.WinNTVersion.RtlGetNtVersionNumbers(ref major, ref minor, ref rawBuildNum);
-            build = Core.WinNTVersion.CorrectedBuildNum(rawBuildNum);
-            revision = ExWinVersion.WinUBR ?? 0;
+            get
+            {
+                uint[] ntVersion = WinNTVersion.GetNtVersion();
+                return new((int)ntVersion[0], (int)ntVersion[1], (int)ntVersion[2]);
+            }
         }
 
-        private static uint major = 0;
-        private static uint minor = 0;
-        private static uint build = 0;
-        private static uint revision = 0;
-
-        public static uint Major { get => GetAndInvoke(major); }
-
-        public static uint Minor { get => GetAndInvoke(minor); }
-
-        public static uint Build { get => GetAndInvoke(build); }
-
-        public static uint Revision { get => GetAndInvoke(revision); }
-
-        public static string FullVersionTag
+        /// <summary>
+        /// Windows 操作系统版本
+        /// </summary>
+        /// <example>
+        /// 6.1.7601.0; 6.2.9200.16384; 10.0.18362.1; 10.0.22621.1533
+        /// </example>
+        public static Version OSVersion
         {
-            get => $"{Major}.{Minor}.{Build}.{Revision}";
+            get
+            {
+                Version ntVersion = NTVersion;
+                uint revision = WinVersionEx.GetWindowsRevision();
+                return new(ntVersion.Major, ntVersion.Minor, ntVersion.Build, (int)revision);
+            }
         }
-
-        public static string MainVersionTag
-        {
-            get => $"{Major}.{Minor}.{Build}";
-        }
-
-        public static string WinNTVersion
-        {
-            get => $"{Major}.{Minor}";
-        }
-
-        public static string WinOSVersion
-        {
-            get => $"{Build}.{Revision}";
-        }
-
-        public static void Reload()
-        {
-            if (IsInvokedOnce) Load();
-        }
-
-        private static uint GetAndInvoke(uint value)
-        {
-            IsInvokedOnce = true;
-            return value;
-        }
-
-        private static bool IsInvokedOnce { get; set; } = false;
     }
 }

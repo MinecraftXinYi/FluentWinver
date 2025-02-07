@@ -70,17 +70,19 @@ namespace FluentWinver
         void LoadMain()
         {
             //加载系统名称
-            string osEdition = Winver.WindowsEdition;
+            string osEdition = Winver.WindowsEdition.WindowsEditionName;
             OSEditionBlock.Text = osEdition;
 
             //加载系统版本号
-            OSVersionBlock.Text = Winver.WindowsVersion.ReleaseVersionTag;
+            OSVersionBlock.Text = Winver.WindowsVersion.VersionTag;
+
+            Version osVersion = Winver.WindowsVersion.OSVersion;
 
             //Get the build number of current OS
-            uint buildNum = Winver.WindowsVersion.Build;
+            uint buildNum = (uint)osVersion.Build;
 
             //加载系统内部版本号
-            OSBuildVersionBlock.Text = Winver.WindowsVersion.FullVersionTag;
+            OSBuildVersionBlock.Text = osVersion.ToString();
 
             //加载系统体验包版本
             if (WindowsUXInfo.UsingClientCBSExperience)
@@ -92,7 +94,7 @@ namespace FluentWinver
             }
 
             //加载系统平台架构
-            OSArchBlock.Text = Winver.OSArchitecture;
+            OSArchBlock.Text = Winver.OSArchitecture.ToString();
 
             //加载系统安装时间
             OSInstalledDateBlock.Text = Winver.WinInstallationInfo.OSInstallationDateTime.ToLocalTime().ToString("d", userCulture);

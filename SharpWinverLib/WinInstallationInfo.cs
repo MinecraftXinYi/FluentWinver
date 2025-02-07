@@ -3,13 +3,17 @@
 namespace SharpWinver;
 
 using Core;
-using Constants;
 
 public static partial class Winver
 {
+    /// <summary>
+    /// 当前运行的 Windows 系统副本的安装信息
+    /// </summary>
     public static class WinInstallationInfo
     {
-        //获取系统安装日期及时间
+        /// <summary>
+        /// 当前系统副本的安装日期及时间
+        /// </summary>
         public static DateTime OSInstallationDateTime
         {
             get
@@ -20,25 +24,28 @@ public static partial class Winver
             }
         }
 
-        //获取系统注册的用户名称
+        /// <summary>
+        /// 注册当前系统副本的用户名称
+        /// </summary>
         public static string OSRegisteredOwner
         {
             get
             {
                 string? registeredUser = WinInstallation.RegisteredOwner;
-                if (registeredUser == null || registeredUser == string.Empty)
-                    registeredUser = ConstantStrings.IUnknown;
+                if (registeredUser == null || registeredUser == string.Empty) registeredUser = ConstantStrings.ErrorMsg;
                 return registeredUser;
             }
         }
 
-        //获取系统注册的组织名称
+        /// <summary>
+        /// 注册当前系统副本的组织名称
+        /// </summary>
         public static string OSRegisteredOrganization
         {
             get
             {
                 string? registeredOrganization = WinInstallation.RegisteredOrganization;
-                registeredOrganization ??= ConstantStrings.IUnknown;
+                registeredOrganization ??= ConstantStrings.ErrorMsg;
                 return registeredOrganization;
             }
         }

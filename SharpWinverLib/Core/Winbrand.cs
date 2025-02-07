@@ -1,15 +1,20 @@
-﻿using System;
+﻿using SharpWinNTInterop;
+using System;
 using System.Runtime.InteropServices;
 
 namespace SharpWinver.Core;
 
 public static class WinBrand
 {
-    private const string WinBrandDll = "winbrand.dll";
+    public const string WinBrandDll = "winbrand.dll";
 
     [DllImport(WinBrandDll, CharSet = CharSet.Unicode, SetLastError = true)]
     [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
     public static extern string BrandingFormatString(string format);
+
+    [DllImport(WinBrandDll, CharSet = CharSet.Unicode, SetLastError = true)]
+    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
+    public static extern HANDLE BrandingLoadImage(IntPtr lpszModule, uint uImageId, uint type, int cx, int cy, uint fuLoad);
 
     public static class VariableNames
     {

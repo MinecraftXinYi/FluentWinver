@@ -10,7 +10,7 @@ internal static class WinClientCBSInf
 {
     public static bool IsClientCBSPackageNeeded
     {
-        get => Winver.WindowsVersion.Build >= 19041 && AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Desktop";
+        get => Winver.WindowsVersion.OSVersion.Build >= 19041 && AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Desktop";
     }
 
     public static string ClientCBSPackageVersion

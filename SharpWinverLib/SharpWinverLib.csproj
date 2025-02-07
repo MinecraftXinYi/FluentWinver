@@ -6,8 +6,9 @@
     <LangVersion>10.0</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Nullable>enable</Nullable>
-    <ProductVersion>2.0.0.0</ProductVersion>
-    <FileVersion>2.0.0.0</FileVersion>
+    <CodeVersion>2.0.0</CodeVersion>
+    <ProductVersion>$(CodeVersion)</ProductVersion>
+    <FileVersion>$(CodeVersion).1</FileVersion>
     <AssemblyTitle>SharpWinver Library</AssemblyTitle>
     <Company>MinecraftXinYi Person</Company>
     <Title>SharpWinver Library</Title>
@@ -18,7 +19,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\NanoWin32Registry\NanoWin32Registry.csproj" />
+    <ProjectReference Include="..\SharpWinNTInterop\SharpWinNTInterop.csproj" />
   </ItemGroup>
 
 </Project>
