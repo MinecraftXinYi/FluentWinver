@@ -5,7 +5,7 @@ namespace SharpWinver.Core;
 
 public static class WinNTVersion
 {
-    [DllImport(DLLName.NTDLL, SetLastError = true)]
+    [DllImport(DLLName.NTDLL, SetLastError = false)]
     [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
     public static extern void RtlGetNtVersionNumbers(ref uint MajorVersion, ref uint MinorVersion, ref uint BuildNumber);
 
