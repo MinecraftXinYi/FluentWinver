@@ -1,5 +1,4 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34003.232
 MinimumVisualStudioVersion = 10.0.40219.1
@@ -8,10 +7,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpWinverLib", "SharpWinverLib\SharpWinverLib.csproj", "{260829DF-C6EB-4084-A056-C7CD342A69E9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpWinNTInterop", "SharpWinNTInterop\SharpWinNTInterop.csproj", "{B62099BC-E079-4759-9DD0-0EF293045065}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpWinverNativeAOTest", "SharpWinverLib.Samples\SharpWinverNativeAOTest\SharpWinverNativeAOTest.csproj", "{88C04245-0BAB-40CD-8E02-2DA3D608B790}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpWinverUWP", "SharpWinverLib.Samples\SharpWinverUWP\SharpWinverUWP.csproj", "{BE836BE7-6C65-42E8-BB5E-80AF0B3E0808}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
