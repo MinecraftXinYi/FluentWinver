@@ -70,7 +70,7 @@ namespace FluentWinver
         void LoadMain()
         {
             //加载系统名称
-            string osEdition = Winver.WindowsEdition.WindowsEditionName;
+            string osEdition = Winver.WindowsEdition.OSEditionName;
             OSEditionBlock.Text = osEdition;
 
             //加载系统版本号
@@ -94,7 +94,7 @@ namespace FluentWinver
             }
 
             //加载系统平台架构
-            OSArchBlock.Text = Winver.OSArchitecture.ToString();
+            OSArchBlock.Text = Winver.WindowsEdition.OSArchitecture.ToString();
 
             //加载系统安装时间
             OSInstalledDateBlock.Text = Winver.WinInstallationInfo.OSInstallationDateTime.ToLocalTime().ToString("d", userCulture);

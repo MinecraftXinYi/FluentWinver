@@ -7,7 +7,7 @@ namespace SharpWinver.Core;
 public static class WinProduct
 {
     public static string? GetWindowsProductName()
-        => NTRegistryValueReader.GetStringValue(UsingRegistryPaths.WinNTCurrentVersion, "ProductName");
+        => NTRegistryValueReader.GetStringValue(ConstRegistryPaths.WinNTCurrentVersion, "ProductName");
 
     public static bool GetProductInfoManaged(uint dwOSMajorVersion, uint dwOSMinorVersion, uint dwSpMajorVersion, uint dwSpMinorVersion, out uint dwReturnedProductType)
     {
@@ -50,7 +50,7 @@ public static class WinProduct
 
     public static WindowsSKU? GetWindowsSKUFromRegistry()
     {
-        string? editionID = NTRegistryValueReader.GetStringValue(UsingRegistryPaths.WinNTCurrentVersion, "EditionID");
+        string? editionID = NTRegistryValueReader.GetStringValue(ConstRegistryPaths.WinNTCurrentVersion, "EditionID");
         if (editionID == null) return null;
         if (WindowsSKU.TryParse(editionID, out WindowsSKU windowsSku)) return windowsSku;
         else return null;

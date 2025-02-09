@@ -7,19 +7,19 @@ public static class WinVersionEx
 {
     public static string? GetWindowsVersionTag()
     {
-        string? version = NTRegistryValueReader.GetStringValue(UsingRegistryPaths.WinNTCurrentVersion, "DisplayVersion");
-        version ??= NTRegistryValueReader.GetStringValue(UsingRegistryPaths.WinNTCurrentVersion, "ReleaseId");
-        version ??= NTRegistryValueReader.GetStringValue(UsingRegistryPaths.WinNTCurrentVersion, "CSDVersion");
+        string? version = NTRegistryValueReader.GetStringValue(ConstRegistryPaths.WinNTCurrentVersion, "DisplayVersion");
+        version ??= NTRegistryValueReader.GetStringValue(ConstRegistryPaths.WinNTCurrentVersion, "ReleaseId");
+        version ??= NTRegistryValueReader.GetStringValue(ConstRegistryPaths.WinNTCurrentVersion, "CSDVersion");
         return version;
     }
 
     public static uint GetWindowsRevision()
     {
-        uint? revision = NTRegistryValueReader.GetDwordValue(UsingRegistryPaths.WinNTCurrentVersion, "UBR");
-        revision ??= NTRegistryValueReader.GetDwordValue(UsingRegistryPaths.WinNTCurrentVersion, "BaseBuildRevisionNumber");
+        uint? revision = NTRegistryValueReader.GetDwordValue(ConstRegistryPaths.WinNTCurrentVersion, "UBR");
+        revision ??= NTRegistryValueReader.GetDwordValue(ConstRegistryPaths.WinNTCurrentVersion, "BaseBuildRevisionNumber");
         if (!revision.HasValue)
         {
-            string? strCurVer = NTRegistryValueReader.GetStringValue(UsingRegistryPaths.WinNTCurrentVersion, "CurrentVersion");
+            string? strCurVer = NTRegistryValueReader.GetStringValue(ConstRegistryPaths.WinNTCurrentVersion, "CurrentVersion");
             if (strCurVer != null)
             {
                 if (Version.TryParse(strCurVer, out Version wCurVer))

@@ -28,7 +28,7 @@ public static partial class Winver
         }
 
         /// <summary>
-        /// Windows NT 系统内核版本
+        /// Windows NT 版本
         /// </summary>
         /// <example>
         /// 6.0.6000; 6.1.7600; 10.0.16299; 10.0.22000

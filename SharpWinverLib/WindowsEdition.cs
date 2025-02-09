@@ -7,14 +7,13 @@ using Core;
 public static partial class Winver
 {
     /// <summary>
-    /// 当前运行的 Windows 系统 SKU 版本
+    /// 当前运行的 Windows 系统 SKU
     /// </summary>
     public static class WindowsEdition
     {
         /// <summary>
         /// Internal method
         /// </summary>
-        /// <returns></returns>
         internal static WindowsSKU GetWindowsSKUSafe()
         {
             uint[] ntVersion = WinNTVersion.GetNtVersion();
@@ -27,7 +26,7 @@ public static partial class Winver
         /// <summary>
         /// Windows 系统 SKU 版本名称
         /// </summary>
-        public static string WindowsEditionName
+        public static string OSEditionName
         {
             get
             {
@@ -51,28 +50,28 @@ public static partial class Winver
         }
 
         /// <summary>
-        /// Windows 系统 SKU ID
+        /// Windows 系统 SKU Id
         /// </summary>
-        public static uint WindowsSKUID
+        public static uint WindowsSKUId
         {
             get
             {
                 return (uint)GetWindowsSKUSafe();
             }
         }
-    }
 
-    /// <summary>
-    /// 当前运行的 Windows 系统平台架构
-    /// </summary>
-    public static Architecture OSArchitecture
-    {
-        get
+        /// <summary>
+        /// 操作系统平台架构
+        /// </summary>
+        public static Architecture OSArchitecture
         {
-            Architecture? architecture = WinNTProcArch.GetNTOSArchitecture2();
-            architecture ??= WinNTProcArch.GetNTOSArchitecture1();
-            architecture ??= RuntimeInformation.ProcessArchitecture;
-            return architecture.Value;
+            get
+            {
+                Architecture? architecture = WinNTProcArch.GetNTOSArchitecture2();
+                architecture ??= WinNTProcArch.GetNTOSArchitecture1();
+                architecture ??= RuntimeInformation.ProcessArchitecture;
+                return architecture.Value;
+            }
         }
     }
 }
