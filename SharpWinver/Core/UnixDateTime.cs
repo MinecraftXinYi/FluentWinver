@@ -7,9 +7,9 @@ internal static class UnixDateTime
     public static readonly DateTime MinValue = (new DateTime(1970, 1, 1)).ToUniversalTime();
 
     public static DateTime FromUnixTimeSeconds(double unixTimeSeconds)
-        => MinValue.AddSeconds(unixTimeSeconds).ToUniversalTime();
+        => MinValue.AddSeconds(unixTimeSeconds);
 
-    public static bool TryConvertFromUnixTimeSeconds(double unixTimeSeconds, out DateTime? convertedDateTime)
+    public static bool TryConvertFromUnixTimeSeconds(double unixTimeSeconds, out DateTime convertedDateTime)
     {
         try
         {
@@ -18,7 +18,7 @@ internal static class UnixDateTime
         }
         catch (Exception)
         {
-            convertedDateTime = null;
+            convertedDateTime = MinValue;
             return false;
         }
     }

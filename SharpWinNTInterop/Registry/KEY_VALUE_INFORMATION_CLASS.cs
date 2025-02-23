@@ -1,4 +1,4 @@
-﻿namespace SharpWinNTInterop.RegistryAPI;
+﻿namespace SharpWinNTInterop.Registry;
 
 public enum KEY_VALUE_INFORMATION_CLASS
 {

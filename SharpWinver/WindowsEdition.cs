@@ -16,8 +16,8 @@ public static partial class Winver
         /// </summary>
         internal static WindowsSKU GetWindowsSKUSafe()
         {
-            uint[] ntVersion = WinNTVersion.GetNtVersion();
-            WindowsSKU? windowsSku = WinProduct.GetWindowsSKUFromWinApi(ntVersion[0], ntVersion[1]);
+            WinNTVersion.GetWinNTVersionNumbers(out uint major, out uint minor, out _);
+            WindowsSKU? windowsSku = WinProduct.GetWindowsSKUFromWinApi(major, minor);
             windowsSku ??= WinProduct.GetWindowsSKUFromRegistry();
             windowsSku ??= WindowsSKU.Undefined;
             return windowsSku.Value;

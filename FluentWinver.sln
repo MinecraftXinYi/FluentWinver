@@ -4,7 +4,7 @@ VisualStudioVersion = 17.7.34003.232
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentWinver", "FluentWinver\FluentWinver.csproj", "{D3CF65FD-EFD2-40A1-96FB-8F5C50563F8F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpWinverLib", "SharpWinverLib\SharpWinverLib.csproj", "{260829DF-C6EB-4084-A056-C7CD342A69E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpWinver", "SharpWinver\SharpWinver.csproj", "{260829DF-C6EB-4084-A056-C7CD342A69E9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpWinNTInterop", "SharpWinNTInterop\SharpWinNTInterop.csproj", "{B62099BC-E079-4759-9DD0-0EF293045065}"
 EndProject

@@ -1,8 +1,8 @@
 namespace SharpWinver.Core;
 
 /// <summary>
-/// Enumeration of Windows OS SKUs corresponding
-/// from website: https://bbs.pcbeta.com/viewthread-1946456-1-1.html.
+/// Enumeration of Windows OS SKUs corresponding.
+/// (Website: https://bbs.pcbeta.com/viewthread-1946456-1-1.html)
 /// </summary>
 public enum WindowsSKU : uint
 {
@@ -156,8 +156,6 @@ public enum WindowsSKU : uint
     ServerAzureNano = 169,
     EnterpriseG = 171,
     EnterpriseGN = 172,
-    ////Business = 173,
-    ////BusinessN = 174,
     ServerRdsh = 175,
     ServerRdshCore = 176,
     Cloud = 178,

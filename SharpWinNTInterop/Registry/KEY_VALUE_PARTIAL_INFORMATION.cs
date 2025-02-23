@@ -1,4 +1,4 @@
-﻿namespace SharpWinNTInterop.RegistryAPI;
+﻿namespace SharpWinNTInterop.Registry;
 
 public unsafe struct KEY_VALUE_PARTIAL_INFORMATION
 {

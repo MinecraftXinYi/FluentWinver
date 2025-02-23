@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace SharpWinNTInterop.MemoryAPI;
+namespace SharpWinNTInterop.Memory;
 
 public unsafe static partial class RtlHeapAPI
 {

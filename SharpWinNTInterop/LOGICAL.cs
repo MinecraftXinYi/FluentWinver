@@ -4,19 +4,19 @@ namespace SharpWinNTInterop;
 
 public readonly partial struct LOGICAL : IComparable, IComparable<LOGICAL>, IEquatable<LOGICAL>, IFormattable
 {
-    private enum LOGICALValue : ulong
+    private enum DefinedValue : ulong
     {
-        FALSE = 0,
-        TRUE = 1
+        FALSE,
+        TRUE
     }
 
     public readonly ulong Value;
 
     public LOGICAL(ulong value) => Value = value;
 
-    public static LOGICAL FALSE => new((ulong)LOGICALValue.FALSE);
+    public static LOGICAL FALSE => new((ulong)DefinedValue.FALSE);
 
-    public static LOGICAL TRUE => new((ulong)LOGICALValue.TRUE);
+    public static LOGICAL TRUE => new((ulong)DefinedValue.TRUE);
 
     public static bool operator ==(LOGICAL left, LOGICAL right) => left.Value == right.Value;
 
@@ -30,13 +30,13 @@ public readonly partial struct LOGICAL : IComparable, IComparable<LOGICAL>, IEqu
 
     public static bool operator >=(LOGICAL left, LOGICAL right) => left.Value >= right.Value;
 
-    public static implicit operator bool(LOGICAL value) => value.Value != (ulong)LOGICALValue.FALSE;
+    public static implicit operator bool(LOGICAL value) => value.Value != (ulong)DefinedValue.FALSE;
 
-    public static implicit operator LOGICAL(bool value) => new(value ? (ulong)LOGICALValue.TRUE : (ulong)LOGICALValue.FALSE);
+    public static implicit operator LOGICAL(bool value) => new(value ? (ulong)DefinedValue.TRUE : (ulong)DefinedValue.FALSE);
 
-    public static bool operator false(LOGICAL value) => value.Value == (ulong)LOGICALValue.FALSE;
+    public static bool operator false(LOGICAL value) => value.Value == (ulong)DefinedValue.FALSE;
 
-    public static bool operator true(LOGICAL value) => value.Value != (ulong)LOGICALValue.FALSE;
+    public static bool operator true(LOGICAL value) => value.Value != (ulong)DefinedValue.FALSE;
 
     public static implicit operator LOGICAL(sbyte value) => new((ulong)value);
 
@@ -92,7 +92,13 @@ public readonly partial struct LOGICAL : IComparable, IComparable<LOGICAL>, IEqu
 
     public override int GetHashCode() => Value.GetHashCode();
 
-    public override string ToString() => $"LOGICAL:{(Value != (ulong)LOGICALValue.FALSE).ToString().ToUpper()}";
+    public override string ToString() => $"LOGICAL:{(Value != (ulong)DefinedValue.FALSE).ToString().ToUpper()}";
 
     public string ToString(string? format, IFormatProvider? formatProvider) => throw new NotSupportedException(WErrorMessage.TargetAPINotSupported);
+
+    public static bool BoolEquals(LOGICAL left, LOGICAL right) => (bool)left == (bool)right;
+
+    public static explicit operator LOGICAL(BOOLEAN value) => new(value.Value);
+
+    public static LOGICAL FromBOOLEAN(BOOLEAN boolean) => new(boolean.Value);
 }

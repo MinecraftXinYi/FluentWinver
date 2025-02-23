@@ -4,19 +4,19 @@ namespace SharpWinNTInterop;
 
 public readonly partial struct BOOLEAN : IComparable, IComparable<BOOLEAN>, IEquatable<BOOLEAN>, IFormattable
 {
-    private enum BOOLValue : byte
+    private enum DefinedValue : byte
     {
-        FALSE = 0,
-        TRUE = 1
+        FALSE,
+        TRUE
     }
 
     public readonly byte Value;
 
     public BOOLEAN(byte value) => Value = value;
 
-    public static BOOLEAN FALSE => new((byte)BOOLValue.FALSE);
+    public static BOOLEAN FALSE => new((byte)DefinedValue.FALSE);
 
-    public static BOOLEAN TRUE => new((byte)BOOLValue.TRUE);
+    public static BOOLEAN TRUE => new((byte)DefinedValue.TRUE);
 
     public static bool operator ==(BOOLEAN left, BOOLEAN right) => left.Value == right.Value;
 
@@ -30,13 +30,13 @@ public readonly partial struct BOOLEAN : IComparable, IComparable<BOOLEAN>, IEqu
 
     public static bool operator >=(BOOLEAN left, BOOLEAN right) => left.Value >= right.Value;
 
-    public static implicit operator bool(BOOLEAN value) => value.Value != (byte)BOOLValue.FALSE;
+    public static implicit operator bool(BOOLEAN value) => value.Value != (byte)DefinedValue.FALSE;
 
-    public static implicit operator BOOLEAN(bool value) => new(value ? (byte)BOOLValue.TRUE : (byte)BOOLValue.FALSE);
+    public static implicit operator BOOLEAN(bool value) => new(value ? (byte)DefinedValue.TRUE : (byte)DefinedValue.FALSE);
 
-    public static bool operator false(BOOLEAN value) => value.Value == (byte)BOOLValue.FALSE;
+    public static bool operator false(BOOLEAN value) => value.Value == (byte)DefinedValue.FALSE;
 
-    public static bool operator true(BOOLEAN value) => value.Value != (byte)BOOLValue.FALSE;
+    public static bool operator true(BOOLEAN value) => value.Value != (byte)DefinedValue.FALSE;
 
     public static implicit operator BOOLEAN(sbyte value) => new((byte)value);
 
@@ -92,7 +92,9 @@ public readonly partial struct BOOLEAN : IComparable, IComparable<BOOLEAN>, IEqu
 
     public override int GetHashCode() => Value.GetHashCode();
 
-    public override string ToString() => $"BOOLEAN:{(Value != (byte)BOOLValue.FALSE).ToString().ToUpper()}";
+    public override string ToString() => $"BOOLEAN:{(Value != (byte)DefinedValue.FALSE).ToString().ToUpper()}";
 
     public string ToString(string? format, IFormatProvider? formatProvider) => throw new NotSupportedException(WErrorMessage.TargetAPINotSupported);
+
+    public static bool BoolEquals(BOOLEAN left, BOOLEAN right) => (bool)left == (bool)right;
 }

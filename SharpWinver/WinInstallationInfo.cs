@@ -19,8 +19,8 @@ public static partial class Winver
             get
             {
                 uint? datetimeSeconds = WinInstallation.InstallationDateTimeRaw;
-                UnixDateTime.TryConvertFromUnixTimeSeconds(datetimeSeconds ?? 0, out DateTime? installDateTime);
-                return installDateTime ?? UnixDateTime.MinValue;
+                UnixDateTime.TryConvertFromUnixTimeSeconds(datetimeSeconds.GetValueOrDefault(), out DateTime installDateTime);
+                return installDateTime;
             }
         }
 

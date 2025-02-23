@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace SharpWinNTInterop.RegistryAPI;
+namespace SharpWinNTInterop.Registry;
 
 public unsafe static partial class NTRegistryAPI
 {

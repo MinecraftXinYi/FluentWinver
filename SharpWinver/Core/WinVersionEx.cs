@@ -13,24 +13,10 @@ public static class WinVersionEx
         return version;
     }
 
-    public static uint GetWindowsRevision()
+    public static uint GetWindowsRevisionNumber()
     {
         uint? revision = NTRegistryValueReader.GetDwordValue(ConstRegistryPaths.WinNTCurrentVersion, "UBR");
         revision ??= NTRegistryValueReader.GetDwordValue(ConstRegistryPaths.WinNTCurrentVersion, "BaseBuildRevisionNumber");
-        if (!revision.HasValue)
-        {
-            string? strCurVer = NTRegistryValueReader.GetStringValue(ConstRegistryPaths.WinNTCurrentVersion, "CurrentVersion");
-            if (strCurVer != null)
-            {
-                if (Version.TryParse(strCurVer, out Version wCurVer))
-                {
-                    if (wCurVer.Revision != ConstantInts.UndefinedVersionNumber) revision = (uint)wCurVer.Revision;
-                    else revision = ConstantInts.MinVersionNumber;
-                }
-                else revision = ConstantInts.MinVersionNumber;
-            }
-            else revision = ConstantInts.MinVersionNumber;
-        }
-        return revision.Value;
+        return revision.GetValueOrDefault();
     }
 }

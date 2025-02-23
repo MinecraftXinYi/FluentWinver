@@ -1,4 +1,4 @@
-﻿namespace SharpWinNTInterop.MemoryAPI;
+﻿namespace SharpWinNTInterop.Memory;
 
 public static class RtlHeapFlags
 {

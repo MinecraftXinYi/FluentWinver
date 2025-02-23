@@ -1,4 +1,4 @@
-﻿namespace SharpWinNTInterop.RegistryAPI;
+﻿namespace SharpWinNTInterop.Registry;
 
 using static ACCESS_MASK;
 

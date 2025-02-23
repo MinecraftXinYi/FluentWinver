@@ -1,15 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Product>.NET-WinNT Interop</Product>
+    <Product>.NET-NativeInterop_WinNT</Product>
     <TargetFramework>netstandard1.1</TargetFramework>
     <RootNamespace>SharpWinNTInterop</RootNamespace>
     <LangVersion>10.0</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Nullable>enable</Nullable>
-    <CodeVersion>1.0.0</CodeVersion>
+    <CodeVersion>1.0.5</CodeVersion>
     <ProductVersion>$(CodeVersion)</ProductVersion>
     <FileVersion>$(CodeVersion).1</FileVersion>
-    <AssemblyTitle>.NET-WinNT Interop</AssemblyTitle>
+    <AssemblyTitle>.NET Native API Interop for Windows NT</AssemblyTitle>
     <Company>MinecraftXinYi Person</Company>
     <CheckNotRecommendedTargetFramework>false</CheckNotRecommendedTargetFramework>
     <NoWarn>$(NoWarn);NETSDK1215</NoWarn>

@@ -2,8 +2,8 @@
 
 namespace SharpWinNTInterop.Toolsets;
 
-using MemoryAPI;
-using RegistryAPI;
+using Memory;
+using Registry;
 
 public unsafe static partial class NTRegistryValueReader
 {

@@ -37,8 +37,8 @@ public static partial class Winver
         {
             get
             {
-                uint[] ntVersion = WinNTVersion.GetNtVersion();
-                return new((int)ntVersion[0], (int)ntVersion[1], (int)ntVersion[2]);
+                WinNTVersion.GetWinNTVersionNumbers(out uint major, out uint minor, out uint build);
+                return new((int)major, (int)minor, (int)build);
             }
         }
 
@@ -53,7 +53,7 @@ public static partial class Winver
             get
             {
                 Version ntVersion = NTVersion;
-                int revision = (int)WinVersionEx.GetWindowsRevision();
+                int revision = (int)WinVersionEx.GetWindowsRevisionNumber();
                 return new(ntVersion.Major, ntVersion.Minor, ntVersion.Build, revision);
             }
         }

@@ -1,25 +1,25 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 
-namespace SharpWinNTInterop.MemoryAPI;
+namespace SharpWinNTInterop.Toolsets;
 
-using static RtlHeapAPI;
+using static Memory.RtlHeapAPI;
 
-public unsafe static partial class RtlHeapAPISafe
+public unsafe static partial class RtlHeap
 {
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static IntPtr CreateHeap(ulong Flags, IntPtr HeapBase, ulong ReserveSize, ulong CommitSize, IntPtr Lock, IntPtr Parameters)
+    public static IntPtr Create(ulong Flags, IntPtr HeapBase, ulong ReserveSize, ulong CommitSize, IntPtr Lock, IntPtr Parameters)
         => new(RtlCreateHeap(Flags, HeapBase.ToPointer(), ReserveSize, CommitSize, Lock.ToPointer(), Parameters.ToPointer()));
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static IntPtr AllocateHeap(IntPtr HeapHandle, ulong Flags, ulong Size)
+    public static IntPtr Allocate(IntPtr HeapHandle, ulong Flags, ulong Size)
         => new(RtlAllocateHeap(HeapHandle.ToPointer(), Flags, Size));
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool FreeHeap(IntPtr HeapHandle, ulong Flags, IntPtr BaseAddress)
+    public static bool Free(IntPtr HeapHandle, ulong Flags, IntPtr BaseAddress)
         => (bool)RtlFreeHeap(HeapHandle.ToPointer(), Flags, BaseAddress.ToPointer());
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static IntPtr DestroyHeap(IntPtr HeapHandle)
+    public static IntPtr Destroy(IntPtr HeapHandle)
         => new(RtlDestroyHeap(HeapHandle.ToPointer()));
 }
