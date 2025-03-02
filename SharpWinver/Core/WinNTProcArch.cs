@@ -67,15 +67,6 @@ public unsafe static class WinNTProcArch
             GetNativeSystemInfo(lpSystemInfo);
             return;
         }
-        catch (Exception) { }
-        try
-        {
-            [DllImport(ExternDllName.Kernel32Legacy)]
-            [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
-            static extern void GetNativeSystemInfo(SYSTEM_INFO* lpSystemInfo);
-            GetNativeSystemInfo(lpSystemInfo);
-            return;
-        }
         catch (Exception)
         {
             return;
@@ -136,27 +127,19 @@ public unsafe static class WinNTProcArch
             static extern HANDLE GetCurrentProcess();
             return GetCurrentProcess();
         }
-        catch (Exception) { }
-        try
-        {
-            [DllImport(ExternDllName.Kernel32Legacy)]
-            [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
-            static extern HANDLE GetCurrentProcess();
-            return GetCurrentProcess();
-        }
         catch (Exception)
         {
             return new((void*)-1);
         }
     }
 
-    private static BOOLEAN IsWow64Process2Managed(HANDLE hProcess, ushort* pProcessMachine, ushort* pNativeMachine)
+    private static BOOL IsWow64Process2Managed(HANDLE hProcess, ushort* pProcessMachine, ushort* pNativeMachine)
     {
         try
         {
             [DllImport(ExternDllName.KernelBase, SetLastError = true)]
             [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
-            static extern BOOLEAN IsWow64Process2(HANDLE hProcess, ushort* pProcessMachine, ushort* pNativeMachinee);
+            static extern BOOL IsWow64Process2(HANDLE hProcess, ushort* pProcessMachine, ushort* pNativeMachine);
             return IsWow64Process2(hProcess, pProcessMachine, pNativeMachine);
         }
         catch (Exception) { }
@@ -164,20 +147,12 @@ public unsafe static class WinNTProcArch
         {
             [DllImport(ExternDllName.Kernel32, SetLastError = true)]
             [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
-            static extern BOOLEAN IsWow64Process2(HANDLE hProcess, ushort* pProcessMachine, ushort* pNativeMachinee);
-            return IsWow64Process2(hProcess, pProcessMachine, pNativeMachine);
-        }
-        catch (Exception) { }
-        try
-        {
-            [DllImport(ExternDllName.Kernel32Legacy, SetLastError = true)]
-            [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
-            static extern BOOLEAN IsWow64Process2(HANDLE hProcess, ushort* pProcessMachine, ushort* pNativeMachinee);
+            static extern BOOL IsWow64Process2(HANDLE hProcess, ushort* pProcessMachine, ushort* pNativeMachine);
             return IsWow64Process2(hProcess, pProcessMachine, pNativeMachine);
         }
         catch (Exception)
         {
-            return BOOLEAN.FALSE;
+            return BOOL.FALSE;
         }
     }
 
@@ -185,8 +160,8 @@ public unsafe static class WinNTProcArch
     {
         HANDLE hProcess = GetCurrentProcessManaged();
         ushort processMachine, nativeMachine;
-        BOOLEAN error = IsWow64Process2Managed(hProcess, &processMachine, &nativeMachine);
-        if (error != BOOLEAN.FALSE) return ArchitectureMap2(nativeMachine);
+        BOOL error = IsWow64Process2Managed(hProcess, &processMachine, &nativeMachine);
+        if (error != BOOL.FALSE) return ArchitectureMap2(nativeMachine);
         else return null;
     }
 }

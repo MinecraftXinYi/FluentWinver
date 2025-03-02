@@ -7,24 +7,26 @@ using Core;
 public static partial class Winver
 {
     /// <summary>
-    /// 当前运行的 Windows 系统 SKU
+    /// 当前运行的 Windows 系统 SKU 版本
     /// </summary>
     public static class WindowsEdition
     {
         /// <summary>
-        /// Internal method
+        /// 所属 Windows SKU
         /// </summary>
-        internal static WindowsSKU GetWindowsSKUSafe()
+        public static WindowsSKU SKU
         {
-            WinNTVersion.GetWinNTVersionNumbers(out uint major, out uint minor, out _);
-            WindowsSKU? windowsSku = WinProduct.GetWindowsSKUFromWinApi(major, minor);
-            windowsSku ??= WinProduct.GetWindowsSKUFromRegistry();
-            windowsSku ??= WindowsSKU.Undefined;
-            return windowsSku.Value;
+            get
+            {
+                WinNTVersion.RtlGetNtVersionNumbers(out uint major, out uint minor, out _);
+                WindowsSKU windowsSku = WinProduct.GetWindowsSKUFromWinApi(major, minor);
+                if (windowsSku == WindowsSKU.Undefined) windowsSku = WinProduct.GetWindowsSKUFromRegistry();
+                return windowsSku;
+            }
         }
 
         /// <summary>
-        /// Windows 系统 SKU 版本名称
+        /// 所属 Windows SKU 版本名称
         /// </summary>
         public static string OSEditionName
         {
@@ -33,30 +35,8 @@ public static partial class Winver
                 string osEdition = string.Empty;
                 if (WinBrand.CanInvoke) osEdition = WinBrand.BrandingFormatString(WinBrand.VariableNames.WindowsLong);
                 if (string.IsNullOrEmpty(osEdition)) osEdition = WinProduct.GetWindowsProductName() ?? string.Empty;
-                if (string.IsNullOrEmpty(osEdition)) osEdition = $"{ConstantStrings.WindowsGeneric} {GetWindowsSKUSafe()}";
+                if (string.IsNullOrEmpty(osEdition)) osEdition = $"{ConstantStrings.WindowsGeneric} {SKU}";
                 return osEdition;
-            }
-        }
-
-        /// <summary>
-        /// Windows 系统 SKU 名称
-        /// </summary>
-        public static string WindowsSKUName
-        {
-            get
-            {
-                return GetWindowsSKUSafe().ToString();
-            }
-        }
-
-        /// <summary>
-        /// Windows 系统 SKU Id
-        /// </summary>
-        public static uint WindowsSKUId
-        {
-            get
-            {
-                return (uint)GetWindowsSKUSafe();
             }
         }
 

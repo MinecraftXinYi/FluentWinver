@@ -9,7 +9,8 @@ public static class WinNTVersion
     [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
     public static extern void RtlGetNtVersionNumbers(out uint major, out uint minor, out uint buildraw);
 
-    public static uint CorrectBuildNumber(uint buildraw) => buildraw & 0xffff;
+    public static uint CorrectBuildNumber(uint buildraw)
+        => buildraw & 0xffff;
 
     public static void GetWinNTVersionNumbers(out uint major, out uint minor, out uint build)
     {

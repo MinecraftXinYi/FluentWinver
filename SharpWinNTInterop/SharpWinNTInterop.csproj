@@ -6,7 +6,7 @@
     <LangVersion>10.0</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Nullable>enable</Nullable>
-    <CodeVersion>1.0.5</CodeVersion>
+    <CodeVersion>1.1.0</CodeVersion>
     <ProductVersion>$(CodeVersion)</ProductVersion>
     <FileVersion>$(CodeVersion).1</FileVersion>
     <AssemblyTitle>.NET Native API Interop for Windows NT</AssemblyTitle>

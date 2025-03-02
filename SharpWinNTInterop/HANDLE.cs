@@ -68,13 +68,21 @@ public unsafe readonly partial struct HANDLE : IComparable, IComparable<HANDLE>,
 
     public static implicit operator nuint(HANDLE value) => (nuint)value.Value;
 
+    public static explicit operator HANDLE(IntPtr value) => new((void*)value);
+
+    public static implicit operator IntPtr(HANDLE value) => (IntPtr)value.Value;
+
     public int CompareTo(object? obj)
     {
         if (obj is HANDLE other) return CompareTo(other);
         else return obj is null ? 1 : throw new ArgumentException(WErrorMessage.ObjNotHANDLE);
     }
 
-    public int CompareTo(HANDLE other) => ((nuint)Value).CompareTo((nuint)other.Value);
+    public int CompareTo(HANDLE other)
+    {
+        if (sizeof(nuint) == sizeof(uint)) return ((uint)Value).CompareTo((uint)other.Value);
+        else return ((ulong)Value).CompareTo((ulong)other.Value);
+    }
 
     public override bool Equals(object? obj) => obj is HANDLE other && Equals(other);
 
@@ -85,4 +93,8 @@ public unsafe readonly partial struct HANDLE : IComparable, IComparable<HANDLE>,
     public override string ToString() => $"HANDLE:{(nuint)Value}";
 
     public string ToString(string? format, IFormatProvider? formatProvider) => throw new NotSupportedException(WErrorMessage.TargetAPINotSupported);
+
+    public IntPtr ToIntPtr() => new(Value);
+
+    public HANDLE FromIntPtr(IntPtr intPtr) => new(intPtr.ToPointer());
 }
