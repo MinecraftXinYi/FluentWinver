@@ -12,9 +12,10 @@ public static class WinNTVersion
     public static uint CorrectBuildNumber(uint buildraw)
         => buildraw & 0xffff;
 
-    public static void GetWinNTVersionNumbers(out uint major, out uint minor, out uint build)
+    public static uint[] GetWinNTVersionNumbers()
     {
-        RtlGetNtVersionNumbers(out major, out minor, out uint buildraw);
-        build = CorrectBuildNumber(buildraw);
+        RtlGetNtVersionNumbers(out uint major, out uint minor, out uint buildraw);
+        uint build = CorrectBuildNumber(buildraw);
+        return new uint[] { major, minor, build };
     }
 }

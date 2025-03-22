@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using System.Runtime.InteropServices;
 
-namespace System.Windows;
+namespace FluentWinver.Helpers;
 
 public unsafe class CultureInfoHelper
 {

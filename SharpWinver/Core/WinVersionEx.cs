@@ -1,5 +1,4 @@
 ﻿using SharpWinNTInterop.Toolsets;
-using System;
 
 namespace SharpWinver.Core;
 

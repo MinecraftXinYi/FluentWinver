@@ -18,8 +18,8 @@ public static partial class Winver
         {
             get
             {
-                uint? datetimeSeconds = WinInstallation.InstallationDateTimeRaw;
-                UnixDateTime.TryConvertFromUnixTimeSeconds(datetimeSeconds.GetValueOrDefault(), out DateTime installDateTime);
+                uint? datetimeRaw = WinInstallation.InstallationDateTimeRaw;
+                UnixDateTime.TryConvertFromUnixTimestamp(datetimeRaw.GetValueOrDefault(), out DateTime installDateTime);
                 return installDateTime;
             }
         }
@@ -31,9 +31,8 @@ public static partial class Winver
         {
             get
             {
-                string? registeredUser = WinInstallation.RegisteredOwner;
-                if (registeredUser == null || registeredUser == string.Empty) registeredUser = ConstantStrings.ErrorMsg;
-                return registeredUser;
+                string? registeredOwner = WinInstallation.RegisteredOwner;
+                return registeredOwner ?? ConstantStrings.DefaultRegisteredOwner;
             }
         }
 
@@ -45,8 +44,7 @@ public static partial class Winver
             get
             {
                 string? registeredOrganization = WinInstallation.RegisteredOrganization;
-                registeredOrganization ??= ConstantStrings.ErrorMsg;
-                return registeredOrganization;
+                return registeredOrganization ?? string.Empty;
             }
         }
     }

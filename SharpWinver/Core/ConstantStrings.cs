@@ -1,10 +1,10 @@
 ﻿namespace SharpWinver.Core;
 
-public static class ConstantStrings
+internal static class ConstantStrings
 {
     internal const string
         WindowsGeneric = "Windows",
-        CopyrightMicrosoftString = "(c) Microsoft Corporation.";
-
-    public const string ErrorMsg = "UNKNOWN_OR_FAILED";
+        DefaultRegisteredOwner = "Microsoft",
+        DefaultMicrosoftCopyrightString = "\xA9 Microsoft Corporation. All rights reserved.",
+        InfoIsUnknown = "Unknown";
 }

@@ -1,32 +1,31 @@
-﻿using System;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
-namespace Win32;
+namespace FluentWinver.Helpers;
 
 //Native Win32 Methods
 public static partial class User32
 {
 #pragma warning disable CA1401
     [DllImport("user32.dll", SetLastError = true)]
-    public static extern uint GetDpiForWindow(IntPtr hWnd);
+    public static extern uint GetDpiForWindow(nint hWnd);
 
     [DllImport("user32.dll", SetLastError = true)]
-    public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, int uFlags);
+    public static extern bool SetWindowPos(nint hWnd, nint hWndInsertAfter, int X, int Y, int cx, int cy, int uFlags);
 }
 
 //Packaged Methods
 public static partial class User32Packaged
 {
-    public static void SetWindowSizeByScalingFactor(IntPtr hWnd, int width, int height)
+    public static void SetWindowSizeByScalingFactor(nint hWnd, int width, int height)
     {
         var dpi = User32.GetDpiForWindow(hWnd);
         float scalingFactor = (float)dpi / 96;
         width = (int)(width * scalingFactor);
         height = (int)(height * scalingFactor);
-        User32.SetWindowPos(hWnd, IntPtr.Zero, 0, 0, width, height, 2);
+        User32.SetWindowPos(hWnd, nint.Zero, 0, 0, width, height, 2);
     }
 
-    public static float GetScalingFactor(IntPtr hWnd)
+    public static float GetScalingFactor(nint hWnd)
     {
         var dpi = User32.GetDpiForWindow(hWnd);
         float scalingFactor = (float)dpi / 96;

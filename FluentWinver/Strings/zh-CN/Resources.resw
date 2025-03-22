@@ -153,11 +153,11 @@
   <data name="OSArchHeader.Text" xml:space="preserve">
     <value>系统架构</value>
   </data>
-  <data name="OSBuildVersionHeader.Text" xml:space="preserve">
+  <data name="OSVersionHeader.Text" xml:space="preserve">
     <value>OS 内部版本</value>
   </data>
   <data name="OSEditionHeader.Text" xml:space="preserve">
-    <value>版本名称</value>
+    <value>SKU 名称</value>
   </data>
   <data name="OSExperienceHeader.Text" xml:space="preserve">
     <value>体验</value>
@@ -168,7 +168,7 @@
   <data name="OSInstalledDateHeader.Text" xml:space="preserve">
     <value>安装日期</value>
   </data>
-  <data name="OSVersionHeader.Text" xml:space="preserve">
+  <data name="OSVersionTagHeader.Text" xml:space="preserve">
     <value>版本</value>
   </data>
   <data name="WindowsSpecificationsTitle.Text" xml:space="preserve">

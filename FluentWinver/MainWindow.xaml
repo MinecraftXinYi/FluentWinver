@@ -1,12 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--// Fluent Winver
-// A WinUI3 version of winver.
-// Version: 1.0.0
-// Made with Visual Studio 2022
-// Used Projects: WinverUWP.Interop
-//
-// Current: MainWindow.UI-->
-
 <Window
     x:Class="FluentWinver.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -18,10 +10,6 @@
     xmlns:isShapesCompatible="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsTypePresent(Windows.UI.Composition.CompositionShape)"
     xmlns:isShapesIncompatible="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsTypeNotPresent(Windows.UI.Composition.CompositionShape)"
     mc:Ignorable="d">
-
-    <Window.SystemBackdrop>
-        <MicaBackdrop/>
-    </Window.SystemBackdrop>
 
     <Grid Margin="10">
         <Grid.RowDefinitions>
@@ -91,15 +79,15 @@
                                         </Style>
                                     </Grid.Resources>
                                     <TextBlock Grid.Row="0" Grid.Column="0" x:Uid="OSEditionHeader" x:Name="OSEditionHeader" Style="{StaticResource InfoHeaderBlockStyle}"/>
-                                    <TextBlock Grid.Row="1" Grid.Column="0" x:Uid="OSVersionHeader" x:Name="OSVersionHeader" Style="{StaticResource InfoHeaderBlockStyle}"/>
-                                    <TextBlock Grid.Row="2" Grid.Column="0" x:Uid="OSBuildVersionHeader" x:Name="OSBuildVersionHeader" Style="{StaticResource InfoHeaderBlockStyle}"/>
+                                    <TextBlock Grid.Row="1" Grid.Column="0" x:Uid="OSVersionTagHeader" x:Name="OSVersionTagHeader" Style="{StaticResource InfoHeaderBlockStyle}"/>
+                                    <TextBlock Grid.Row="2" Grid.Column="0" x:Uid="OSVersionHeader" x:Name="OSVersionHeader" Style="{StaticResource InfoHeaderBlockStyle}"/>
                                     <TextBlock Grid.Row="3" Grid.Column="0" x:Uid="OSArchHeader" x:Name="OSArchHeader" Style="{StaticResource InfoHeaderBlockStyle}"/>
                                     <TextBlock Grid.Row="4" Grid.Column="0" x:Uid="OSInstalledDateHeader" x:Name="OSInstalledDateHeader" Style="{StaticResource InfoHeaderBlockStyle}"/>
                                     <TextBlock Grid.Row="5" Grid.Column="0" x:Uid="OSExperienceHeader" x:Name="OSExperienceHeader" Style="{StaticResource InfoHeaderBlockStyle}"/>
                                     <TextBlock Grid.Row="6" Grid.Column="0" x:Uid="OSExpirationTimeHeader" x:Name="OSExpirationTimeHeader" Style="{StaticResource InfoHeaderBlockStyle}"/>
                                     <TextBlock Grid.Row="0" Grid.Column="1" x:Name="OSEditionBlock" Style="{StaticResource InfoContentBlockStyle}"/>
-                                    <TextBlock Grid.Row="1" Grid.Column="1" x:Name="OSVersionBlock" Style="{StaticResource InfoContentBlockStyle}"/>
-                                    <TextBlock Grid.Row="2" Grid.Column="1" x:Name="OSBuildVersionBlock" Style="{StaticResource InfoContentBlockStyle}"/>
+                                    <TextBlock Grid.Row="1" Grid.Column="1" x:Name="OSVersionTagBlock" Style="{StaticResource InfoContentBlockStyle}"/>
+                                    <TextBlock Grid.Row="2" Grid.Column="1" x:Name="OSVersionBlock" Style="{StaticResource InfoContentBlockStyle}"/>
                                     <TextBlock Grid.Row="3" Grid.Column="1" x:Name="OSArchBlock" Style="{StaticResource InfoContentBlockStyle}"/>
                                     <TextBlock Grid.Row="4" Grid.Column="1" x:Name="OSInstalledDateBlock" Style="{StaticResource InfoContentBlockStyle}"/>
                                     <TextBlock Grid.Row="5" Grid.Column="1" x:Name="OSExperienceBlock" Style="{StaticResource InfoContentBlockStyle}"/>

@@ -4,16 +4,23 @@ using System;
 using System.Linq;
 using Windows.System.Profile;
 
-namespace SharpWinverEx.CoreExternal;
+namespace FluentWinver.Helpers;
 
-internal static class WinClientCBSInf
+internal static class WinCBSPackInfoHelper
 {
-    public static bool IsClientCBSPackageNeeded
+    public static bool IsCBSPackSupported
     {
-        get => Winver.WindowsVersion.OSVersion.Build >= 19041 && AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Desktop";
+        get => Winver.WindowsVersion.OSVersion.Build >= 19041;
     }
 
-    public static string ClientCBSPackageVersion
+    public static bool IsClientCBSPackageSupported
+    {
+        get => IsCBSPackSupported && AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Desktop";
+    }
+
+    public const string ClientCBSPackName = "Windows Feature Experience Pack";
+
+    public static string ClientCBSPackageVersionString
     {
         get
         {

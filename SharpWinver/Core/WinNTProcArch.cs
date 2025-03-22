@@ -48,7 +48,7 @@ public unsafe static class WinNTProcArch
         internal short wProcessorRevision;
     }
 
-    private static void GetNativeSystemInfoManaged(SYSTEM_INFO* lpSystemInfo)
+    private static bool TryGetNativeSystemInfo(SYSTEM_INFO* lpSystemInfo)
     {
         try
         {
@@ -56,27 +56,29 @@ public unsafe static class WinNTProcArch
             [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
             static extern void GetNativeSystemInfo(SYSTEM_INFO* lpSystemInfo);
             GetNativeSystemInfo(lpSystemInfo);
-            return;
-        }
-        catch (Exception) { }
-        try
-        {
-            [DllImport(ExternDllName.Kernel32)]
-            [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
-            static extern void GetNativeSystemInfo(SYSTEM_INFO* lpSystemInfo);
-            GetNativeSystemInfo(lpSystemInfo);
-            return;
+            return true;
         }
         catch (Exception)
         {
-            return;
+            try
+            {
+                [DllImport(ExternDllName.Kernel32)]
+                [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
+                static extern void GetNativeSystemInfo(SYSTEM_INFO* lpSystemInfo);
+                GetNativeSystemInfo(lpSystemInfo);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 
     public static Architecture? GetNTOSArchitecture1()
     {
         SYSTEM_INFO systemInfo;
-        GetNativeSystemInfoManaged(&systemInfo);
+        if (!TryGetNativeSystemInfo(&systemInfo)) return null;
         return ArchitectureMap1(systemInfo.wProcessorArchitecture);
     }
 
@@ -119,40 +121,46 @@ public unsafe static class WinNTProcArch
             static extern HANDLE GetCurrentProcess();
             return GetCurrentProcess();
         }
-        catch (Exception) { }
-        try
-        {
-            [DllImport(ExternDllName.Kernel32)]
-            [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
-            static extern HANDLE GetCurrentProcess();
-            return GetCurrentProcess();
-        }
         catch (Exception)
         {
-            return new((void*)-1);
+            try
+            {
+                [DllImport(ExternDllName.Kernel32)]
+                [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
+                static extern HANDLE GetCurrentProcess();
+                return GetCurrentProcess();
+            }
+            catch (Exception)
+            {
+                return new((void*)-1);
+            }
         }
     }
 
-    private static BOOL IsWow64Process2Managed(HANDLE hProcess, ushort* pProcessMachine, ushort* pNativeMachine)
+    private static bool TryGetImageFileMachine(HANDLE hProcess, ushort* pProcessMachine, ushort* pNativeMachine)
     {
         try
         {
             [DllImport(ExternDllName.KernelBase, SetLastError = true)]
             [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
             static extern BOOL IsWow64Process2(HANDLE hProcess, ushort* pProcessMachine, ushort* pNativeMachine);
-            return IsWow64Process2(hProcess, pProcessMachine, pNativeMachine);
-        }
-        catch (Exception) { }
-        try
-        {
-            [DllImport(ExternDllName.Kernel32, SetLastError = true)]
-            [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
-            static extern BOOL IsWow64Process2(HANDLE hProcess, ushort* pProcessMachine, ushort* pNativeMachine);
-            return IsWow64Process2(hProcess, pProcessMachine, pNativeMachine);
+            IsWow64Process2(hProcess, pProcessMachine, pNativeMachine);
+            return true;
         }
         catch (Exception)
         {
-            return BOOL.FALSE;
+            try
+            {
+                [DllImport(ExternDllName.Kernel32, SetLastError = true)]
+                [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
+                static extern BOOL IsWow64Process2(HANDLE hProcess, ushort* pProcessMachine, ushort* pNativeMachine);
+                IsWow64Process2(hProcess, pProcessMachine, pNativeMachine);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 
@@ -160,8 +168,7 @@ public unsafe static class WinNTProcArch
     {
         HANDLE hProcess = GetCurrentProcessManaged();
         ushort processMachine, nativeMachine;
-        BOOL error = IsWow64Process2Managed(hProcess, &processMachine, &nativeMachine);
-        if (error != BOOL.FALSE) return ArchitectureMap2(nativeMachine);
-        else return null;
+        if (!TryGetImageFileMachine(hProcess, &processMachine, &nativeMachine)) return null;
+        return ArchitectureMap2(nativeMachine);
     }
 }

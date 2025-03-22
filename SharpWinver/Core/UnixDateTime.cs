@@ -6,14 +6,14 @@ internal static class UnixDateTime
 {
     public static readonly DateTime MinValue = (new DateTime(1970, 1, 1)).ToUniversalTime();
 
-    public static DateTime FromUnixTimeSeconds(double unixTimeSeconds)
-        => MinValue.AddSeconds(unixTimeSeconds);
+    public static DateTime FromUnixTimestamp(double timestamp)
+        => MinValue.AddSeconds(timestamp);
 
-    public static bool TryConvertFromUnixTimeSeconds(double unixTimeSeconds, out DateTime convertedDateTime)
+    public static bool TryConvertFromUnixTimestamp(double timestamp, out DateTime convertedDateTime)
     {
         try
         {
-            convertedDateTime = FromUnixTimeSeconds(unixTimeSeconds);
+            convertedDateTime = FromUnixTimestamp(timestamp);
             return true;
         }
         catch (Exception)

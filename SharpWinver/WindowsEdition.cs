@@ -7,12 +7,12 @@ using Core;
 public static partial class Winver
 {
     /// <summary>
-    /// 当前运行的 Windows 系统 SKU 版本
+    /// 当前运行的 Windows 系统 SKU
     /// </summary>
     public static class WindowsEdition
     {
         /// <summary>
-        /// 所属 Windows SKU
+        /// Windows SKU
         /// </summary>
         public static WindowsSKU SKU
         {
@@ -26,15 +26,15 @@ public static partial class Winver
         }
 
         /// <summary>
-        /// 所属 Windows SKU 版本名称
+        /// Windows SKU 名称
         /// </summary>
-        public static string OSEditionName
+        public static string OSEdition
         {
             get
             {
-                string osEdition = string.Empty;
+                string osEdition = null!;
                 if (WinBrand.CanInvoke) osEdition = WinBrand.BrandingFormatString(WinBrand.VariableNames.WindowsLong);
-                if (string.IsNullOrEmpty(osEdition)) osEdition = WinProduct.GetWindowsProductName() ?? string.Empty;
+                if (string.IsNullOrEmpty(osEdition)) osEdition = WinProduct.GetWindowsProductName()!;
                 if (string.IsNullOrEmpty(osEdition)) osEdition = $"{ConstantStrings.WindowsGeneric} {SKU}";
                 return osEdition;
             }

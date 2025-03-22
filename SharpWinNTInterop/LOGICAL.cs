@@ -8,9 +8,9 @@ public readonly partial struct LOGICAL : IComparable, IComparable<LOGICAL>, IEqu
 
     public LOGICAL(ulong value) => Value = value;
 
-    public static LOGICAL FALSE => new((ulong)DefinedBoolValue.FALSE);
+    public static LOGICAL FALSE => new(NTDefBoolValue.FALSE);
 
-    public static LOGICAL TRUE => new((ulong)DefinedBoolValue.DefaultTRUE);
+    public static LOGICAL TRUE => new(NTDefBoolValue.TRUE);
 
     public static bool operator ==(LOGICAL left, LOGICAL right) => left.Value == right.Value;
 
@@ -24,13 +24,13 @@ public readonly partial struct LOGICAL : IComparable, IComparable<LOGICAL>, IEqu
 
     public static bool operator >=(LOGICAL left, LOGICAL right) => left.Value >= right.Value;
 
-    public static implicit operator bool(LOGICAL value) => DefinedBoolValueHelper.IsTrue(value.Value);
+    public static implicit operator bool(LOGICAL value) => NTDefBoolValue.ToBoolValue(value.Value);
 
-    public static implicit operator LOGICAL(bool value) => new(value ? (ulong)DefinedBoolValue.DefaultTRUE : (ulong)DefinedBoolValue.FALSE);
+    public static implicit operator LOGICAL(bool value) => new(NTDefBoolValue.FromBoolValue(value));
 
-    public static bool operator false(LOGICAL value) => DefinedBoolValueHelper.IsFalse(value.Value);
+    public static bool operator false(LOGICAL value) => value.Value == NTDefBoolValue.FALSE;
 
-    public static bool operator true(LOGICAL value) => DefinedBoolValueHelper.IsTrue(value.Value);
+    public static bool operator true(LOGICAL value) => value.Value == NTDefBoolValue.TRUE;
 
     public static implicit operator LOGICAL(sbyte value) => new((ulong)value);
 
@@ -88,15 +88,11 @@ public readonly partial struct LOGICAL : IComparable, IComparable<LOGICAL>, IEqu
 
     public override int GetHashCode() => Value.GetHashCode();
 
-    public override string ToString() => $"LOGICAL:{DefinedBoolValueHelper.IsTrue(Value).ToString().ToUpper()}";
+    public override string ToString() => $"LOGICAL:{NTDefBoolValue.ToBoolValue(Value).ToString().ToUpper()}";
 
     public string ToString(string? format, IFormatProvider? formatProvider) => throw new NotSupportedException(WErrorMessage.TargetAPINotSupported);
 
-    public static bool BoolEquals(LOGICAL a, LOGICAL b) => (bool)a == (bool)b;
-
-    public static bool BoolEquals(LOGICAL lOGICAL, BOOL bOOL) => (bool)lOGICAL == (bool)bOOL;
-
-    public static bool ToBool(LOGICAL lOGICAL) => DefinedBoolValueHelper.IsTrue(lOGICAL.Value);
+    public static bool BoolEquals(LOGICAL a, LOGICAL b) => NTDefBoolValue.ToBoolValue(a.Value) == NTDefBoolValue.ToBoolValue(b.Value);
 
     public static LOGICAL FromBOOL(BOOL boolean) => new(boolean.Value);
 }

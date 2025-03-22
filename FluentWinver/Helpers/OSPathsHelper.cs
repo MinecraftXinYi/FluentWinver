@@ -2,7 +2,7 @@
 using System;
 using System.Numerics;
 
-namespace WinverUWP.Helpers;
+namespace FluentWinver.Helpers;
 
 public class FirstDisposableTuple<T1, T2, T3> : Tuple<T1, T2, T3>, IDisposable where T1 : IDisposable
 {

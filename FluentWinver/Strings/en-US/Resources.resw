@@ -153,7 +153,7 @@
   <data name="OSArchHeader.Text" xml:space="preserve">
     <value>Architecture</value>
   </data>
-  <data name="OSBuildVersionHeader.Text" xml:space="preserve">
+  <data name="OSVersionHeader.Text" xml:space="preserve">
     <value>OS Build</value>
   </data>
   <data name="OSEditionHeader.Text" xml:space="preserve">
@@ -168,7 +168,7 @@
   <data name="OSInstalledDateHeader.Text" xml:space="preserve">
     <value>Installed on</value>
   </data>
-  <data name="OSVersionHeader.Text" xml:space="preserve">
+  <data name="OSVersionTagHeader.Text" xml:space="preserve">
     <value>Version</value>
   </data>
   <data name="WindowsSpecificationsTitle.Text" xml:space="preserve">

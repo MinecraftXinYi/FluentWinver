@@ -1,8 +1,8 @@
 namespace SharpWinver.Core;
 
 /// <summary>
-/// Enumeration of Windows OS SKUs corresponding.
-/// (Website: https://bbs.pcbeta.com/viewthread-1946456-1-1.html)
+/// Enumeration of Windows SKUs.
+/// (Source: https://bbs.pcbeta.com/viewthread-1946456-1-1.html)
 /// </summary>
 public enum WindowsSKU : uint
 {

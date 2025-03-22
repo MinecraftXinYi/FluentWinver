@@ -8,8 +8,6 @@ public unsafe readonly partial struct HANDLE : IComparable, IComparable<HANDLE>,
 
     public HANDLE(void* value) => Value = value;
 
-    public static HANDLE INVALID_VALUE => new((void*)-1);
-
     public static HANDLE NULL => new(null);
 
     public static bool operator ==(HANDLE left, HANDLE right) => left.Value == right.Value;

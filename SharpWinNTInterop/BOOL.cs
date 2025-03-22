@@ -8,9 +8,9 @@ public readonly partial struct BOOL : IComparable, IComparable<BOOL>, IEquatable
 
     public BOOL(byte value) => Value = value;
 
-    public static BOOL FALSE => new((byte)DefinedBoolValue.FALSE);
+    public static BOOL FALSE => new(NTDefBoolValue.FALSE);
 
-    public static BOOL TRUE => new((byte)DefinedBoolValue.DefaultTRUE);
+    public static BOOL TRUE => new(NTDefBoolValue.TRUE);
 
     public static bool operator ==(BOOL left, BOOL right) => left.Value == right.Value;
 
@@ -24,13 +24,13 @@ public readonly partial struct BOOL : IComparable, IComparable<BOOL>, IEquatable
 
     public static bool operator >=(BOOL left, BOOL right) => left.Value >= right.Value;
 
-    public static implicit operator bool(BOOL value) => DefinedBoolValueHelper.IsTrue(value.Value);
+    public static implicit operator bool(BOOL value) => NTDefBoolValue.ToBoolValue(value.Value);
 
-    public static implicit operator BOOL(bool value) => new(value ? (byte)DefinedBoolValue.DefaultTRUE : (byte)DefinedBoolValue.FALSE);
+    public static implicit operator BOOL(bool value) => new(NTDefBoolValue.FromBoolValue(value));
 
-    public static bool operator false(BOOL value) => DefinedBoolValueHelper.IsFalse(value.Value);
+    public static bool operator false(BOOL value) => value.Value == NTDefBoolValue.FALSE;
 
-    public static bool operator true(BOOL value) => DefinedBoolValueHelper.IsTrue(value.Value);
+    public static bool operator true(BOOL value) => value.Value == NTDefBoolValue.TRUE;
 
     public static implicit operator BOOL(sbyte value) => new((byte)value);
 
@@ -86,11 +86,9 @@ public readonly partial struct BOOL : IComparable, IComparable<BOOL>, IEquatable
 
     public override int GetHashCode() => Value.GetHashCode();
 
-    public override string ToString() => $"BOOLEAN:{DefinedBoolValueHelper.IsTrue(Value).ToString().ToUpper()}";
+    public override string ToString() => $"BOOL:{NTDefBoolValue.ToBoolValue(Value).ToString().ToUpper()}";
 
     public string ToString(string? format, IFormatProvider? formatProvider) => throw new NotSupportedException(WErrorMessage.TargetAPINotSupported);
 
-    public static bool BoolEquals(BOOL a, BOOL b) => (bool)a == (bool)b;
-
-    public static bool ToBool(BOOL bOOL) => DefinedBoolValueHelper.IsTrue(bOOL.Value);
+    public static bool BoolEquals(BOOL a, BOOL b) => NTDefBoolValue.ToBoolValue(a.Value) == NTDefBoolValue.ToBoolValue(b.Value);
 }

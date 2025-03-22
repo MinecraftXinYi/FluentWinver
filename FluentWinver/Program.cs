@@ -1,34 +1,47 @@
 ﻿using System;
 using System.Threading;
-using Windows;
+using WinAppModelHelpers;
 using WinRT;
-using Microsoft.Windows.ApplicationModel.DynamicDependency;
 using Microsoft.UI.Xaml;
-using FluentWinver;
 using Microsoft.UI.Dispatching;
+using FluentWinver.Helpers;
+using System.Text.Json;
 
-namespace FluentWinverProg
+namespace FluentWinver;
+
+public static class Program
 {
-    public static class Program
+    [STAThread]
+    internal static void Main(string[] args)
     {
-        [STAThread]
-        internal static void Main(string[] args)
+        if (!AppxEnvironment.IsAppx)
         {
-            if (!AppxRuntimeHelper.IsMSIX)
+            int hresult;
+            bool tryInitWindowsAppRuntime;
+            try
             {
-                if (!WARInitializerCs.InitializeWAR(out int hresult))
-                {
-                    Environment.Exit(hresult);
-                }
+                JsonElement waruntimeInfo = MsixRTListHelperUnsafe.GetMsixRuntimeInfoItem("MSIXRuntimeInfo.json", "Microsoft.WindowsAppRuntime");
+                uint warMajorMinor = Convert.ToUInt32(MsixRTListHelperUnsafe.MajorMinorVersion(waruntimeInfo).GetString(), 16);
+                ulong warMinVersionUl = Convert.ToUInt64(MsixRTListHelperUnsafe.MinVersion(waruntimeInfo).GetString(), 16);
+                string warVersionTag = MsixRTListHelperUnsafe.VersionTag(waruntimeInfo).GetString();
+                PackageVersion warMinVersion = new(warMinVersionUl);
+                tryInitWindowsAppRuntime = WindowsAppRuntimeBootstrap.TryInitialize(warMajorMinor, warVersionTag, warMinVersion,
+                    WindowsAppRuntimeBootstrap.InitializeOptions.OnNoMatch_ShowUI, out hresult);
             }
-            ComWrappersSupport.InitializeComWrappers();
-            Application.Start((p) =>
+            catch (Exception ex)
             {
-                var context = new DispatcherQueueSynchronizationContext(DispatcherQueue.GetForCurrentThread());
-                SynchronizationContext.SetSynchronizationContext(context);
-                new App();
-            });
-            return;
+                hresult = ex.HResult;
+                tryInitWindowsAppRuntime = false;
+            }
+            if (!tryInitWindowsAppRuntime) Environment.Exit(hresult);
         }
+        ComWrappersSupport.InitializeComWrappers();
+        Application.Start((p) =>
+        {
+            var context = new DispatcherQueueSynchronizationContext(DispatcherQueue.GetForCurrentThread());
+            SynchronizationContext.SetSynchronizationContext(context);
+            new App();
+        });
+        return;
     }
 }
