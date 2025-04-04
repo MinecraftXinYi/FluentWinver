@@ -1,10 +1,12 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace SharpWinNTInterop;
+namespace MinecraftXinYi.WindowsNT;
+
+using static NTDllName;
 
 public unsafe static partial class NTHandleAPI
 {
-    [DllImport(DLLName.NTDLL, SetLastError = true)]
+    [DllImport(NTDLL, SetLastError = true)]
     [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
     public static extern int NtClose(HANDLE Handle);
 }

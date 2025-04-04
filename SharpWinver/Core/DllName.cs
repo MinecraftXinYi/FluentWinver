@@ -1,6 +1,6 @@
 ﻿namespace SharpWinver.Core;
 
-internal static class ExternDllName
+internal static class DllName
 {
     internal const string
         KernelBase = "KernelBase.dll",

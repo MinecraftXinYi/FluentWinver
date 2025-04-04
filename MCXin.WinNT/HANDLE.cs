@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SharpWinNTInterop;
+namespace MinecraftXinYi.WindowsNT;
 
 public unsafe readonly partial struct HANDLE : IComparable, IComparable<HANDLE>, IEquatable<HANDLE>, IFormattable
 {

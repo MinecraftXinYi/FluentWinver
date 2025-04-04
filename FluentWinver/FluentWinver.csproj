@@ -16,7 +16,7 @@
     <EnableMsixTooling>true</EnableMsixTooling>
     <PublishProfile>win-$(Platform).pubxml</PublishProfile>
     <Configurations>Debug;Release;Debug-AOT;Release-AOT</Configurations>
-    <CodeVersion>0.8.3</CodeVersion>
+    <CodeVersion>0.8.4</CodeVersion>
     <ProductVersion>$(CodeVersion)</ProductVersion>
     <FileVersion>$(CodeVersion).2</FileVersion>
     <AssemblyTitle>Fluent Winver</AssemblyTitle>

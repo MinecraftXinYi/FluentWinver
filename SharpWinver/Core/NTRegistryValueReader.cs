@@ -1,11 +1,11 @@
-﻿using System.Runtime.InteropServices;
+﻿using MinecraftXinYi.WindowsNT;
+using MinecraftXinYi.WindowsNT.Memory;
+using MinecraftXinYi.WindowsNT.Registry;
+using System.Runtime.InteropServices;
 
-namespace SharpWinNTInterop.Toolsets;
+namespace SharpWinver.Core;
 
-using Memory;
-using Registry;
-
-public unsafe static partial class NTRegistryValueReader
+public unsafe static class NTRegistryValueReader
 {
     private static KEY_VALUE_PARTIAL_INFORMATION* ReadKeyValuePartialInfo(string keyPath, string valueName, out void* heap)
     {

@@ -6,7 +6,7 @@
     <LangVersion>10.0</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Nullable>enable</Nullable>
-    <CodeVersion>2.1.1</CodeVersion>
+    <CodeVersion>2.2.0</CodeVersion>
     <ProductVersion>$(CodeVersion)</ProductVersion>
     <FileVersion>$(CodeVersion).1</FileVersion>
     <AssemblyTitle>SharpWinver Library</AssemblyTitle>
@@ -19,7 +19,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SharpWinNTInterop\SharpWinNTInterop.csproj" />
+    <ProjectReference Include="..\MCXin.WinNT\MCXin.WinNT.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace SharpWinNTInterop;
+﻿namespace MinecraftXinYi.WindowsNT;
 
 internal static class WErrorMessage
 {

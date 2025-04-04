@@ -1,4 +1,4 @@
-﻿namespace SharpWinNTInterop.Registry;
+﻿namespace MinecraftXinYi.WindowsNT.Registry;
 
 public enum KEY_VALUE_INFORMATION_CLASS
 {

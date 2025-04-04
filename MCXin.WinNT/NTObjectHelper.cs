@@ -1,8 +1,8 @@
 ﻿using System.Runtime.CompilerServices;
 
-namespace SharpWinNTInterop;
+namespace MinecraftXinYi.WindowsNT;
 
-public unsafe static partial class NTObjectMethods
+public unsafe static partial class NTObjectHelper
 {
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void InitializeObjectAttributes(OBJECT_ATTRIBUTES* p, UNICODE_STRING* n, ulong a, HANDLE r, void* s)

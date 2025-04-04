@@ -1,4 +1,4 @@
-﻿namespace SharpWinNTInterop.Registry;
+﻿namespace MinecraftXinYi.WindowsNT.Registry;
 
 public unsafe struct KEY_VALUE_PARTIAL_INFORMATION
 {

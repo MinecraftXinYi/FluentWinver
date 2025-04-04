@@ -1,6 +1,4 @@
-﻿using SharpWinNTInterop.Toolsets;
-
-namespace SharpWinver.Core;
+﻿namespace SharpWinver.Core;
 
 public static class WinVersionEx
 {

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 
-namespace SharpWinNTInterop.Toolsets;
+namespace MinecraftXinYi.WindowsNT.Memory;
 
-using static Memory.RtlHeapAPI;
+using static RtlHeapAPI;
 
-public unsafe static partial class RtlHeap
+public unsafe static partial class RtlHeapManaged
 {
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static IntPtr Create(ulong Flags, IntPtr HeapBase, ulong ReserveSize, ulong CommitSize, IntPtr Lock, IntPtr Parameters)

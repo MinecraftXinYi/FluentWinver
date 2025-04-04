@@ -1,5 +1,4 @@
-﻿using SharpWinNTInterop;
-using SharpWinNTInterop.Toolsets;
+﻿using MinecraftXinYi.WindowsNT;
 using System;
 using System.Runtime.InteropServices;
 
@@ -14,7 +13,7 @@ public static class WinProduct
     {
         try
         {
-            [DllImport(ExternDllName.KernelBase, SetLastError = true)]
+            [DllImport(DllName.KernelBase, SetLastError = true)]
             [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
             static extern BOOL GetProductInfo(uint dwOSMajorVersion, uint dwOSMinorVersion, uint dwSpMajorVersion, uint dwSpMinorVersion, out uint dwReturnedProductType);
             BOOL result = GetProductInfo(dwOSMajorVersion, dwOSMinorVersion, dwSpMajorVersion, dwSpMinorVersion, out dwReturnedProductType);
@@ -24,7 +23,7 @@ public static class WinProduct
         {
             try
             {
-                [DllImport(ExternDllName.Kernel32, SetLastError = true)]
+                [DllImport(DllName.Kernel32, SetLastError = true)]
                 [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
                 static extern BOOL GetProductInfo(uint dwOSMajorVersion, uint dwOSMinorVersion, uint dwSpMajorVersion, uint dwSpMinorVersion, out uint dwReturnedProductType);
                 BOOL result = GetProductInfo(dwOSMajorVersion, dwOSMinorVersion, dwSpMajorVersion, dwSpMinorVersion, out dwReturnedProductType);

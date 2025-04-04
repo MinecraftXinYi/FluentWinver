@@ -1,4 +1,4 @@
-﻿namespace SharpWinNTInterop;
+﻿namespace MinecraftXinYi.WindowsNT;
 
 public static partial class ACCESS_MASK
 {

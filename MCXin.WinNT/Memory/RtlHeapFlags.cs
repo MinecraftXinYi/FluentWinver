@@ -1,4 +1,4 @@
-﻿namespace SharpWinNTInterop.Memory;
+﻿namespace MinecraftXinYi.WindowsNT.Memory;
 
 public static class RtlHeapFlags
 {

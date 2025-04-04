@@ -1,9 +1,9 @@
 ﻿//SharpWinver Library
 //This is a .NET Standard library that provides version information of Windows OS via common CSharp methods.
 //Author: Github/MinecraftXinYi
-//Version: 2.1.1
+//Version: 2.2.0
 
-using SharpWinNTInterop;
+using MinecraftXinYi.WindowsNT;
 using System;
 using System.Runtime.InteropServices;
 
@@ -24,7 +24,7 @@ public static partial class Winver
         {
             try
             {
-                [DllImport(DLLName.NTDLL, CallingConvention = CallingConvention.StdCall, SetLastError = false)]
+                [DllImport(NTDllName.NTDLL, CallingConvention = CallingConvention.StdCall, SetLastError = false)]
                 [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
                 static extern double sin(double x);
                 sin(0);

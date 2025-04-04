@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SharpWinNTInterop;
+namespace MinecraftXinYi.WindowsNT;
 
 public readonly partial struct BOOL : IComparable, IComparable<BOOL>, IEquatable<BOOL>, IFormattable
 {

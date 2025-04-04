@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentWinver", "FluentWinve
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpWinver", "SharpWinver\SharpWinver.csproj", "{260829DF-C6EB-4084-A056-C7CD342A69E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpWinNTInterop", "SharpWinNTInterop\SharpWinNTInterop.csproj", "{B62099BC-E079-4759-9DD0-0EF293045065}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCXin.WinNT", "MCXin.WinNT\MCXin.WinNT.csproj", "{B62099BC-E079-4759-9DD0-0EF293045065}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinAppModelHelpers", "WinAppModelHelpers\WinAppModelHelpers.csproj", "{E560A505-2040-62AC-53B2-587436F4D954}"
 EndProject

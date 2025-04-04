@@ -1,4 +1,4 @@
-﻿namespace SharpWinNTInterop.Registry;
+﻿namespace MinecraftXinYi.WindowsNT.Registry;
 
 using static ACCESS_MASK;
 

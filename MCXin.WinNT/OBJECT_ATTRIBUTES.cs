@@ -1,4 +1,4 @@
-﻿namespace SharpWinNTInterop;
+﻿namespace MinecraftXinYi.WindowsNT;
 
 public unsafe struct OBJECT_ATTRIBUTES
 {

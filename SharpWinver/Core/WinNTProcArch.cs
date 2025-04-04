@@ -1,4 +1,4 @@
-﻿using SharpWinNTInterop;
+﻿using MinecraftXinYi.WindowsNT;
 using System;
 using System.Runtime.InteropServices;
 
@@ -52,7 +52,7 @@ public unsafe static class WinNTProcArch
     {
         try
         {
-            [DllImport(ExternDllName.KernelBase)]
+            [DllImport(DllName.KernelBase)]
             [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
             static extern void GetNativeSystemInfo(SYSTEM_INFO* lpSystemInfo);
             GetNativeSystemInfo(lpSystemInfo);
@@ -62,7 +62,7 @@ public unsafe static class WinNTProcArch
         {
             try
             {
-                [DllImport(ExternDllName.Kernel32)]
+                [DllImport(DllName.Kernel32)]
                 [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
                 static extern void GetNativeSystemInfo(SYSTEM_INFO* lpSystemInfo);
                 GetNativeSystemInfo(lpSystemInfo);
@@ -116,7 +116,7 @@ public unsafe static class WinNTProcArch
     {
         try
         {
-            [DllImport(ExternDllName.KernelBase)]
+            [DllImport(DllName.KernelBase)]
             [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
             static extern HANDLE GetCurrentProcess();
             return GetCurrentProcess();
@@ -125,7 +125,7 @@ public unsafe static class WinNTProcArch
         {
             try
             {
-                [DllImport(ExternDllName.Kernel32)]
+                [DllImport(DllName.Kernel32)]
                 [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
                 static extern HANDLE GetCurrentProcess();
                 return GetCurrentProcess();
@@ -141,7 +141,7 @@ public unsafe static class WinNTProcArch
     {
         try
         {
-            [DllImport(ExternDllName.KernelBase, SetLastError = true)]
+            [DllImport(DllName.KernelBase, SetLastError = true)]
             [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
             static extern BOOL IsWow64Process2(HANDLE hProcess, ushort* pProcessMachine, ushort* pNativeMachine);
             IsWow64Process2(hProcess, pProcessMachine, pNativeMachine);
@@ -151,7 +151,7 @@ public unsafe static class WinNTProcArch
         {
             try
             {
-                [DllImport(ExternDllName.Kernel32, SetLastError = true)]
+                [DllImport(DllName.Kernel32, SetLastError = true)]
                 [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
                 static extern BOOL IsWow64Process2(HANDLE hProcess, ushort* pProcessMachine, ushort* pNativeMachine);
                 IsWow64Process2(hProcess, pProcessMachine, pNativeMachine);
