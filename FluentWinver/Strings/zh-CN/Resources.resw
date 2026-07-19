@@ -174,4 +174,10 @@
   <data name="WindowsSpecificationsTitle.Text" xml:space="preserve">
     <value>Windows 规格</value>
   </data>
+  <data name="MainWindowWidth" xml:space="preserve">
+    <value>550</value>
+  </data>
+  <data name="MainWindowHeight" xml:space="preserve">
+    <value>850</value>
+  </data>
 </root>

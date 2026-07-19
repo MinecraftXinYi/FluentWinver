@@ -1,47 +1,34 @@
-﻿using System;
-using System.Threading;
-using WinAppModelHelpers;
-using WinRT;
-using Microsoft.UI.Xaml;
+﻿using FluentWinver;
 using Microsoft.UI.Dispatching;
-using FluentWinver.Helpers;
-using System.Text.Json;
+using Microsoft.UI.Xaml;
+using Microsoft.Windows.ApplicationModel.DynamicDependency;
+using Microsoft.WindowsAppSDK;
+using Microsoft.WindowsAppSDK.Runtime;
+using NeonWindows.ApplicationModel;
+using NeonWindows.UI.Scaling;
+using System.Threading;
+using WinRT;
 
-namespace FluentWinver;
-
-public static class Program
+if (!Win32AppModel.IsRunningAsAppX)
 {
-    [STAThread]
-    internal static void Main(string[] args)
+    PackageVersion minVer = new(Version.Major, Version.Minor, Version.Build, Version.Revision);
+    if (!Bootstrap.TryInitialize(Release.MajorMinor, string.Empty, minVer, Bootstrap.InitializeOptions.OnNoMatch_ShowUI, out int hr)) return;
+}
+
+Thread appThread = new(AppMain);
+appThread.SetApartmentState(ApartmentState.STA);
+appThread.Start();
+appThread.Join();
+
+static void AppMain()
+{
+    ComWrappersSupport.InitializeComWrappers();
+    AppDpiAwareness2.SetCurrentProcessDpiAwarenessModeEx(DpiAwarenessMode.PerMonitorV2, true);
+    Application.Start((p) =>
     {
-        if (!AppxEnvironment.IsAppx)
-        {
-            int hresult;
-            bool tryInitWindowsAppRuntime;
-            try
-            {
-                JsonElement waruntimeInfo = MsixRTListHelperUnsafe.GetMsixRuntimeInfoItem("MSIXRuntimeInfo.json", "Microsoft.WindowsAppRuntime");
-                uint warMajorMinor = Convert.ToUInt32(MsixRTListHelperUnsafe.MajorMinorVersion(waruntimeInfo).GetString(), 16);
-                ulong warMinVersionUl = Convert.ToUInt64(MsixRTListHelperUnsafe.MinVersion(waruntimeInfo).GetString(), 16);
-                string warVersionTag = MsixRTListHelperUnsafe.VersionTag(waruntimeInfo).GetString();
-                PackageVersion warMinVersion = new(warMinVersionUl);
-                tryInitWindowsAppRuntime = WindowsAppRuntimeBootstrap.TryInitialize(warMajorMinor, warVersionTag, warMinVersion,
-                    WindowsAppRuntimeBootstrap.InitializeOptions.OnNoMatch_ShowUI, out hresult);
-            }
-            catch (Exception ex)
-            {
-                hresult = ex.HResult;
-                tryInitWindowsAppRuntime = false;
-            }
-            if (!tryInitWindowsAppRuntime) Environment.Exit(hresult);
-        }
-        ComWrappersSupport.InitializeComWrappers();
-        Application.Start((p) =>
-        {
-            var context = new DispatcherQueueSynchronizationContext(DispatcherQueue.GetForCurrentThread());
-            SynchronizationContext.SetSynchronizationContext(context);
-            new App();
-        });
-        return;
-    }
+        var context = new DispatcherQueueSynchronizationContext(DispatcherQueue.GetForCurrentThread());
+        SynchronizationContext.SetSynchronizationContext(context);
+        AppDpiAwareness2.SetCurrentThreadDpiAwarenessMode(DpiAwarenessMode.PerMonitorV2);
+        new App();
+    });
 }

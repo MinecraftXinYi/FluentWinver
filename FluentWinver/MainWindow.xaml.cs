@@ -1,163 +1,123 @@
-using System;
-using SharpWinver;
+using FluentWinver.Helpers;
+using Microsoft.Graphics.Canvas.Geometry;
+using Microsoft.UI.Composition;
+using Microsoft.UI.Composition.SystemBackdrops;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls.Primitives;
+using Microsoft.UI.Xaml.Data;
+using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
-using Windows.ApplicationModel.DataTransfer;
+using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Windows.ApplicationModel.Resources;
-using Microsoft.Graphics.Canvas.Geometry;
-using Microsoft.UI.Xaml.Markup;
-using Windows.UI.ViewManagement;
-using Microsoft.UI.Composition;
-using System.Globalization;
-using FluentWinver.Helpers;
+using SharpWinver;
+using SharpWinver.Core;
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel.DataTransfer;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
+using Windows.Graphics;
+using Windows.UI.ViewManagement;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace FluentWinver;
 
+/// <summary>
+/// An empty window that can be used on its own or navigated to within a Frame.
+/// </summary>
 public sealed partial class MainWindow : Window
 {
+    public IWinVer WinVer { get; set; } = new OnlineWinVer();
+
+    private readonly ResourceLoader resourceLoader = new();
+
+    private readonly UISettings uiSettings = new();
+
+    private static readonly Version win11min = new(10, 0, 21996);
+
     public MainWindow()
     {
-        ResourceLoader resourceLoader = new();
-        InitWindow(resourceLoader);
-        this.InitializeComponent();
-        LoadMain(resourceLoader, CultureInfoHelper.GetCurrentCulture(), out Version osVersion);
-        uint buildNum = (uint)osVersion.Build;
-        LoadWindowIcon(buildNum);
-        LoadWindowsBrand(buildNum);
-        LoadBackdrop(buildNum);
-        LoadLast(resourceLoader);
+        InitializeComponent();
+        LoadWindowStyle();
+        LoadMainInfo();
+        LoadWindowsBrand();
+        LoadWindowStyle2();
     }
 
     private void Copy_WS(object sender, RoutedEventArgs e)
     {
-        this.CopyInfoToClipboard();
+        CopyInfoToClipboard();
     }
 
     private void OK_Click(object sender, RoutedEventArgs e)
     {
-        this.CloseView();
+        Close();
     }
 
-    void InitWindow(ResourceLoader resourceLoader)
+    public void LoadMainInfo()
     {
-        //获取窗口句柄(HWND)
-        IntPtr hwnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
+        OSEditionBlock.Text = WinVer.Edition;
+        OSVersionTagBlock.Text = WinVer.VersionTag;
+        OSVersionBlock.Text = WinVer.OSVersion.ToString();
+        OSArchBlock.Text = WinVer.OSArchitecture.ToString();
 
-        //初始化窗口
-        Title = resourceLoader.GetString("MainWindowTitle");
-        User32Packaged.SetWindowSizeByScalingFactor(hwnd, 550, 850);
-        AppWindow.TitleBar.IconShowOptions = IconShowOptions.HideIconAndSystemMenu;
-    }
-
-    void LoadMain(ResourceLoader resourceLoader, CultureInfo userCulture, out Version osVersion)
-    {
-        //加载系统名称
-        string osEdition = Winver.WindowsEdition.OSEdition;
-        OSEditionBlock.Text = osEdition;
-
-        //加载系统版本号
-        OSVersionTagBlock.Text = Winver.WindowsVersion.VersionTag;
-
-        osVersion = Winver.WindowsVersion.OSVersion;
-
-
-        //加载系统内部版本号
-        OSVersionBlock.Text = osVersion.ToString();
-
-        //加载系统体验包版本
-        if (WinCBSPackInfoHelper.IsClientCBSPackageSupported)
-            OSExperienceBlock.Text = $"{WinCBSPackInfoHelper.ClientCBSPackName} {WinCBSPackInfoHelper.ClientCBSPackageVersionString}";
-        else
-        {
-            OSExperienceBlock.Text = string.Empty;
-            OSExperienceHeader.Visibility = Visibility.Collapsed;
-            OSExperienceBlock.Visibility = Visibility.Collapsed;
-        }
-
-        //加载系统平台架构
-        OSArchBlock.Text = Winver.WindowsEdition.OSArchitecture.ToString();
-
-        //加载系统安装时间
-        OSInstalledDateBlock.Text = Winver.WinInstallationInfo.OSInstallationDateTime.ToLocalTime().ToString("d", userCulture);
-
-        //加载系统开发商（版权方）名称
-        OSCopyRightBlock.Text = Winver.WinOSLegalInfo.OSCopyrightString;
-
-        //加载系统测试副本过期时间或隐藏
-        if (Winver.WinOSTestBuildInfo.HasExpirationTime)
-            OSExpirationTimeBlock.Text = Winver.WinOSTestBuildInfo.OSExpirationTime!.Value.ToLocalTime().ToString("g", userCulture);
+        OSInstalledDateBlock.Text = OnlineWinInstallationInfo.SystemInstallationDateTime?.ToString("D");
+        if (OnlineWinTestBuildInfo.SystemExpirationDateTime.HasValue) OSExpirationTimeBlock.Text = OnlineWinTestBuildInfo.SystemExpirationDateTime.Value.ToLocalTime().ToString();
         else
         {
             OSExpirationTimeHeader.Visibility = Visibility.Collapsed;
             OSExpirationTimeBlock.Visibility = Visibility.Collapsed;
         }
 
-        //加载 Windows Legal 信息
-        LicensingTextBlock.Text = resourceLoader.GetString("LicensingText").Replace("[Microsoft Windows]", osEdition);
-
-        //加载系统注册用户名
-        RegisterBlock.Text = Winver.WinInstallationInfo.OSRegisteredOwner;
+        OSCopyRightBlock.Text = OnlineWinProductInfo.WindowsCopyrightString;
+        LicensingTextBlock.Text = resourceLoader.GetString("LicensingText").Replace("[Microsoft Windows]", WinVer.Edition);
+        RegisterBlock.Text = OnlineWinInstallationInfo.SystemRegisteredOwner;
+        LicenseLinkButton.NavigateUri = new(resourceLoader.GetString("LicenseLink"));
     }
 
-    void LoadWindowIcon(uint buildNum)
+    public void LoadWindowStyle()
     {
-        //加载窗口图标
-        string icoPath = buildNum >= 21996 ? "Assets/@WLOGO_11.ico" : "Assets/@WLOGO_10.ico";
-        AppWindow.SetIcon(icoPath);
+        Title = resourceLoader.GetString("MainWindowTitle");
+        AppWindow.TitleBar.IconShowOptions = IconShowOptions.HideIconAndSystemMenu;
+        double scale = Content.RasterizationScale;
+        int widthRaw = int.Parse(resourceLoader.GetString("MainWindowWidth")), heightRaw = int.Parse(resourceLoader.GetString("MainWindowHeight"));
+        SizeInt32 size = new(widthRaw * (int)scale, heightRaw * (int)scale);
+        AppWindow.Resize(size);
     }
 
-    void LoadWindowsBrand(uint buildNum)
+    public void LoadWindowStyle2()
     {
-        //加载 Windows Brand
-        string osShortName = buildNum >= 21996 ? "Windows11" : "Windows10";
-        UpdateWindowsBrand(osShortName, new UISettings());
+        AppWindow.SetIcon(WinVer.OSVersion >= win11min ? "Assets/@WLOGO_11.ico" : "Assets/@WLOGO_10.ico");
+        if (WinVer.OSVersion >= win11min) SystemBackdrop = new MicaBackdrop() { Kind = MicaKind.BaseAlt };
+        else SystemBackdrop = new DesktopAcrylicBackdrop();
     }
 
-    void LoadBackdrop(uint buildNum)
+    public void LoadWindowsBrand()
     {
-        //添加 Mica 或 Acrylic 背景
-        SystemBackdrop backdrop = buildNum >= 21996 ? new MicaBackdrop() : new DesktopAcrylicBackdrop();
-        SystemBackdrop = backdrop;
+        using FirstDisposableTuple<CanvasPathBuilder, float, float> path = WinVer.OSVersion >= win11min ? OSPathsHelper.GetWindows11Path() : OSPathsHelper.GetWindows10Path();
+        using CanvasGeometry canvasGeo = CanvasGeometry.CreatePath(path.Item1);
+        CompositionPath compPath = new(canvasGeo);
+        var compositor = Compositor;
+        var compGeo = compositor.CreatePathGeometry(compPath);
+        var shape = compositor.CreateSpriteShape(compGeo);
+        shape.FillBrush = compositor.CreateColorBrush(uiSettings.GetColorValue(UIColorType.Foreground));
+        var shapeVisual = compositor.CreateShapeVisual();
+        shapeVisual.Shapes.Add(shape);
+        shapeVisual.Size = new(path.Item2, path.Item3);
+        Microsoft.UI.Xaml.Hosting.ElementCompositionPreview.SetElementChildVisual(CompatibleCanvas, shapeVisual);
+        CompatibleCanvas.Width = path.Item2;
+        CompatibleCanvas.Height = path.Item3;
     }
 
-    void LoadLast(ResourceLoader resourceLoader)
-    {
-        //LicenseLinkButton 链接初始化
-        LicenseLinkButton.NavigateUri = new Uri(resourceLoader.GetString("LicenseLink"));
-    }
-
-    private void UpdateWindowsBrand(string osShortName, UISettings uiSettings)
-    {
-        if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.Composition.CompositionShape"))
-        {
-            using FirstDisposableTuple<CanvasPathBuilder, float, float> path = osShortName == "Windows11" ? OSPathsHelper.GetWindows11Path() : OSPathsHelper.GetWindows10Path();
-            using CanvasGeometry canvasGeo = CanvasGeometry.CreatePath(path.Item1);
-            CompositionPath compPath = new(canvasGeo);
-            var compositor = Compositor;
-            var compGeo = compositor.CreatePathGeometry(compPath);
-            var shape = compositor.CreateSpriteShape(compGeo);
-            shape.FillBrush = compositor.CreateColorBrush(uiSettings.GetColorValue(UIColorType.Foreground));
-            var shapeVisual = compositor.CreateShapeVisual();
-            shapeVisual.Shapes.Add(shape);
-            shapeVisual.Size = new(path.Item2, path.Item3);
-            Microsoft.UI.Xaml.Hosting.ElementCompositionPreview.SetElementChildVisual(CompatibleCanvas, shapeVisual);
-            CompatibleCanvas.Width = path.Item2;
-            CompatibleCanvas.Height = path.Item3;
-        }
-        else
-        {
-            string path = (string)Application.Current.Resources[$"{osShortName}Path"];
-            var geo = (Geometry)XamlBindingHelper.ConvertValue(typeof(Geometry), path);
-            NonCompatiblePath.Data = geo;
-        }
-    }
-
-    void CopyInfoToClipboard()
+    public void CopyInfoToClipboard()
     {
         List<string> strings =
         [
@@ -172,9 +132,7 @@ public sealed partial class MainWindow : Window
             strings.Add($"{OSExpirationTimeHeader.Text} {OSExpirationTimeBlock.Text}");
         DataPackage dataPackage = new();
         dataPackage.SetText(string.Join("\r\n", strings));
-        Clipboard.SetContentWithOptions(dataPackage, new ClipboardContentOptions() { IsRoamable = true });
+        Clipboard.SetContentWithOptions(dataPackage, new() { IsRoamable = true });
         Clipboard.Flush();
     }
-
-    void CloseView() => this.Close();
 }

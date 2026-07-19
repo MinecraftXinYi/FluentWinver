@@ -7,9 +7,12 @@
     xmlns:SettingsControls="using:CommunityToolkit.WinUI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:isShapesCompatible="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsTypePresent(Windows.UI.Composition.CompositionShape)"
-    xmlns:isShapesIncompatible="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsTypeNotPresent(Windows.UI.Composition.CompositionShape)"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    Title="FluentWinver">
+
+    <Window.SystemBackdrop>
+        <MicaBackdrop />
+    </Window.SystemBackdrop>
 
     <Grid Margin="10">
         <Grid.RowDefinitions>
@@ -17,24 +20,21 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-
         <!--Windows brand logo-->
         <Viewbox Grid.Row="0"
             MaxWidth="300"
             Margin="100,20">
             <Grid>
-                <isShapesIncompatible:Path x:Name="NonCompatiblePath" Fill="{ThemeResource ApplicationForegroundThemeBrush}" />
-                <isShapesCompatible:Border>
+                <Path x:Name="NonCompatiblePath" Fill="{ThemeResource ApplicationForegroundThemeBrush}" />
+                <Border>
                     <Border x:Name="CompatibleCanvas">
                         <!--  This is only for Designer, not actually loaded in the real UI tree  -->
                         <d:Path Data="{StaticResource Windows11Path}" Fill="{ThemeResource ApplicationForegroundThemeBrush}" />
                     </Border>
-                </isShapesCompatible:Border>
+                </Border>
             </Grid>
         </Viewbox>
-
-        <ScrollViewer Grid.Row="1"
-                      VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
             <!--Main display controls-->
             <StackPanel Margin="0,15,0,0">
                 <StackPanel.Resources>
@@ -43,7 +43,6 @@
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                     </Style>
                 </StackPanel.Resources>
-
                 <!--Windows Specifications Card-->
                 <SettingsControls:SettingsCard>
                     <SettingsControls:SettingsCard.Header>
@@ -100,14 +99,12 @@
                         <Button MinWidth="90" x:Uid="CopyButton" Click="Copy_WS"/>
                     </SettingsControls:SettingsCard.Content>
                 </SettingsControls:SettingsCard>
-
                 <!--OS CopyRight Card-->
                 <SettingsControls:SettingsCard>
                     <SettingsControls:SettingsCard.Header>
                         <TextBlock x:Name="OSCopyRightBlock" FontSize="15"/>
                     </SettingsControls:SettingsCard.Header>
                 </SettingsControls:SettingsCard>
-
                 <!--Legal Card-->
                 <Expander x:Uid="Legalandlicense" Margin="0,10,0,0">
                     <Expander.Content>
@@ -122,7 +119,6 @@
                 </Expander>
             </StackPanel>
         </ScrollViewer>
-
         <StackPanel Grid.Row="2" Margin="0,10,0,0">
             <!--OK Button-->
             <Button
