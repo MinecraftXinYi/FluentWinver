@@ -17,7 +17,7 @@
 		<DefineConstants>DISABLE_XAML_GENERATED_MAIN</DefineConstants>
 	</PropertyGroup>
 	<PropertyGroup>
-		<VersionPrefix>0.8.0</VersionPrefix>
+		<VersionPrefix>0.8.1</VersionPrefix>
 		<VersionSuffix></VersionSuffix>
 	</PropertyGroup>
 
@@ -59,7 +59,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="NeonWindows.ModernApp.Base" Version="0.20.0" />
+		<PackageReference Include="NeonWindows.ModernApp.Base" Version="0.20.2" />
 		<PackageReference Include="SharpWinver" Version="4.0.2" />
 	</ItemGroup>
 	
